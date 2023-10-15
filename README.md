@@ -2,8 +2,6 @@
 
 ## Services List
 
-<hr>
-
 ### Add Sales
 
 When a sale is a made it should be added to the database.
@@ -88,8 +86,6 @@ A chatbot like interface can be created for this.
 ### Sentiment Analysis on Reviews
 
 Scrape data from google reviews and analyse the reviews using AI similar to [this project](https://github.com/ronan-s1/Django-Sentiment-Analysis-Application) I made.
-
-<hr>
 
 ## Possible Tools, Technolgies and Frameworks
 
