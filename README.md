@@ -51,7 +51,7 @@ Ability to create an invoice with business logo.
 
 ### Generate Reports
 
-Generate reports on past sales and expenses.
+Generate reports on past sales and expenses. Maybe intergrate a summary explaining the report using AI.
 
 ### Export Data
 
@@ -80,13 +80,26 @@ Streamlit can seamlessly integrate with popular computer vision libraries and fr
 Streamlit has intergation with mongodb using the [streamlit secrets manager](https://docs.streamlit.io/knowledge-base/tutorials/databases/mongodb).
 
 The book "Web Application Development with Streamlit
-Develop and Deploy Secure and Scalable Web Applications to the Cloud Using a Pure Python Framework" discusses more above reasons in more detail.
-
+Develop and Deploy Secure and Scalable Web Applications to the Cloud Using a Pure Python Framework" discusses more above in more detail.
 
 ### Langchain
 
-LangChain is an open source framework to aid the development of applications leveraging the power of Large Language Models. It can be used for chatbots, text summarization, data generation, question answering, and more. LangChain's strength lies in its wide array of integrations and capabilities. 
+LangChain is an open source framework to aid the development of applications leveraging the power of Large Language Models.
 
-LangChain DataFrame Agent is a tool in LangChain that allows interaction with a pandas DataFrame, optimized for question answering. This agent can be used to query your data using natural language.
+LangChain DataFrame Agent is a tool that allows interaction with a pandas DataFrame, optimised for question answering. This agent can be used to query your data using natural language.
 
-!(diagram)[https://blog.streamlit.io/content/images/2023/07/langchain-5-scheme.JPG.jpg]
+![langchain df agent flow](https://blog.streamlit.io/content/images/2023/07/langchain-5-scheme.JPG.jpg)
+
+There are other LLM libraries such as [LlamaIndex](https://www.llamaindex.ai/) which I am also considering using.
+
+### Plotly
+
+Plotly's Python graphing library makes interactive, publication-quality graphs. [Plotly website](https://plotly.com/python/).
+
+### Pandas
+
+Pandas is a fast, powerful, flexible and easy to use open source data analysis library, also works well with Plotly. [Pandas website](https://pandas.pydata.org/).
+
+### BERT
+
+BERT(Bidirectional Encoder Representations from Transformers) can perform sentiment analysis on [reviews](#sentiment-analysis-on-reviews).
