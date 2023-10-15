@@ -105,3 +105,7 @@ Pandas is a fast, powerful, flexible and easy to use open source data analysis l
 ### BERT
 
 BERT(Bidirectional Encoder Representations from Transformers) can perform sentiment analysis on [reviews](#sentiment-analysis-on-reviews).
+
+### Docker
+
+Docker can be used to containerising the app and deploying it.
