@@ -2,6 +2,8 @@
 
 ## Services List
 
+<hr>
+
 ### Add Sales
 
 When a sale is a made it should be added to the database.
@@ -11,6 +13,8 @@ A sale can be added:
 - Through scanning salesight [barcode](#generate-barcodes)
 - Importing a correctly formatted CSV file
 
+<hr>
+
 ### Add Expenses
 
 When an expense is a made it should be added to the database.
@@ -18,6 +22,8 @@ When an expense is a made it should be added to the database.
 Ann expense can be added a sale:
 - Manually (from a dropdown of [products](#add-products))
 - Uploading a correctly formatted CSV file
+
+<hr>
 
 ### Add Products
 
@@ -31,31 +37,45 @@ There should be fields for:
 
 maybe more?
 
+<hr>
+
 ### Generate Barcodes / QR codes
 
 - Ability to Generate a Barcode / QR code.
 - These codes would be placed on products. 
 - These products would be scanned when adding a sale.
 
+<hr>
+
 ### Generate Reciepts
 
 After a sale has been made and added to the database, a reciept should be generated.
+
+<hr>
 
 ### Analytics
 
 Ability to view daily, weekly, monthly quarterly insights on business sales and expenses through charts.
 
+<hr>
+
 ### Generate Invoices
 
 Ability to create an invoice with business logo.
+
+<hr>
 
 ### Generate Reports
 
 Generate reports on past sales and expenses. Maybe intergrate a summary explaining the report using AI.
 
+<hr>
+
 ### Export Data
 
 Ability to export data in to a CSV or Excel file for external reporting and analysis.
+
+<hr>
 
 ### NLP Data Querying
 
@@ -63,9 +83,13 @@ Allow users to query their businesses data using natural language, for example: 
 
 A chatbot like interface can be created for this.
 
+<hr>
+
 ### Sentiment Analysis on Reviews
 
 Scrape data from google reviews and analyse the reviews using AI similar to [this project](https://github.com/ronan-s1/Django-Sentiment-Analysis-Application) I made.
+
+<hr>
 
 ## Possible Tools, Technolgies and Frameworks
 
