@@ -138,7 +138,7 @@ BERT(Bidirectional Encoder Representations from Transformers) can perform sentim
 
 ### Docker
 
-Docker can be used to containerising the app and deploying it.
+Docker can be used for containerising the app and deploying it (maybe).
 
 ## Interim and Final Report
 
