@@ -69,6 +69,8 @@ Scrape data from google reviews and analyse the reviews using AI similar to [thi
 
 ## Possible Tools, Technolgies and Frameworks
 
+Here are some proposed tools I am planning to use.
+
 ### Streamlit
 
 Streamlit is an open-source framework that for custom web app development. It's great for building intuitive interfaces and developing data driven applications as it keep users informed with dynamic data that refreshes in real-time.
