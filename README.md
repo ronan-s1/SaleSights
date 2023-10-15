@@ -104,6 +104,8 @@ Streamlit has intergation with mongodb using the [streamlit secrets manager](htt
 The book "Web Application Development with Streamlit
 Develop and Deploy Secure and Scalable Web Applications to the Cloud Using a Pure Python Framework" discusses more above in more detail.
 
+<hr>
+
 ### Langchain
 
 LangChain is an open source framework to aid the development of applications leveraging the power of Large Language Models.
@@ -114,18 +116,30 @@ LangChain DataFrame Agent is a tool that allows interaction with a pandas DataFr
 
 There are other LLM libraries such as [LlamaIndex](https://www.llamaindex.ai/) which I am also considering using.
 
+<hr>
+
 ### Plotly
 
 Plotly's Python graphing library makes interactive, publication-quality graphs. [Plotly website](https://plotly.com/python/).
+
+<hr>
 
 ### Pandas
 
 Pandas is a fast, powerful, flexible and easy to use open source data analysis library, also works well with Plotly. [Pandas website](https://pandas.pydata.org/).
 
+<hr>
+
 ### BERT
 
 BERT(Bidirectional Encoder Representations from Transformers) can perform sentiment analysis on [reviews](#sentiment-analysis-on-reviews).
 
+<hr>
+
 ### Docker
 
 Docker can be used to containerising the app and deploying it.
+
+## Interim and Final Report
+
+For the write up part of the FYP I will be using [Overleaf](https://www.overleaf.com/) which is an online LaTeX editor.
