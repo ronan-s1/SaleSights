@@ -87,6 +87,12 @@ A chatbot like interface can be created for this.
 
 Scrape data from google reviews and analyse the reviews using AI similar to [this project](https://github.com/ronan-s1/Django-Sentiment-Analysis-Application) I made.
 
+<hr>
+
+### SaleSight API
+
+Allow users to intergreate SaleSights service's with other programs and software via an API
+
 ## Possible Tools, Technolgies and Frameworks
 
 Here are some proposed tools I am planning to use.
