@@ -8,7 +8,7 @@ When a sale is a made it should be added to the database.
 
 A sale can be added:
 - Manually (from a dropdown of products)
-- Through scanning salesight [barcode](#generate-barcodes)
+- Through scanning salesight [barcode](#generate-barcodes--qr-codes)
 - Importing a correctly formatted CSV file
 
 <hr>
