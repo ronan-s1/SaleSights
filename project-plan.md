@@ -88,6 +88,14 @@ Scrape data from google reviews and analyse the reviews using AI similar to [thi
 
 <hr>
 
+### Implement PyGWalker
+
+PyGWalker is Python Library for Exploratory Data Analysis with Visualization. It can simplify data analysis and data visualization workflow, by turning a pandas dataframe (and polars dataframe) into a Tableau-style User Interface for visual exploration.
+
+PyGwalker can be embedded into a streamlit application seamlessly; [read here](https://docs.kanaries.net/pygwalker/use-pygwalker-with-streamlit).
+
+<hr>
+
 ### SaleSight API
 
 Allow users to intergreate SaleSights service's with other programs and software via an API
