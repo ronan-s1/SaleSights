@@ -159,3 +159,50 @@ Docker can be used for containerising the app and deploying it (maybe).
 For the write up part of the FYP I will be using [Overleaf](https://www.overleaf.com/) which is an online LaTeX editor.
 
 </details>
+
+
+<details><summary><h2>Choosing all services and tech stack<h2></summary>
+
+### Core Services
+- Add Sale
+  - Ability to scan barcode to add to a sale transaction
+- Add Expense
+- Add Product
+  - Associate a barcode with a product (optional)
+  - **fields:**
+  - Product ID
+  - Product name
+  - Price
+  - Category
+  - Barcode
+- Display analytics
+- Generate receipts
+- Export data
+
+### Other Services
+- Generate reports
+- NLP Querying
+
+### Services to implement if I have time
+- PyGWalker
+- Sentiment Analysis
+- SaleSight API
+
+## Technolgies
+
+### Frontend Technologies
+- Streamlit
+- Streamlit Components
+
+<img src="https://images.ctfassets.net/23aumh6u8s0i/2vWy8CrwyDEsApwk5wHzge/2962bedb072ac7cd952b4ce134d5e132/05_capabilities-zero-app.png" width="550">
+
+### Backend Technologies
+- Langchain
+- Pandas
+- Plotly
+- OpenCV
+
+## Database
+- MongoDB
+
+</details>
