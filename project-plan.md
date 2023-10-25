@@ -1,5 +1,6 @@
+# Project Plan
 
-## Services List
+<details><summary><h2>Services and Technologies<h2></summary>
 
 ### Add Sales
 
@@ -156,3 +157,5 @@ Docker can be used for containerising the app and deploying it (maybe).
 ## Interim and Final Report
 
 For the write up part of the FYP I will be using [Overleaf](https://www.overleaf.com/) which is an online LaTeX editor.
+
+</details>
