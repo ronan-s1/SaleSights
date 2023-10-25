@@ -197,8 +197,8 @@ For the write up part of the FYP I will be using [Overleaf](https://www.overleaf
 <img src="https://images.ctfassets.net/23aumh6u8s0i/2vWy8CrwyDEsApwk5wHzge/2962bedb072ac7cd952b4ce134d5e132/05_capabilities-zero-app.png" width="550">
 
 ### Backend Technologies
-- Langchain
-- LlamaIndex
+- Langchain (for report analysis)
+- LlamaIndex (for NLP querying)
 - Pandas
 - Plotly
 - OpenCV
