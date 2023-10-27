@@ -163,6 +163,8 @@ For the write up part of the FYP I will be using [Overleaf](https://www.overleaf
 
 <details><summary><h2>Choosing all services and tech stack<h2></summary>
 
+Quickly going over things...
+
 ### Core Services
 - Add Sale
   - Ability to scan barcode to add to a sale transaction
@@ -196,14 +198,36 @@ For the write up part of the FYP I will be using [Overleaf](https://www.overleaf
 
 <img src="https://images.ctfassets.net/23aumh6u8s0i/2vWy8CrwyDEsApwk5wHzge/2962bedb072ac7cd952b4ce134d5e132/05_capabilities-zero-app.png" width="550">
 
+#### Reasoning:
+- Visually appealing UI components
+= Good support for displaying data elements (dataframes, plotly charts etc...). [read more](https://docs.streamlit.io/library/api-reference/data)
+- LlamaIndex and langchain can pair nicely with Streamlit's chat elements to make robust contextually relevant chatbots.
+- The streamlit-webrtc can handle real-time video streams which would be useful for scanning product barcode and reciepts (if a customer were return an item).
+- Useful inbuilt functions for caching and more.
+
+<img src="https://docs.streamlit.io/images/caching-high-level-diagram.png" width="550">
+
+- Good documentation and large open source community.
+
+
 ### Backend Technologies
+These are the 2 main LLM frameworks:
 - Langchain (for report analysis)
 - LlamaIndex (for NLP querying)
-- Pandas
-- Plotly
-- OpenCV
+
+Llamaindex tends to be a bit more complex but seems to perform better with RAG (Retrieval Augmented Generation).
+
+Langchain is a bit more general purpose but also has many useful agents and can be used for report summaries.
+
+<img src="https://blog.streamlit.io/content/images/2023/08/rag-with-llamaindex-1.png#border" width="550">
+
+- Pandas (most popular dataframe library)
+- Plotly (most visually appealing and popular data visualization library)
+- OpenCV (most populor computer vision library)
 
 ### Database
 - MongoDB
+
+MongoDB is the most popular NoSQL database. I decided to choose this as my data may semi structured (a customer can buy 1 product or 10 products in one transaction).  MongoDB handles transactional, operational, and analytical workloads at scale. [more info on transactional dbs using mongodb](https://www.mongodb.com/transactions)
 
 </details>
