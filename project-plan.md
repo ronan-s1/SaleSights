@@ -161,7 +161,7 @@ For the write up part of the FYP I will be using [Overleaf](https://www.overleaf
 </details>
 
 
-<details><summary><h2>Choosing all services and tech stack<h2></summary>
+<details><summary><h2>Deciding all services and tech stack<h2></summary>
 
 Quickly going over things...
 
