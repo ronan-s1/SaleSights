@@ -1,6 +1,6 @@
 # Project Plan
 
-<details><summary><h2>Services and Technologies<h2></summary>
+<details><summary><h2>Possible Services and Technologies<h2></summary>
 
 ### Add Sales
 
@@ -161,7 +161,7 @@ For the write up part of the FYP I will be using [Overleaf](https://www.overleaf
 </details>
 
 
-<details><summary><h2>Deciding all services and tech stack<h2></summary>
+<details><summary><h2>Deciding services and tech stack<h2></summary>
 
 Quickly going over things...
 
