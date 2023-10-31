@@ -200,7 +200,7 @@ Quickly going over things...
 
 #### Reasoning:
 - Visually appealing UI components
-= Good support for displaying data elements (dataframes, plotly charts etc...). [read more](https://docs.streamlit.io/library/api-reference/data)
+- Good support for displaying data elements (dataframes, plotly charts etc...). [read more](https://docs.streamlit.io/library/api-reference/data)
 - LlamaIndex and langchain can pair nicely with Streamlit's chat elements to make robust contextually relevant chatbots.
 - The streamlit-webrtc can handle real-time video streams which would be useful for scanning product barcode and reciepts (if a customer were return an item).
 - Useful inbuilt functions for caching and more.
