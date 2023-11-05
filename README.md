@@ -2,8 +2,6 @@
   <img src="static/img/salesights-logo.png" alt="SaleSights Logo", style="width: 500px;">
 </p>
 
-<p align="center">Get Insights on your Sales</p>
-
 
 ## Table of Contents
 
