@@ -7,5 +7,5 @@
 
 ## Table of Contents
 
-- [Setup](documentation/setup.md)
-- [SaleSight Services](documentation/app.md)
+- [Setup](documentation/services.md)
+- [SaleSight Services](documentation/services.md)
