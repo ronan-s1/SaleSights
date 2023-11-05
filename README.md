@@ -3,3 +3,9 @@
 </p>
 
 <p align="center">Get Insights on your Sales</p>
+
+
+## Table of Contents
+
+- [Setup](documentation/setup.md)
+- [SaleSight Services](documentation/app.md)
