@@ -20,7 +20,7 @@ def get_logo_dimensions(dimensions, resize_multiplyer):
 
 def add_logo():
     logo = Image.open(LOGO_PATH)
-    resize_multiplyer = 0.4
+    resize_multiplyer = 0.37
     width, height = get_logo_dimensions(logo.size, resize_multiplyer)
     
     modified_logo = logo.resize((width, height))
@@ -33,7 +33,11 @@ def main():
 
     pages = {
         "Home": {"function": home_main, "icon": "house"},
-        "Test": {"function": home_main, "icon": "table"},
+        "Checkout": {"function": home_main, "icon": "cart-check"},
+        "Products": {"function": home_main, "icon": "basket"},
+        "Analytics": {"function": home_main, "icon": "bar-chart"},
+        "Report": {"function": home_main, "icon": "clipboard-data"},
+        "AI Query": {"function": home_main, "icon": "search"},
     }
 
     pages_list = list(pages.keys())
