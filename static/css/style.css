@@ -1,0 +1,21 @@
+[data-testid=stSidebar] [data-testid=stImage]{
+    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
+
+div[data-testid="metric-container"] {
+    background-color: #e9ecfb;
+    border: 1px solid rgba(28, 131, 225, 0.1);
+    padding: 5% 5% 5% 10%;
+    border-radius: 5px;
+    color: #414a7d;
+    overflow-wrap: break-word;
+}
+
+div[data-testid="metric-container"] > label[data-testid="stMetricLabel"] > div {
+    overflow-wrap: break-word;
+    white-space: break-spaces;
+}

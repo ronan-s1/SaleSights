@@ -2,3 +2,6 @@ pandas
 streamlit
 plotly
 langchain
+pymongo
+pandas
+numpy
