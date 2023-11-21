@@ -1,0 +1,5 @@
+[
+    {"product_name": "iPhone X", "category": "Smartphones", "barcode_data": "123456789"},
+    {"product_name": "Dell XPS 13", "category": "Laptops", "barcode_data": "987654321"},
+    {"product_name": "Sony WH-1000XM4", "category": "Headphones", "barcode_data": "654321789"}
+]

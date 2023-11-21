@@ -2,7 +2,7 @@ import streamlit as st
 from streamlit_option_menu import option_menu
 from PIL import Image
 from home.home import home_main
-from checkout.checkout import checkout_main
+from checkout.checkout_view import checkout_main
 
 LOGO_PATH = "static/img/salesights-logo.png"
 CSS_PATH = "static/css/style.css"
