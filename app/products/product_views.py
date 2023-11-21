@@ -44,7 +44,7 @@ def product_main():
         st.info("No products found.")
 
     # Expander for fetching and displaying existing products in a table
-    with st.expander("Manage Products"):
+    with st.expander("Edit/Delete Products"):
         existing_products = fetch_products(include_id=True)
         if existing_products:
             df_existing_products = pd.DataFrame(existing_products)
@@ -63,8 +63,7 @@ def product_main():
             if st.button("Delete Product"):
                 delete_product(selected_product_name)
 
-            # Form fields for editing the selected product
-            st.write("Edit Product")
+            st.markdown("""---""")
 
             # Check if selected product details are available
             if not selected_product_details.empty:
