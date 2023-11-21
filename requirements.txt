@@ -5,3 +5,6 @@ langchain
 pymongo
 pandas
 numpy
+opencv-python
+pyzbar
+streamlit-webrtc
