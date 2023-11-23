@@ -29,7 +29,7 @@ def add_logo():
     return modified_logo
 
 # service router
-def main():    
+def main():  
     salesights_logo = add_logo()    
     st.sidebar.image(salesights_logo)
 

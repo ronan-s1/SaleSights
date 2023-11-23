@@ -20,6 +20,6 @@ div[data-testid="metric-container"] > label[data-testid="stMetricLabel"] > div {
     white-space: break-spaces;
 }
 
-footer {
+footer, div[data-testid="stDecoration"]  {
     display: none;
 }
