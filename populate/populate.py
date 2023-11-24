@@ -14,7 +14,6 @@ def read_json(data_file):
         return json.load(file)
 
 
-
 def populate():
     logger.info("Connecting to database")
     client = MongoClient("localhost", 27017)
@@ -39,6 +38,7 @@ def populate():
     products_collection.insert_many(products_data)
 
     logger.info("Database populated successfully")
+
 
 if __name__ == "__main__":
     populate()
