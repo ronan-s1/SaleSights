@@ -1,5 +1,7 @@
 [
-    {"category": "Smartphones"},
-    {"category": "Laptops"},
-    {"category": "Headphones"}
+    {"category": "Supplements"},
+    {"category": "Books"},
+    {"category": "Personal Care"},
+    {"category": "Food"},
+    {"category": "Fitness"}
 ]

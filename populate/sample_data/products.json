@@ -1,5 +1,167 @@
 [
-    {"product_name": "iPhone X", "category": "Smartphones", "barcode_data": "123456789"},
-    {"product_name": "Dell XPS 13", "category": "Laptops", "barcode_data": "987654321"},
-    {"product_name": "Sony WH-1000XM4", "category": "Headphones", "barcode_data": "654321789"}
+    {
+        "product_name": "Vitamin D3 Supplement",
+        "category": "Supplements",
+        "barcode_data": "X002VTD301"
+    },
+    {
+        "product_name": "Gluten-Free Quinoa Pasta",
+        "category": "Food",
+        "barcode_data": "X003GFQP02"
+    },
+    {
+        "product_name": "Plant-Based Protein Powder",
+        "category": "Food",
+        "barcode_data": "X007PBPP06"
+    },
+    {
+        "product_name": "Natural Almond Butter",
+        "category": "Food",
+        "barcode_data": "X008NAB07"
+    },
+    {
+        "product_name": "Joint Support Capsules",
+        "category": "Supplements",
+        "barcode_data": "X010JSC09"
+    },
+    {
+        "product_name": "Organic Coconut Oil",
+        "category": "Food",
+        "barcode_data": "X011OCO10"
+    },
+    {
+        "product_name": "Natural Omega-3 Fish Oil",
+        "category": "Supplements",
+        "barcode_data": "X014NOFO13"
+    },
+    {
+        "product_name": "Himalayan Pink Salt",
+        "category": "Food",
+        "barcode_data": "X015HPS14"
+    },
+    {
+        "product_name": "Whole Grain Brown Rice",
+        "category": "Food",
+        "barcode_data": "X017WGBR16"
+    },
+    {
+        "product_name": "Turmeric Curcumin Capsules",
+        "category": "Supplements",
+        "barcode_data": "X018TCC17"
+    },
+    {
+        "product_name": "MCT Oil for Keto",
+        "category": "Supplements",
+        "barcode_data": "X022MCTK21"
+    },
+    {
+        "product_name": "High-Fiber Oat Bran",
+        "category": "Food",
+        "barcode_data": "X023HFOB22"
+    },
+    {
+        "product_name": "Vegetarian Collagen Supplement",
+        "category": "Supplements",
+        "barcode_data": "X024VCS23"
+    },
+    {
+        "product_name": "Plant-Based Omega-3 Algal Oil",
+        "category": "Supplements",
+        "barcode_data": "X027PBO26"
+    },
+    {
+        "product_name": "Vegan Food Bars Variety Pack",
+        "category": "Food",
+        "barcode_data": "X030VPB29"
+    },
+    {
+        "product_name": "Moisturizing Aloe Vera Body Lotion",
+        "category": "Personal Care",
+        "barcode_data": "X002MAVBLC02"
+    },
+    {
+        "product_name": "Natural Coconut Milk Bath Soap",
+        "category": "Personal Care",
+        "barcode_data": "X004NCMBS04"
+    },
+    {
+        "product_name": "Peppermint Eucalyptus Deodorant Stick",
+        "category": "Personal Care",
+        "barcode_data": "X005PEDS05"
+    },
+    {
+        "product_name": "Charcoal Infused Toothpaste",
+        "category": "Personal Care",
+        "barcode_data": "X006CITP06"
+    },
+    {
+        "product_name": "Head and Shoulders Shampoo",
+        "category": "Personal Care",
+        "barcode_data": "8001090360175"
+    },
+    {
+        "product_name": "Yoga Mat with Non-Slip Surface",
+        "category": "Fitness",
+        "barcode_data": "X032YMNS02"
+    },
+    {
+        "product_name": "Resistance Band Set",
+        "category": "Fitness",
+        "barcode_data": "X033RBS03"
+    },
+    {
+        "product_name": "Digital Body Weight Scale",
+        "category": "Fitness",
+        "barcode_data": "X034DBWS04"
+    },
+    {
+        "product_name": "Collapsible Water Bottle",
+        "category": "Fitness",
+        "barcode_data": "X037CWB07"
+    },
+    {
+        "product_name": "Foam Roller for Muscle Massage",
+        "category": "Fitness",
+        "barcode_data": "X038FRMM08"
+    },
+    {
+        "product_name": "Portable Blender for Smoothies",
+        "category": "Fitness",
+        "barcode_data": "X039PBS09"
+    },
+    {
+        "product_name": "Mindfulness Meditation Guide",
+        "category": "Books",
+        "barcode_data": "X071MMGB01"
+    },
+    {
+        "product_name": "Healthy Living Cookbook",
+        "category": "Books",
+        "barcode_data": "X072HLCB02"
+    },
+    {
+        "product_name": "Yoga for Beginners",
+        "category": "Books",
+        "barcode_data": "X073YFB03"
+    },
+    {
+        "product_name": "Mental Health Journal",
+        "category": "Books",
+        "barcode_data": "X074MHWJ04"
+    },
+    {
+        "product_name": "Natural Remedies Encyclopedia",
+        "category": "Books",
+        "barcode_data": "X075NRE05"
+    },
+    {
+        "product_name": "Fitness and Nutrition Guide",
+        "category": "Books",
+        "barcode_data": "X076FNG06"
+    },
+    {
+        "product_name": "Stress Management Handbook",
+        "category": "Books",
+        "barcode_data": "X077SMH07"
+    }
 ]
