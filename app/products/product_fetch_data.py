@@ -17,7 +17,7 @@ def get_products_collection():
     return db.products
 
 
-def get_products_categories_collection():
+def get_product_categories_collection():
     db = get_db()
     return db.product_categories
 
@@ -29,7 +29,7 @@ def fetch_products():
 
 
 def fetch_categories():
-    product_categories = get_products_categories_collection()
+    product_categories = get_product_categories_collection()
     return product_categories.distinct("category")
 
 
@@ -41,13 +41,16 @@ def insert_new_product_to_db(new_product):
 def delete_product_from_db(product_id):
     products_collection = get_products_collection()
     products_collection.delete_one({"_id": product_id})
-    
+
 
 def update_product_from_db(selected_product_id, product_to_update):
     products_collection = get_products_collection()
-    products_collection.update_one({"_id": selected_product_id}, {"$set": product_to_update})
+    products_collection.update_one(
+        {"_id": selected_product_id}, {"$set": product_to_update}
+    )
 
 
-def get_product_by_name(product_name):
+def product_exists(product):
     products_collection = get_products_collection()
-    return products_collection.find_one({"product_name": product_name})
+    matching_product = products_collection.find_one(product)
+    return matching_product is not None

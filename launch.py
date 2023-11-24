@@ -1,3 +1,4 @@
+import os
 import platform
 import subprocess
 import sys
@@ -9,11 +10,9 @@ def start_mongodb():
     Start the MongoDB server based on the operating system.
     Return path of app.py
     """
-    streamlit_command = "streamlit run /app/app.py"
     match USER_OS:
         case "Windows":
             mongo_command = "start mongod"
-            streamlit_command = "streamlit run app\\app.py"
         case "Darwin":
             mongo_command = "brew services start mongodb-community"
         case "Linux":
@@ -26,16 +25,16 @@ def start_mongodb():
         subprocess.run(mongo_command, shell=True, check=True)
     except subprocess.CalledProcessError as e:
         print(f"Error starting MongoDB: {e}")
-        
-    return streamlit_command
 
 
 def run_streamlit_app():
     """
     Run the Streamlit app.
     """
-
-    streamlit_command = start_mongodb()
+    start_mongodb()
+    
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    streamlit_command = f"streamlit run {os.path.join(script_dir, 'app', 'app.py')}"
     
     try:
         subprocess.run(streamlit_command, shell=True, check=True)
