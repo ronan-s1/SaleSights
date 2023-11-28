@@ -1,6 +1,6 @@
 # checkout_views.py
 import streamlit as st
-from checkout.checkout_controller import process_frame
+from checkout.checkout_controller import process_frame, get_products, process_decoded_barcode
 import cv2
 
 def scan_product(session_state):
@@ -19,20 +19,14 @@ def scan_product(session_state):
             frame_placeholder = st.empty()
 
             while cap.isOpened():
-                ret, frame = cap.read()
-                if not ret:
-                    st.write("The video capture has ended.")
-                    break
+                _, frame = cap.read()
 
                 result = process_frame(frame, session_state)
                 if result:
-                    barcode_data = result["barcode_data"]
+                    # draw a rectangle around the barcode
                     rectangle_coords = result["rectangle_coords"]
-
-                    st.write(f"Barcode Data: {barcode_data}")
-
-                    # Draw a rectangle around the barcode
                     cv2.rectangle(frame, rectangle_coords[:2], rectangle_coords[2:], (0, 255, 0), 2)
+                    st.write(process_decoded_barcode(result))
 
                 frame_placeholder.image(frame, channels="BGR")
 
@@ -42,8 +36,9 @@ def scan_product(session_state):
             cap.release()
             cv2.destroyAllWindows()
 
+
 def checkout_main():
     if "cam_on" not in st.session_state:
         st.session_state.cam_on = False
-    
+
     scan_product(st.session_state)

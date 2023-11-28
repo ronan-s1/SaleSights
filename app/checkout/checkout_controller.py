@@ -1,6 +1,12 @@
 # checkout_processing.py
 import cv2
 import pyzbar.pyzbar as pyzbar
+from checkout.product_fetch_data import fetch_products, get_product_by_barcode
+
+def get_products():
+    products = fetch_products()
+    return list(products)
+
 
 def process_frame(frame, session_state):
     frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
@@ -23,4 +29,18 @@ def process_frame(frame, session_state):
                 ),
             }
 
-    return None
+
+def process_decoded_barcode(data):
+    barcode_data = data["barcode_data"]
+    product = get_product_by_barcode(barcode_data)
+    
+    if product:
+        return product
+    
+    return f"No product with scanned barcode {barcode_data}."
+    
+    
+    
+    
+
+    
