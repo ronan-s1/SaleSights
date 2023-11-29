@@ -1,5 +1,6 @@
 # SaleSights Setup
 
+## Table of Contents
 - [Run Locally 🚀](#run-locally-)
   - [MongoDB](#mongodb)
     - [macOS (brew)](#macos-brew)
