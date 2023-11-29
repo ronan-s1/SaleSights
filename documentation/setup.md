@@ -1,4 +1,4 @@
-# Setup SaleSights
+# SaleSights Setup
 
 ## Run locally
 
@@ -20,29 +20,28 @@ For Windows users, MongoDB can be installed by downloading the installer from th
 
 #### Linux
 - For Debian/Ubuntu-based systems:<br><br>
-```bash
-sudo apt-get update
-sudo apt-get install -y mongodb
-sudo systemctl start mongod
-```
+    ```bash
+    sudo apt-get update
+    sudo apt-get install -y mongodb
+    sudo systemctl start mongod
+    ```
 
 - For Red Hat/Fedora-based systems:  
-```bash
-sudo yum install -y mongodb
-sudo systemctl start mongod
-```
+    ```bash
+    sudo yum install -y mongodb
+    sudo systemctl start mongod
+    ```
 
 **Note:**
 If you plan to run `launch.py`, please make sure you have MongoDB installed using the appropriate method mentioned above, as this script relies on a MongoDB server for its functionality.
 
-### Set Up
+### Local Setup
 
 1. Clone the repo
 
 2. Navigate to the project directory
 
 3. Install required packages
-
     ```
     pip install -r requirements.txt
     ```
