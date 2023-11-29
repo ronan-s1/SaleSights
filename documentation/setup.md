@@ -47,16 +47,30 @@ If you plan to run `launch.py`, please make sure you have MongoDB installed usin
     pip install -r requirements.txt
     ```
 
-4. run `launch_app.py`
+4. Create a `.streamlit/secrets.toml`
+    ```toml
+    [mongo]
+    host = "localhost"
+    port = 27017
+    ```
+
+6. run `launch_app.py`
 
 ## Run using Docker 🐋
 
-1. To run using Docker, build images like so:
-```
-docker-compose build
-```
+4. Create a `.streamlit/secrets.toml`
+    ```toml
+    [mongo]
+    host = "mongo"
+    port = 27017
+    ```
 
-2. Now run containers
-```
-docker-compose up
-```
+1. Build images
+    ```
+    docker-compose build
+    ```
+
+2. Run containers
+    ```
+    docker-compose up
+    ```
