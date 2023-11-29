@@ -51,4 +51,12 @@ If you plan to run `launch.py`, please make sure you have MongoDB installed usin
 
 ## Run using Docker 🐋
 
-WIP
+1. To run using Docker, build images like so:
+```
+docker-compose build
+```
+
+2. Now run containers
+```
+docker-compose up
+```
