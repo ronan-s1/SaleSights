@@ -2,6 +2,7 @@ import logging
 import os
 from pymongo import MongoClient
 import json
+from streamlit import secrets
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 logger = logging.getLogger(__name__)
@@ -16,7 +17,7 @@ def read_json(data_file):
 
 def populate():
     logger.info("Connecting to database")
-    client = MongoClient("localhost", 27017)
+    client = MongoClient(**secrets["mongo"])
 
     # get the database and collections
     db = client.salesights
