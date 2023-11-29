@@ -5,7 +5,7 @@
     - [macOS (brew)](#macos-brew)
     - [Windows](#windows)
     - [Linux](#linux)
-  - [Local Setup](#local-setup)
+  - [Run Application](#run-application)
 - [Run using Docker 🐋](#run-using-docker-)
 - [Use Sample Data](#use-sample-data)
   - [Local](#local)
@@ -46,7 +46,7 @@ For Windows users, MongoDB can be installed by downloading the installer from th
 **Note:**
 If you plan to run `launch.py`, please make sure you have MongoDB installed using the appropriate method mentioned above, as this script relies on a MongoDB server for its functionality.
 
-### Local Setup
+### Run Application
 
 1. Clone the repo
 
