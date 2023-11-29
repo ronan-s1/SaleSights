@@ -35,7 +35,7 @@ sudo systemctl start mongod
 **Note:**
 If you plan to run `launch.py`, please make sure you have MongoDB installed using the appropriate method mentioned above, as this script relies on a MongoDB server for its functionality.
 
-### Installation
+### Set Up
 
 1. Clone the repo
 
@@ -58,19 +58,23 @@ If you plan to run `launch.py`, please make sure you have MongoDB installed usin
 
 ## Run using Docker 🐋
 
-4. Create a `.streamlit/secrets.toml`
+1. Clone the repo
+
+2. Navigate to the project directory
+
+3. Create a `.streamlit/secrets.toml`
     ```toml
     [mongo]
     host = "mongo"
     port = 27017
     ```
 
-1. Build images
+4. Build images
     ```
     docker-compose build
     ```
 
-2. Run containers
+5. Run containers
     ```
     docker-compose up
     ```
