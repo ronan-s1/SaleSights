@@ -20,7 +20,8 @@
     {
         "product_name": "Natural Almond Butter",
         "category": "Food",
-        "barcode_data": "X008NAB07"
+        "barcode_data": "X008NAB07",
+        "price": 6.69
     },
     {
         "product_name": "Joint Support Capsules",

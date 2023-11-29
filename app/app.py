@@ -2,8 +2,10 @@ import streamlit as st
 from streamlit_option_menu import option_menu
 from PIL import Image
 from home.home import home_main
-from checkout.checkout_view import checkout_main
+from sale.sale_view import sale_main
 from products.product_views import product_main
+
+st.set_page_config(page_title="SaleSights")
 
 LOGO_PATH = "static/img/salesights-logo.png"
 CSS_PATH = "static/css/style.css"
@@ -35,7 +37,7 @@ def main():
 
     pages = {
         "Home": {"function": home_main, "icon": "house"},
-        "Checkout": {"function": checkout_main, "icon": "cart-check"},
+        "Sale": {"function": sale_main, "icon": "cart-check"},
         "Products": {"function": product_main, "icon": "basket"},
     }
 
