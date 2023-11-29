@@ -103,7 +103,7 @@ def add_components():
             err = add_new_product(product_name, category, barcode_data)
             if err:
                 st.warning(err)
-        
+
             else:
                 st.rerun()
         else:

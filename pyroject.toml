@@ -1,0 +1,11 @@
+[tool.black]
+max-line-length = 88
+target-version = ['py37']
+include = '\.pyi?$'
+extend-exclude = '''
+(
+  ^/foo.py
+  | .*_pb2.py
+)
+'''
+skip-string-normalization = true

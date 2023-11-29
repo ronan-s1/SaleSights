@@ -11,3 +11,5 @@ pymongo==4.3.2
 Pillow==9.1.1
 python-dotenv==1.0.0
 streamlit_qrcode_scanner
+# invoke
+# black

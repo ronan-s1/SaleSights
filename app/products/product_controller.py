@@ -4,7 +4,7 @@ from products.product_fetch_data import (
     insert_new_product_to_db,
     delete_product_from_db,
     update_product_from_db,
-    product_exists
+    product_exists,
 )
 
 
@@ -44,9 +44,9 @@ def update_product(product_details, product_name, category, barcode):
         "category": category,
         "barcode_data": barcode,
     }
-    
+
     if product_exists(product_to_update):
         return f"Product '{product_name}' already exists."
-    
+
     # Use the _id to identify the document for update
     update_product_from_db(product_id, product_to_update)

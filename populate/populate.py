@@ -31,7 +31,7 @@ def populate():
 
     product_categories_data = read_json("product_categories.json")
     products_data = read_json("products.json")
-    
+
     logger.info("Inserting data into product_categories collection")
     product_categories_collection.insert_many(product_categories_data)
 
