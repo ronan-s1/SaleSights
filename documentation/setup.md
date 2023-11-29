@@ -1,6 +1,18 @@
 # SaleSights Setup
 
-## Run locally
+- [SaleSights Setup](#salesights-setup)
+  - [Run Locally](#run-locally)
+    - [MongoDB](#mongodb)
+      - [macOS (brew)](#macos-brew)
+      - [Windows](#windows)
+      - [Linux](#linux)
+    - [Local Setup](#local-setup)
+  - [Run using Docker 🐋](#run-using-docker-)
+  - [Use Sample Data](#use-sample-data)
+    - [Local](#local)
+    - [Docker](#docker)
+
+## Run Locally
 
 To run the app locally you just need a MongoDB server and the streamlit app running.
 
