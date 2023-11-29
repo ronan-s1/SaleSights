@@ -12,7 +12,7 @@ from products.product_controller import (
 def display_products():
     all_products = get_products()
     df_all_products = pd.DataFrame(
-        all_products, columns=["product_name", "category", "barcode_data"]
+        all_products, columns=["product_name", "category", "barcode_data", "price"]
     )
     st.table(df_all_products)
     return all_products
