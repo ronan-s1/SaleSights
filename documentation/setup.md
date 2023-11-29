@@ -77,3 +77,25 @@ If you plan to run `launch.py`, please make sure you have MongoDB installed usin
     ```
     docker-compose up
     ```
+
+## Use Sample Data
+
+SaleSight's comes with sample data which you can use for testing. 
+
+### Local
+1. Run `populate/populate.py`
+    ```bash
+    python populate/populate.py
+    ```
+
+### Docker
+1. Run containers in background
+    ```bash
+    docker-compose up -d
+    ```
+
+2. After containers are running, populate the database
+    ```bash
+   docker-compose exec streamlit-app python populate/populate.py
+    ```
+
