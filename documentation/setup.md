@@ -1,16 +1,5 @@
 # SaleSights Setup
 
-- [Run Locally 🚀](#run-locally-)
-  - [MongoDB](#mongodb)
-    - [macOS (brew)](#macos-brew)
-    - [Windows](#windows)
-    - [Linux](#linux)
-  - [Run Application](#run-application)
-- [Run using Docker 🐋](#run-using-docker-)
-- [Use Sample Data 📂](#use-sample-data-)
-  - [Local](#local)
-  - [Docker](#docker)
-
 ## Run Locally 🚀
 
 To run the app locally you just need a MongoDB server and the streamlit app running.
@@ -30,7 +19,7 @@ brew install mongodb-community
 For Windows users, MongoDB can be installed by downloading the installer from the [MongoDB website](https://www.mongodb.com/try/download/community).
 
 #### Linux
-- For Debian/Ubuntu-based systems:<br><br>
+- For Debian/Ubuntu-based systems:
     ```bash
     sudo apt-get update
     sudo apt-get install -y mongodb
@@ -80,12 +69,12 @@ If you plan to run `launch.py`, please make sure you have MongoDB installed usin
     ```
 
 4. Build images
-    ```
+    ```bash
     docker-compose build
     ```
 
 5. Run containers
-    ```
+    ```bash
     docker-compose up
     ```
 
@@ -100,12 +89,12 @@ SaleSight's comes with sample data which you can use for testing.
     ```
 
 ### Docker
-1. Run containers in background
+1. Run containers in the background
     ```bash
     docker-compose up -d
     ```
 
-2. After containers are running, populate the database
+2. After the containers are running, populate the database
     ```bash
    docker-compose exec streamlit-app python populate/populate.py
     ```
