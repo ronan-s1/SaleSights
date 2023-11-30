@@ -96,4 +96,3 @@ SaleSight's comes with sample data which you can use for testing.
     ```bash
    docker-compose exec streamlit-app python populate/populate.py
     ```
-
