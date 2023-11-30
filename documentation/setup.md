@@ -2,9 +2,7 @@
 
 ## Run Locally 🚀
 
-To run the app locally you just need a MongoDB server and the streamlit app running.
-
-**Python 3.10 or above**: You can download Python from [python.org](https://www.python.org/downloads/).
+To run the app locally you need a MongoDB server and the streamlit app running. It is recommend to use Python 3.10 for optimal compatibility.
 
 ### MongoDB
 
