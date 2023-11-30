@@ -3,5 +3,5 @@
 </p>
 
 <div align="center">
-  <h3><a href="https://ronansingpurwala.com/SaleSights/">SaleSights Documentation</a></h3>
+  <h3><a href="https://ronansingpurwala.com/SaleSights/" target="_blank">SaleSights Documentation</a></h3>
 </div>
