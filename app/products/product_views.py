@@ -9,25 +9,12 @@ from products.product_controller import (
     add_new_category,
     edit_existing_category,
     delete_category,
+    get_products_df,
 )
 
 
 def display_products():
-    all_products = get_products()
-    df_all_products = pd.DataFrame(
-        all_products, columns=["product_name", "category", "barcode_data", "price"]
-    )
-
-    # Rename columns without underscores
-    df_all_products = df_all_products.rename(
-        columns={
-            "product_name": "Product",
-            "category": "Category",
-            "barcode_data": "Barcode",
-            "price": "Price",
-        }
-    )
-
+    all_products, df_all_products = get_products_df()
     st.dataframe(df_all_products, use_container_width=True)
     return all_products
 

@@ -1,4 +1,5 @@
-from products.product_fetch_data import (
+import pandas as pd
+from products.product_data import (
     fetch_products,
     fetch_categories,
     insert_new_product_to_db,
@@ -13,8 +14,27 @@ from products.product_fetch_data import (
 
 
 def get_products():
-    products = fetch_products()
+    products = list(fetch_products())
     return list(products)
+
+
+def get_products_df():
+    all_products = get_products()
+    df_all_products = pd.DataFrame(
+        all_products, columns=["product_name", "category", "barcode_data", "price"]
+    )
+
+    # Rename columns without underscores
+    df_all_products = df_all_products.rename(
+        columns={
+            "product_name": "Product",
+            "category": "Category",
+            "barcode_data": "Barcode",
+            "price": "Price",
+        }
+    )
+
+    return all_products, df_all_products
 
 
 def get_categories():
