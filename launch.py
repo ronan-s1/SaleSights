@@ -20,7 +20,7 @@ def start_mongodb():
             mongo_command = "sudo systemctl start mongod"
         case _:
             print(
-                f"No automated process for starting Spendalyse with this OS: {USER_OS}\nLook at the Set Up section in the README for more details\n"
+                f"No automated process for starting app with this OS: {USER_OS}"
             )
             sys.exit(1)
 
