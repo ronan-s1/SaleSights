@@ -24,7 +24,7 @@ def get_products_df():
         all_products, columns=["product_name", "category", "barcode_data", "price"]
     )
 
-    # Rename columns without underscores
+    # rename columns
     df_all_products = df_all_products.rename(
         columns={
             "product_name": "Product",

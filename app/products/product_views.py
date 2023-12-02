@@ -133,8 +133,8 @@ def edit_category_components():
     )
 
     new_category_name = st.text_input("Edit Category Name:", selected_category_name)
-    # Add additional input fields for other category details if needed
 
+    # Add additional input fields for other category details if needed
     if st.button("Edit Category"):
         err = edit_existing_category(selected_category_name, new_category_name)
         if err:
