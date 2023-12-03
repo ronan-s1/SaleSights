@@ -1,3 +1,6 @@
+# use for testing dumb stuff lol 
+test_stuff/
+
 # Streamlit secrets
 secrets.toml
 

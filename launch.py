@@ -9,7 +9,6 @@ USER_OS = platform.system()
 def start_mongodb():
     """
     Start the MongoDB server based on the operating system.
-    Return path of app.py
     """
     match USER_OS:
         case "Windows":
@@ -19,9 +18,7 @@ def start_mongodb():
         case "Linux":
             mongo_command = "sudo systemctl start mongod"
         case _:
-            print(
-                f"No automated process for starting app with this OS: {USER_OS}"
-            )
+            print(f"No automated process for starting app with this OS: {USER_OS}")
             sys.exit(1)
 
     try:
