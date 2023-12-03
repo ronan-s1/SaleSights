@@ -1,3 +1,4 @@
+import os
 import streamlit as st
 from streamlit_option_menu import option_menu
 from PIL import Image
@@ -7,8 +8,8 @@ from products.product_views import product_main
 
 st.set_page_config(page_title="SaleSights")
 
-LOGO_PATH = "static/img/salesights-logo.png"
-CSS_PATH = "static/css/style.css"
+LOGO_PATH = os.path.join("static", "img", "salesights-logo.png")
+CSS_PATH = os.path.join("static", "css", "style.css")
 
 with open(CSS_PATH) as f:
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
