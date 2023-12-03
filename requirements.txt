@@ -5,8 +5,8 @@ langchain
 pymongo==4.3.2
 pandas==2.0.0
 numpy==1.23.3
-opencv-python==4.8.0.76
-pyzbar==0.1.9
+# opencv-python==4.8.0.76
+# pyzbar==0.1.9
 pymongo==4.3.2
 Pillow==9.1.1
 python-dotenv==1.0.0

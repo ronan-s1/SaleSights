@@ -1,32 +1,82 @@
-# sale_views.py
 import streamlit as st
-from sale.sale_controller import process_decoded_barcode
+from sale.sale_controller import (
+    add_scanned_product_to_transaction,
+    format_transaction_df,
+    process_barcode,
+    get_products,
+    add_product_to_transaction,
+    get_total_transaction,
+    add_transaction,
+)
 from streamlit_qrcode_scanner import qrcode_scanner
+import pandas as pd
 
 
 def scan_product(session_state):
-    with st.expander("Scan Product"):
-        # Create a state variable for the camera
-        if "cam_on" not in session_state:
-            session_state.cam_on = False
+    if "cam_on" not in session_state:
+        session_state.cam_on = False
 
-        # Add a button to toggle the camera on and off
-        if st.button("Toggle Camera"):
-            session_state.cam_on = not session_state.cam_on
+    # Add a button to toggle the camera on and off
+    if st.button("Toggle Camera"):
+        session_state.cam_on = not session_state.cam_on
 
-        # If the camera is on, capture and display video frames
-        if session_state.cam_on:
-            barcode = qrcode_scanner(key="scanner")
-            if barcode:
-                scanned_product = process_decoded_barcode(barcode)
-                return scanned_product
+    # If the camera is on, capture and display video frames
+    if session_state.cam_on:
+        barcode = qrcode_scanner(key="scanner")
+        if barcode:
+            scanned_product = process_barcode(barcode)
+
+            if scanned_product:
+                add_scanned_product_to_transaction(scanned_product)
+
+            return scanned_product
+
+
+def add_product_manually():
+    if "selected_products" not in st.session_state:
+        st.session_state.selected_products = []
+
+    products = get_products()
+
+    # Check if the selected product is not already in the list
+    selected_product_name = st.selectbox(
+        "Select a product:", [product["product_name"] for product in products]
+    )
+
+    quantity = st.number_input("Quantity", min_value=1, value=1)
+
+    if st.button("Add", key="add_manually") and selected_product_name:
+        selected_product_names = [
+            product["product_name"] for product in st.session_state.selected_products
+        ]
+
+        add_product_to_transaction(
+            selected_product_name, selected_product_names, quantity, products
+        )
+    df_selected_products = pd.DataFrame(st.session_state.selected_products)
+
+    return df_selected_products
 
 
 def sale_main():
-    if "cam_on" not in st.session_state:
-        st.session_state.cam_on = False
+    with st.expander("Add Product"):
+        df_selected_products = add_product_manually()
 
-    scanned_product = scan_product(st.session_state)
+    with st.expander("Scan Product"):
+        if "cam_on" not in st.session_state:
+            st.session_state.cam_on = False
 
-    if scanned_product:
-        st.write(scanned_product)
+        scan_product(st.session_state)
+
+    if not df_selected_products.empty:
+        df_selected_products_show = format_transaction_df(df_selected_products)
+        st.table(df_selected_products_show)
+        total = get_total_transaction(df_selected_products)
+        st.write(total)
+
+        if st.button("Finish"):
+            err = add_transaction(df_selected_products)
+            if err:
+                st.error("Error")
+            else:
+                st.success("Transaction Successful")

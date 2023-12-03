@@ -18,9 +18,20 @@ def get_products_collection():
     return db.products
 
 
+def get_sale_transactions_collection():
+    db = get_db()
+    return db.sale_transactions
+
+
 def fetch_products():
     products_collection = get_products_collection()
-    projection = {"_id": 1, "product_name": 1, "category": 1, "barcode_data": 1}
+    projection = {
+        "_id": 1,
+        "product_name": 1,
+        "category": 1,
+        "barcode_data": 1,
+        "price": 1,
+    }
     return products_collection.find({}, projection)
 
 
@@ -28,3 +39,8 @@ def get_product_by_barcode(barcode):
     products_collection = get_products_collection()
     matching_product = products_collection.find_one({"barcode_data": barcode})
     return matching_product
+
+
+def insert_transaction_into_db(transaction):
+    sale_transactions_collection = get_sale_transactions_collection()
+    sale_transactions_collection.insert_one(transaction)
