@@ -35,8 +35,10 @@ def run_streamlit_app():
 
     script_dir = os.path.dirname(os.path.abspath(__file__))
     streamlit_command = f"streamlit run {os.path.join(script_dir, 'app', 'app.py')}"
-
+    db_connection = "python docker_db_connection.py"
+    
     try:
+        subprocess.run(db_connection, shell=True, check=True)
         subprocess.run(streamlit_command, shell=True, check=True)
     except subprocess.CalledProcessError as e:
         print(f"Error running Streamlit app: {e}")
