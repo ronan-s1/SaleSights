@@ -2,18 +2,12 @@ import base64
 from datetime import datetime as dt
 import os
 import streamlit as st
-import pandas as pd
 from fpdf import FPDF
-from PIL import Image
-import io
-# from barcode import Code128
-# from barcode.writer import ImageWriter
 from datetime import datetime
 from sale.sale_data import (
     fetch_products,
     get_product_by_barcode,
     insert_transaction_into_db,
-    get_last_inserted_transaction,
 )
 
 
@@ -111,15 +105,15 @@ def add_transaction(df_selected_products):
         ),
     }
 
-    # Insert the transaction
-    insert_success = insert_transaction_into_db(transaction_data)
-    if not insert_success:
+    # Insert the transaction, and get the transaction _id
+    transaction_id = str(insert_transaction_into_db(transaction_data))
+    if not transaction_id:
         return "Error when inserting transaction"
 
     st.session_state.selected_products = []
 
     # generate receipt
-    receipt = generate_receipt(df_selected_products)
+    receipt = generate_receipt(df_selected_products, transaction_id)
     return receipt
 
 
@@ -129,7 +123,7 @@ def convert_pdf_to_base64(pdf_content):
     return pdf_display
 
 
-def generate_receipt(df_selected_products):
+def generate_receipt(df_selected_products, transaction_id):
     # preparing dataframe in correct format
     df_selected_products = df_selected_products.drop(columns=["category"])
     df_selected_products = df_selected_products.rename(
@@ -182,7 +176,7 @@ def generate_receipt(df_selected_products):
 
     # id
     pdf.ln(10)
-    pdf.cell(15, 8, txt=f"Transaction ID: {str(get_last_inserted_transaction())}")
+    pdf.cell(15, 8, txt=f"Transaction ID: {transaction_id}")
 
     # add Salesights logo
     pdf.image(

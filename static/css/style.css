@@ -21,5 +21,5 @@ div[data-testid="metric-container"] > label[data-testid="stMetricLabel"] > div {
 }
 
 footer, div[data-testid="stDecoration"], .stDeployButton  {
-    display: none;
+    display: none !important;
 }

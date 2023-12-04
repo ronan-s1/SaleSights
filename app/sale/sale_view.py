@@ -60,6 +60,7 @@ def add_product_manually():
 
 
 def sale_main():
+    st.title("Log Sale Transaction")
     with st.expander("Add Product"):
         df_selected_products = add_product_manually()
 
