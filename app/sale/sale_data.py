@@ -42,5 +42,16 @@ def get_product_by_barcode(barcode):
 
 
 def insert_transaction_into_db(transaction):
+    try:
+        sale_transactions_collection = get_sale_transactions_collection()
+        sale_transactions_collection.insert_one(transaction)
+        return True
+    except Exception as e:
+        print(f"Error inserting transaction into the database: {e}")
+        return False
+
+
+def get_last_inserted_transaction():
     sale_transactions_collection = get_sale_transactions_collection()
-    sale_transactions_collection.insert_one(transaction)
+    last_document = sale_transactions_collection.find_one(sort=[("_id", -1)])["_id"]
+    return last_document

@@ -7,6 +7,7 @@ from sale.sale_controller import (
     add_product_to_transaction,
     get_total_transaction,
     add_transaction,
+    clear_transaction_data,
 )
 from streamlit_qrcode_scanner import qrcode_scanner
 import pandas as pd
@@ -74,9 +75,17 @@ def sale_main():
         total = get_total_transaction(df_selected_products)
         st.write(total)
 
-        if st.button("Finish"):
-            err = add_transaction(df_selected_products)
-            if err:
-                st.error("Error")
+        # create two columns for buttons
+        col1, col2 = st.columns([9, 1])
+
+        # clicked when transaction is finished
+        if col1.button("Finish"):
+            retrun_val = add_transaction(df_selected_products)
+            if "iframe" in retrun_val:
+                st.markdown(retrun_val, unsafe_allow_html=True)
             else:
-                st.success("Transaction Successful")
+                st.error(retrun_val)
+
+        # clear table
+        if col2.button("Clear"):
+            clear_transaction_data()

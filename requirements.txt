@@ -1,6 +1,8 @@
 streamlit==1.28.2
 streamlit-option-menu==0.3.6
 plotly==5.16.1
+fpdf==1.7.2
+python-barcode==0.15.1
 langchain
 pymongo==4.3.2
 pandas==2.0.0
