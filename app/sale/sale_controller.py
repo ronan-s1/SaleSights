@@ -191,7 +191,6 @@ def generate_receipt(df_selected_products):
 
     # save the PDF to BytesIO
     pdf_byte_string = pdf.output()
-    # pdf_byte_string_arr = bytes(str(pdf_byte_string), "utf-8")
 
     # display PDF using iframe
     iframe_base64_pdf = convert_pdf_to_base64(pdf_byte_string)
