@@ -119,7 +119,7 @@ def add_transaction(df_selected_products):
 
 def convert_pdf_to_base64(pdf_content):
     base64_pdf = base64.b64encode(pdf_content).decode("utf-8")
-    pdf_display = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="700" height="1000" type="application/pdf"></iframe>'
+    pdf_display = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="700" height="900" type="application/pdf"></iframe>'
     return pdf_display
 
 
