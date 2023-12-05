@@ -48,5 +48,3 @@ def insert_transaction_into_db(transaction):
         return result.inserted_id
     except Exception as e:
         return None
-
-
