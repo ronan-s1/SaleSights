@@ -27,7 +27,7 @@
         "product_name": "Joint Support Capsules",
         "category": "Supplements",
         "barcode_data": "X010JSC09",
-        "price": 8.00
+        "price": 8.55
     },
     {
         "product_name": "Organic Coconut Oil",
@@ -57,13 +57,13 @@
         "product_name": "Turmeric Curcumin Capsules",
         "category": "Supplements",
         "barcode_data": "X018TCC17",
-        "price": 10.50
+        "price": 10.59
     },
     {
         "product_name": "MCT Oil for Keto",
         "category": "Supplements",
         "barcode_data": "X022MCTK21",
-        "price": 15.20
+        "price": 15.25
     },
     {
         "product_name": "High-Fiber Oat Bran",
@@ -87,7 +87,7 @@
         "product_name": "Vegan Food Bars Variety Pack",
         "category": "Food",
         "barcode_data": "X030VPB29",
-        "price": 15.50
+        "price": 15.55
     },
     {
         "product_name": "Moisturizing Aloe Vera Body Lotion",
@@ -99,13 +99,13 @@
         "product_name": "Natural Coconut Milk Bath Soap",
         "category": "Personal Care",
         "barcode_data": "X004NCMBS04",
-        "price": 12.50
+        "price": 12.35
     },
     {
         "product_name": "Peppermint Eucalyptus Deodorant Stick",
         "category": "Personal Care",
         "barcode_data": "X005PEDS05",
-        "price": 8.50
+        "price": 5.99
     },
     {
         "product_name": "Charcoal Infused Toothpaste",
@@ -123,7 +123,7 @@
         "product_name": "Yoga Mat with Non-Slip Surface",
         "category": "Fitness",
         "barcode_data": "X032YMNS02",
-        "price": 25.00
+        "price": 25.05
     },
     {
         "product_name": "Resistance Band Set",
@@ -135,7 +135,7 @@
         "product_name": "Digital Body Weight Scale",
         "category": "Fitness",
         "barcode_data": "X034DBWS04",
-        "price": 20.50
+        "price": 20.05
     },
     {
         "product_name": "Collapsible Water Bottle",
@@ -183,7 +183,7 @@
         "product_name": "Natural Remedies Encyclopedia",
         "category": "Books",
         "barcode_data": "X075NRE05",
-        "price": 10.99
+        "price": 10.75
     },
     {
         "product_name": "Fitness and Nutrition Guide",
@@ -195,6 +195,6 @@
         "product_name": "Stress Management Handbook",
         "category": "Books",
         "barcode_data": "X077SMH07",
-        "price": 17.10
+        "price": 17.15
     }
 ]
