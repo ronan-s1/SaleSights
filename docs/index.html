@@ -4,42 +4,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple.css">
+    <link rel="stylesheet" href="assets/styles/styles.css">
 </head>
 <body>
     <div id="app"></div>
-    <script>
-    window.$docsify = {
-        name: "SaleSights",
-        loadSidebar: true,
-        el: "#app",
-        subMaxLevel: 3,
-        search: "auto",
-        search: {
-            maxAge: 86400000,
-            paths: "auto",
-            placeholder: "Type to search",
-            noData: "No Results!",
-            depth: 6,
-            hideOtherSidebarContent: true,
-        },
-        repo: "true",
-        corner: {
-            url: "https://github.com/ronan-s1/SaleSights",  
-            icon: "github"
-        },
-        copyCode: {
-            buttonText: {
-                "/": "Copy"
-            },
-            errorText: {
-                "/": "Error"
-            },
-            successText: {
-                "/": "Copied"
-            }
-        }
-    }
-    </script>
+    <script src="assets/scripts/scripts.js"></script>
     <script src="https://unpkg.com/@h-hg/docsify-image-caption/dist/docsify-image-caption.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
     <script src="//unpkg.com/docsify/lib/plugins/search.min.js"></script>
@@ -50,14 +19,3 @@
 </body>
 </html>
 
-<style>
-@import url("https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&family=Courgette&family=Pacifico&family=Roboto&display=swap");
-:root {
-    font-family: "Roboto", sans-serif;
-    --theme-color: #414a7d;
-}
-
-.clear-button {
-    display: none !important;
-}
-</style>

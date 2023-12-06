@@ -1,0 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&family=Courgette&family=Pacifico&family=Roboto&display=swap");
+:root {
+    font-family: "Roboto", sans-serif;
+    --theme-color: #414a7d;
+}
+
+.clear-button {
+    display: none !important;
+}
+
+.app-name-link img{
+    margin-bottom: -25px;
+    margin-top: -14px;
+}
