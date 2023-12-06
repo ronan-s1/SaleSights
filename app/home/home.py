@@ -1,5 +1,4 @@
 import streamlit as st
-from datetime import datetime
 from home.home_controller import service_container, get_greeting
 
 
@@ -20,11 +19,8 @@ def home_main():
 
     with col2:
         product_container = service_container(
-            "fa-solid fa-basket-shopping",
-            "Products",
-            "Manage your products with ease"
+            "fa-solid fa-basket-shopping", "Products", "Manage your products with ease"
         )
         st.markdown(product_container, unsafe_allow_html=True)
-        
 
     st.write("Need help? See our [docs](https://salesights.xyz).")

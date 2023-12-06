@@ -15,19 +15,21 @@ def update_secrets_file():
     secrets_path = os.path.join(".streamlit", "secrets.toml")
 
     if is_running_in_docker():
-        secrets_content = textwrap.dedent("""
+        secrets_content = textwrap.dedent(
+            """
             [mongo]
             host = "mongo"
             port = 27017
-        """
+            """
         )
         print("Secrets file updated for Docker env.")
     else:
-        secrets_content = textwrap.dedent("""
+        secrets_content = textwrap.dedent(
+            """
             [mongo]
             host = "localhost"
             port = 27017
-        """
+            """
         )
         print("Secrets file updated for local env.")
 

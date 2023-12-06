@@ -9,13 +9,13 @@ def service_container(iconname, i, sline):
 
     html_template = f"""
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous">
-        <p style='background-color: rgba({wch_colour_box[0]}, {wch_colour_box[1]}, {wch_colour_box[2]}, 0.75); 
-            color: rgba({wch_colour_font[0]}, {wch_colour_font[1]}, {wch_colour_font[2]}, 0.8); 
-            font-size: {fontsize}px; 
-            border-radius: 7px; 
-            padding-left: 12px; 
-            padding-top: 18px; 
-            padding-bottom: 18px; 
+        <p style='background-color: rgba({wch_colour_box[0]}, {wch_colour_box[1]}, {wch_colour_box[2]}, 0.75);
+            color: rgba({wch_colour_font[0]}, {wch_colour_font[1]}, {wch_colour_font[2]}, 0.8);
+            font-size: {fontsize}px;
+            border-radius: 7px;
+            padding-left: 12px;
+            padding-top: 18px;
+            padding-bottom: 18px;
             line-height: 25px;'>
             <i class='{iconname} fa-2xs'></i> {i}
             </br>

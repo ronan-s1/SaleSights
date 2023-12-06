@@ -47,4 +47,5 @@ def insert_transaction_into_db(transaction):
         result = sale_transactions_collection.insert_one(transaction)
         return result.inserted_id
     except Exception as e:
-        return None
+        print(e)
+        return
