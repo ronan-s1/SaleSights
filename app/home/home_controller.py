@@ -1,6 +1,7 @@
 from datetime import datetime
 
 
+# display a custom styled container for each service
 def service_container(iconname, i, sline):
     wch_colour_box = (233, 236, 251)
     wch_colour_font = (4, 9, 33)
@@ -24,6 +25,7 @@ def service_container(iconname, i, sline):
     return html_template
 
 
+# get greeting depending on hour of the day
 def get_greeting():
     current_hour = datetime.now().hour
     if 5 <= current_hour < 12:
