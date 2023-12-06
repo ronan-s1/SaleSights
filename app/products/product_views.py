@@ -159,7 +159,7 @@ def delete_category_components():
 
 
 def product_main():
-    st.title("Product Management")
+    st.title("Product Management 📦")
     products = display_products()
     categories = get_categories()
     product_col, category_col = st.columns(2)
