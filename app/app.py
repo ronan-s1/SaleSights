@@ -6,10 +6,11 @@ from home.home import home_main
 from sale.sale_view import sale_main
 from products.product_views import product_main
 
-st.set_page_config(page_title="SaleSights")
-
 LOGO_PATH = os.path.join("static", "img", "salesights-logo.png")
+LOGO_ICON_PATH = os.path.join("static", "img", "salesights-title-icon.png")
 CSS_PATH = os.path.join("static", "css", "style.css")
+
+st.set_page_config(page_title="SaleSights", page_icon=LOGO_ICON_PATH)
 
 with open(CSS_PATH) as f:
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
