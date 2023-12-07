@@ -57,6 +57,7 @@ def update_product_from_db(selected_product_id, product_to_update):
     )
 
 
+# if a product exists return True
 def product_exists(product):
     products_collection = get_products_collection()
     matching_product = products_collection.find_one(product)

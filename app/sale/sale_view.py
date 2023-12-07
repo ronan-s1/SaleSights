@@ -13,16 +13,17 @@ from streamlit_qrcode_scanner import qrcode_scanner
 import pandas as pd
 
 
-def scan_product(session_state):
-    if "cam_on" not in session_state:
-        session_state.cam_on = False
+def scan_product():
+    # create cam_on session if it doesn't exist
+    if "cam_on" not in st.session_state:
+        st.session_state.cam_on = False
 
     # Add a button to toggle the camera on and off
     if st.button("Toggle Camera"):
-        session_state.cam_on = not session_state.cam_on
+        st.session_state.cam_on = not st.session_state.cam_on
 
     # If the camera is on, capture and display video frames
-    if session_state.cam_on:
+    if st.session_state.cam_on:
         barcode = qrcode_scanner(key="scanner")
         if barcode:
             scanned_product = process_barcode(barcode)
@@ -34,6 +35,7 @@ def scan_product(session_state):
 
 
 def add_product_manually():
+    # create selected_products session if it doesn't exist
     if "selected_products" not in st.session_state:
         st.session_state.selected_products = []
 
@@ -46,7 +48,7 @@ def add_product_manually():
 
     quantity = st.number_input("Quantity", min_value=1, value=1)
 
-    if st.button("Add", key="add_manually") and selected_product_name:
+    if st.button("Add", key="add_manually"):
         selected_product_names = [
             product["product_name"] for product in st.session_state.selected_products
         ]
@@ -65,11 +67,9 @@ def sale_main():
         df_selected_products = add_product_manually()
 
     with st.expander("Scan Product"):
-        if "cam_on" not in st.session_state:
-            st.session_state.cam_on = False
+        scan_product()
 
-        scan_product(st.session_state)
-
+    # if a product has been added to the transaction
     if not df_selected_products.empty:
         df_selected_products_show = format_transaction_df(df_selected_products)
         st.table(df_selected_products_show)
