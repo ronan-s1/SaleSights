@@ -1,8 +1,18 @@
 from datetime import datetime
 
 
-# display a custom styled container for each service
-def service_container(iconname, i, sline):
+def service_container(iconname, title, sline):
+    """
+    Generate a custom-styled service container.
+
+    Args:
+        iconname (str): The font-awsome icon.
+        i (str): The title of the service.
+        sline (str): A small description of the service.
+
+    Returns:
+        str: HTML template for the styled service container.
+    """
     wch_colour_box = (233, 236, 251)
     wch_colour_font = (4, 9, 33)
     fontsize = 22
@@ -17,7 +27,7 @@ def service_container(iconname, i, sline):
             padding-top: 18px;
             padding-bottom: 18px;
             line-height: 25px;'>
-            <i class='{iconname} fa-2xs'></i> {i}
+            <i class='{iconname} fa-2xs'></i> {title}
             </br>
             <span style='font-size: 14px; margin-top: 0;'>{sline}</span>
         </p>
@@ -27,6 +37,12 @@ def service_container(iconname, i, sline):
 
 # get greeting depending on hour of the day
 def get_greeting():
+    """
+    Get a greeting message based on the current hour of the day.
+
+    Returns:
+        str: A greeting message.
+    """
     current_hour = datetime.now().hour
     if 5 <= current_hour < 12:
         return "Good morning ☀️"

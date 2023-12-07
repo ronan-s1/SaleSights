@@ -3,8 +3,13 @@ from home.home_controller import service_container, get_greeting
 
 
 def home_main():
-    greeting = get_greeting()
+    """
+    The home page view, display info about the services
 
+    Return:
+        None
+    """
+    greeting = get_greeting()
     st.markdown(f"### {greeting}")
 
     col1, col2 = st.columns(2)

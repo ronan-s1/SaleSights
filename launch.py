@@ -29,7 +29,10 @@ def start_mongodb():
 
 def run_streamlit_app():
     """
-    Run the Streamlit app.
+    Runs Streamlit app and docker_db_connection.py.
+
+    Returns:
+        None
     """
     start_mongodb()
 
