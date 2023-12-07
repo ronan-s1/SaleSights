@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/ronan-s1/SaleSights/blob/main/static/img/salesights-logo.png?raw=true" alt="SaleSights Logo", style="width: 470px; margin-top: -30px; min-width: 300px">
+  <img src="assets/img/salesights-logo.png" alt="SaleSights Logo", style="width: 470px; margin-top: -30px; min-width: 300px">
 </p>
 
 <div align="center" style="margin-top: -20px">

@@ -1,3 +1,0 @@
-# SaleSight Services
-
-WIP

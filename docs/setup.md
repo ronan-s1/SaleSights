@@ -1,8 +1,8 @@
 # SaleSights Setup
 
-## Run Locally 🚀
+## Run Locally 🖥️
 
-To run the app locally you need a MongoDB server and the streamlit app running. It is recommend to use Python 3.10 for optimal compatibility.
+To run the app locally you need a MongoDB server and the Streamlit application running. It is recommend to use Python 3.10 for optimal compatibility.
 
 ### MongoDB
 
@@ -44,14 +44,9 @@ If you plan to run `launch.py`, please make sure you have MongoDB installed usin
     pip install -r requirements.txt
     ```
 
-4. Create a `.streamlit/secrets.toml`
-    ```toml
-    [mongo]
-    host = "localhost"
-    port = 27017
-    ```
+4. run `launch_app.py`
 
-6. run `launch_app.py`
+5. Got to http://127.0.0.1:8501/
 
 ## Run using Docker 🐋
 
@@ -59,22 +54,17 @@ If you plan to run `launch.py`, please make sure you have MongoDB installed usin
 
 2. Navigate to the project directory
 
-3. Create a `.streamlit/secrets.toml`
-    ```toml
-    [mongo]
-    host = "mongo"
-    port = 27017
-    ```
-
-4. Build images
+3. Build images
     ```bash
     docker-compose build
     ```
 
-5. Run containers
+4. Run containers
     ```bash
     docker-compose up
     ```
+
+5. Go to http://127.0.0.1:8501/
 
 ## Use Sample Data 📂
 
