@@ -12,11 +12,27 @@ from sale.sale_data import (
 
 
 def get_products():
+    """
+    Request list of all products from data access.
+
+    Returns:
+        List[dict]: A list of product documents
+    """
     products = fetch_products()
     return list(products)
 
 
 def process_barcode(barcode_data):
+    """
+    Process a scanned barcode and request data acces to retrieve the corresponding product.
+
+    Args:
+        barcode_data (str): The scanned barcode data.
+
+    Returns:
+        dict: Fetched product with matching barcode
+        str: If no product is found, return an error message
+    """
     product = get_product_by_barcode(barcode_data)
 
     if product:
@@ -25,20 +41,30 @@ def process_barcode(barcode_data):
     return f"No product with scanned barcode: {barcode_data}."
 
 
-def add_product_to_transaction(
-    selected_product_name, selected_product_names, quantity, products
-):
-    if selected_product_name in selected_product_names:
+def add_product_to_transaction(product_name, product_names, quantity, products):
+    """
+    Add a product to the transaction or update its quantity if already selected.
+
+    Args:
+        selected_product_name (str): The name of the selected product
+        selected_product_names (list): List of names of already selected products
+        quantity (int): The quantity of the product
+        products (list): List of products
+
+    Returns:
+        None
+    """
+    if product_name in product_names:
         # Update the quantity for the existing product
         for product in st.session_state.selected_products:
-            if product["product_name"] == selected_product_name:
+            if product["product_name"] == product_name:
                 product["quantity"] = quantity
     else:
         # Add a new entry to the list
         selected_product = [
             product
             for product in products
-            if product["product_name"] == selected_product_name
+            if product["product_name"] == product_name
         ]
         if selected_product:
             selected_product[0]["quantity"] = quantity
@@ -46,6 +72,15 @@ def add_product_to_transaction(
 
 
 def format_transaction_df(df_selected_products):
+    """
+    Format and clean the transaction DataFrame
+
+    Args:
+        df_selected_products (pd.DataFrame): DataFrame containing selected products.
+
+    Returns:
+        Styler: A formatted Styler object for displaying the DataFrame.
+    """
     df_selected_products_show = df_selected_products.drop(
         columns=["_id", "barcode_data"], errors="ignore"
     )
@@ -67,11 +102,29 @@ def format_transaction_df(df_selected_products):
 
 
 def get_total_transaction(df_selected_products):
+    """
+    Calculate the total price of the transaction.
+
+    Args:
+        df_selected_products (pd.DataFrame): DataFrame containing selected products.
+
+    Returns:
+        str: Total price of the transaction.
+    """
     total = (df_selected_products["price"] * df_selected_products["quantity"]).sum()
     return f"Total: {total:.2f}"
 
 
 def add_scanned_product_to_transaction(scanned_product):
+    """
+    Add a scanned product to the transaction.
+
+    Args:
+        scanned_product (str): The product information of the scanned product
+
+    Returns:
+        None
+    """
     if "selected_products" not in st.session_state:
         st.session_state.selected_products = []
 
@@ -87,11 +140,27 @@ def add_scanned_product_to_transaction(scanned_product):
 
 
 def clear_transaction_data():
+    """
+    Clear the transaction data stored in the session state
+
+    Returns:
+        None
+    """
     st.session_state.selected_products = []
     st.rerun()
 
 
 def add_transaction(df_selected_products):
+    """
+    Request data access to add a transaction to the database and generate a receipt.
+
+    Args:
+        df_selected_products (pd.DataFrame): DataFrame containing selected products.
+
+    Returns:
+       str: Base64-encoded string for displaying the PDF receipt using an iframe
+       str: Error message
+    """
     st.session_state.cam_on = False
     if df_selected_products.empty:
         return "Cannot finish an empty transaction"
@@ -118,6 +187,15 @@ def add_transaction(df_selected_products):
 
 
 def convert_pdf_to_base64(pdf_content):
+    """
+    Convert PDF content to a Base64-encoded string.
+
+    Args:
+        pdf_content (bytes): The content of the PDF file
+
+    Returns:
+        str: Base64-encoded string for displaying the PDF receipt using an iframe
+    """
     base64_pdf = base64.b64encode(pdf_content).decode("utf-8")
     pdf_display = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="700" height="900" type="application/pdf"></iframe>'
     return pdf_display
@@ -183,7 +261,7 @@ def generate_receipt(df_selected_products, transaction_id):
         os.path.join("static", "img", "salesights-logo.png"), x=10, y=pdf.h - 20, w=40
     )
 
-    # save the PDF to BytesIO
+    # save the PDF in memory
     pdf_byte_string = pdf.output()
 
     # display PDF using iframe
