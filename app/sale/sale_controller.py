@@ -1,6 +1,7 @@
 import base64
 from datetime import datetime as dt
 import os
+import platform
 import streamlit as st
 from fpdf import FPDF
 from datetime import datetime
@@ -202,6 +203,15 @@ def convert_pdf_to_base64(pdf_content):
 
 
 def generate_receipt(df_selected_products, transaction_id):
+    """_summary_
+
+    Args:
+        df_selected_products (pd.DataFrame): Dataframe of products purchased
+        transaction_id (int): MongoDB ObjectID for the transaction
+
+    Returns:
+        str: iframe of receipt PDF
+    """
     # preparing dataframe in correct format
     df_selected_products = df_selected_products.drop(columns=["category"])
     df_selected_products = df_selected_products.rename(
@@ -261,8 +271,12 @@ def generate_receipt(df_selected_products, transaction_id):
         os.path.join("static", "img", "salesights-logo.png"), x=10, y=pdf.h - 20, w=40
     )
 
-    # save the PDF in memory
-    pdf_byte_string = pdf.output()
+    # save the PDF in memory, system dependent
+    # temp fix until better method is found
+    if platform.system() == "Linux":
+        pdf_byte_string = pdf.output(dest="S").encode("latin-1")
+    else:
+        pdf_byte_string = pdf.output()
 
     # display PDF using iframe
     iframe_base64_pdf = convert_pdf_to_base64(pdf_byte_string)
