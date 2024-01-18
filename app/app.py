@@ -5,6 +5,7 @@ from PIL import Image
 from home.home import home_main
 from sale.sale_view import sale_main
 from products.product_views import product_main
+from transactions.transaction_view import transaction_main
 
 LOGO_PATH = os.path.join("static", "img", "salesights-logo.png")
 LOGO_ICON_PATH = os.path.join("static", "img", "salesights-title-icon.png")
@@ -41,6 +42,7 @@ def main():
         "Home": {"function": home_main, "icon": "house"},
         "Sale": {"function": sale_main, "icon": "cart-check"},
         "Products": {"function": product_main, "icon": "basket"},
+        "Transactions": {"function": transaction_main, "icon": "wallet2"},
     }
 
     pages_list = list(pages.keys())
