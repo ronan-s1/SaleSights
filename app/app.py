@@ -7,9 +7,9 @@ from sale.sale_view import sale_main
 from products.product_views import product_main
 from transactions.transaction_view import transaction_main
 
-LOGO_PATH = os.path.join("static", "img", "salesights-logo.png")
-LOGO_ICON_PATH = os.path.join("static", "img", "salesights-title-icon.png")
-CSS_PATH = os.path.join("static", "css", "style.css")
+LOGO_PATH = os.path.join("app", "static", "img", "salesights-logo.png")
+LOGO_ICON_PATH = os.path.join("app", "static", "img", "salesights-title-icon.png")
+CSS_PATH = os.path.join("app", "static", "css", "style.css")
 
 st.set_page_config(page_title="SaleSights", page_icon=LOGO_ICON_PATH)
 

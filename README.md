@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="static/img/salesights-logo.png" alt="SaleSights Logo", style="width: 550px;">
+  <img src="app/static/img/salesights-logo.png" alt="SaleSights Logo", style="width: 550px;">
 </p>
 
 <div align="center">

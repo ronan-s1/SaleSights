@@ -268,7 +268,7 @@ def generate_receipt(df_selected_products, transaction_id):
 
     # add Salesights logo
     pdf.image(
-        os.path.join("static", "img", "salesights-logo.png"), x=10, y=pdf.h - 20, w=40
+        os.path.join("app", "static", "img", "salesights-logo.png"), x=10, y=pdf.h - 20, w=40
     )
 
     # save the PDF in memory, system dependent
