@@ -15,6 +15,10 @@ def display_transaction():
     page_size = 5
     transactions = list(get_transactions())
     
+    if not transactions:
+        st.error("No transactions.")
+        return
+    
     # filter transactions based on the entered ID
     search_id = st.text_input("Search by ID:")
     if search_id:
@@ -34,6 +38,7 @@ def display_transaction():
     
     # start and end index for transactions list
     start_idx, end_idx = get_index(page_size)
+    
 
     # display transactions for the current page
     for transaction in transactions[start_idx:end_idx]:
