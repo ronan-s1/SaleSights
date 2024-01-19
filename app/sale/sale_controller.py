@@ -273,10 +273,10 @@ def generate_receipt(df_selected_products, transaction_id):
 
     # save the PDF in memory, system dependent
     # temp fix until better method is found
-    if platform.system() == "Linux":
-        pdf_byte_string = pdf.output(dest="S").encode("latin-1")
-    else:
+    if platform.system() == "Windows":
         pdf_byte_string = pdf.output()
+    else:
+        pdf_byte_string = pdf.output(dest="S").encode("latin-1")
 
     # display PDF using iframe
     iframe_base64_pdf = convert_pdf_to_base64(pdf_byte_string)
