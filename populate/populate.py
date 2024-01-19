@@ -23,11 +23,13 @@ def populate():
     db = client.salesights
     product_categories_collection = db.product_categories
     products_collection = db.products
+    sale_transactions_collection = db.sale_transactions
 
     # drop existing collections
     logger.info("Dropping existing collections")
     product_categories_collection.drop()
     products_collection.drop()
+    sale_transactions_collection.drop()
 
     product_categories_data = read_json("product_categories.json")
     products_data = read_json("products.json")
