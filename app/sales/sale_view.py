@@ -1,5 +1,5 @@
 import streamlit as st
-from sale.sale_controller import (
+from sales.sale_controller import (
     add_scanned_product_to_transaction,
     format_transaction_df,
     process_barcode,

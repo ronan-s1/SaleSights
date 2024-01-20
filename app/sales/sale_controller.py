@@ -5,7 +5,7 @@ import platform
 import streamlit as st
 from fpdf import FPDF
 from datetime import datetime
-from sale.sale_data import (
+from sales.sale_data import (
     fetch_products,
     get_product_by_barcode,
     insert_transaction_into_db,
