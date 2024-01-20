@@ -185,6 +185,9 @@ def add_transaction(df_selected_products):
     return receipt
 
 
+# -- Receipt Generation --
+
+
 def convert_pdf_to_base64(pdf_content):
     """
     Convert PDF content to a Base64-encoded string.
@@ -201,6 +204,15 @@ def convert_pdf_to_base64(pdf_content):
 
 
 def prepare_dataframe(df_selected_products):
+    """
+    Structure dataframe of purchased products for the receipt.
+
+    Args:
+        df_selected_products (pd.DataFrame): DataFrame containing selected products.
+
+    Returns:
+        pd.Dataframe: Dataframe structured in the desired format for the receipt
+    """
     df_selected_products = df_selected_products.drop(columns=["category"])
     df_selected_products = df_selected_products.rename(
         columns={
@@ -213,6 +225,12 @@ def prepare_dataframe(df_selected_products):
 
 
 def generate_pdf_header(pdf):
+    """
+    Generate the header of the receipt.
+
+    Args:
+        pdf (FPDF): PDF object
+    """
     pdf.set_font("Helvetica", "B", 16)
     pdf.cell(0, 10, txt="Receipt", align='C')
     pdf.ln(10)
@@ -220,30 +238,56 @@ def generate_pdf_header(pdf):
 
 
 def add_date_time(pdf):
+    """
+    Add date and time of receipt generation.
+
+    Args:
+        pdf (FPDF): PDF object
+    """
     now = datetime.now()
-    formatted_date = now.strftime("%Y-%m-%d %H:%M")
+    formatted_date = now.strftime("%Y/%m/%d %H:%M:%S")
     pdf.cell(0, 8, txt=f"Receipt Generation Date: {formatted_date}")
     pdf.ln(8)
 
 
 def add_headers(pdf):
+    """
+    Generate the header of the receipt.
+
+    Args:
+        pdf (FPDF): PDF object
+    """
     pdf.set_fill_color(200, 220, 255)
     pdf.cell(15, 8, txt="qty", border=1, fill=True)
     pdf.cell(145, 8, txt="product", border=1, fill=True)
     pdf.cell(30, 8, txt="price", border=1, fill=True)
 
 
-def add_receipt_items(pdf, df_selected_products):
-    for _, row in df_selected_products.iterrows():
+def add_receipt_items(pdf, df_selected_products_formatted):
+    """
+    Add puchased products to the receipt from the dataframe.
+
+    Args:
+        pdf (FPDF): PDF object
+        df_selected_products_formatted (pd.DataFrame): DataFrame containing selected products.
+    """
+    for _, row in df_selected_products_formatted.iterrows():
         pdf.ln(8)
         pdf.cell(15, 8, txt=str(row["qty"]), border=1)
         pdf.cell(145, 8, txt=row["product"], border=1)
         pdf.cell(30, 8, txt="{:.2f}".format(row["price"]), border=1)
 
 
-def add_total(pdf, df_selected_products):
+def add_total(pdf, df_selected_products_formatted):
+    """
+    Calculate the total and add it to the receipt with some styling.
+
+    Args:
+        pdf (FPDF): PDF object
+        df_selected_products_formatted (pd.DataFrame): DataFrame containing selected products.
+    """
     pdf.ln(8)
-    total = (df_selected_products["qty"] * df_selected_products["price"]).sum()
+    total = (df_selected_products_formatted["qty"] * df_selected_products_formatted["price"]).sum()
     formatted_total = "{:.2f}".format(total)
     pdf.cell(160, 8, txt="Total", border=1)
     pdf.set_fill_color(174, 247, 173)
@@ -251,11 +295,24 @@ def add_total(pdf, df_selected_products):
 
 
 def add_transaction_id(pdf, transaction_id):
+    """
+    Add transaction ID of the purchase to the receipt.
+
+    Args:
+        pdf (FPDF): PDF object
+        transaction_id (str): MongoDB Object ID of the transaction
+    """
     pdf.ln(10)
     pdf.cell(15, 8, txt=f"Transaction ID: {transaction_id}")
 
 
 def add_salesights_logo(pdf):
+    """
+    Add SaleSights Logo to bottom left corner of receipt.
+
+    Args:
+        pdf (FPDF): PDF object
+    """
     pdf.image(
         os.path.join("app", "static", "img", "salesights-logo.png"),
         x=10,
@@ -265,15 +322,35 @@ def add_salesights_logo(pdf):
 
 
 def save_pdf(pdf):
+    """
+    Save pdf in RAM. This is OS dependent.
+
+    Args:
+        pdf (_type_): _description_
+
+    Returns:
+        bytes: A byte string containing the content of the generated PDF.
+    """
     if platform.system() == "Windows":
         pdf_byte_string = pdf.output()
     else:
         pdf_byte_string = pdf.output(dest="S").encode("latin-1")
+
     return pdf_byte_string
 
 
 def generate_receipt(df_selected_products, transaction_id):
-    df_selected_products = prepare_dataframe(df_selected_products)
+    """
+    Generate the pdf receipt.
+
+    Args:
+        df_selected_products (pd.DataFrame): DataFrame containing selected products.
+        transaction_id (str): MongoDB Object ID of the transaction
+
+    Returns:
+        str: Base64-encoded string for displaying the PDF receipt using an iframe
+    """
+    df_selected_products_formatted = prepare_dataframe(df_selected_products)
     pdf = FPDF()
     pdf.add_page()
 
@@ -281,9 +358,9 @@ def generate_receipt(df_selected_products, transaction_id):
     add_date_time(pdf)
 
     add_headers(pdf)
-    add_receipt_items(pdf, df_selected_products)
+    add_receipt_items(pdf, df_selected_products_formatted)
 
-    add_total(pdf, df_selected_products)
+    add_total(pdf, df_selected_products_formatted)
 
     add_transaction_id(pdf, transaction_id)
     add_salesights_logo(pdf)
