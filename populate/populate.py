@@ -1,8 +1,9 @@
 import logging
 import os
-from pymongo import MongoClient
 import json
+from pymongo import MongoClient
 from streamlit import secrets
+from populate_modules.sale_transactions import generate_sale_transactions_test_data
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 logger = logging.getLogger(__name__)
@@ -39,6 +40,8 @@ def populate():
 
     logger.info("Inserting data into products collection")
     products_collection.insert_many(products_data)
+    
+    generate_sale_transactions_test_data(5000)
 
     logger.info("Database populated successfully")
 
