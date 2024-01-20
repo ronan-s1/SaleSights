@@ -63,9 +63,7 @@ def add_product_to_transaction(product_name, product_names, quantity, products):
     else:
         # Add a new entry to the list
         selected_product = [
-            product
-            for product in products
-            if product["product_name"] == product_name
+            product for product in products if product["product_name"] == product_name
         ]
         if selected_product:
             selected_product[0]["quantity"] = quantity
@@ -202,17 +200,7 @@ def convert_pdf_to_base64(pdf_content):
     return pdf_display
 
 
-def generate_receipt(df_selected_products, transaction_id):
-    """_summary_
-
-    Args:
-        df_selected_products (pd.DataFrame): Dataframe of products purchased
-        transaction_id (int): MongoDB ObjectID for the transaction
-
-    Returns:
-        str: iframe of receipt PDF
-    """
-    # preparing dataframe in correct format
+def prepare_dataframe(df_selected_products):
     df_selected_products = df_selected_products.drop(columns=["category"])
     df_selected_products = df_selected_products.rename(
         columns={
@@ -221,40 +209,39 @@ def generate_receipt(df_selected_products, transaction_id):
             "quantity": "qty",
         }
     )
-    pdf = FPDF()
-    pdf.add_page()
+    return df_selected_products
 
-    # Set font and styling
+
+def generate_pdf_header(pdf):
     pdf.set_font("Helvetica", "B", 16)
     pdf.cell(0, 10, txt="Receipt", align='C')
     pdf.ln(10)
     pdf.set_font("Helvetica", "", 11)
 
-    # Current Date and Time
+
+def add_date_time(pdf):
     now = datetime.now()
     formatted_date = now.strftime("%Y-%m-%d %H:%M")
-
-    pdf.cell(
-        0,
-        8,
-        txt=f"Receipt Generation Date: {formatted_date}",
-    )
+    pdf.cell(0, 8, txt=f"Receipt Generation Date: {formatted_date}")
     pdf.ln(8)
 
-    # headers
+
+def add_headers(pdf):
     pdf.set_fill_color(200, 220, 255)
     pdf.cell(15, 8, txt="qty", border=1, fill=True)
     pdf.cell(145, 8, txt="product", border=1, fill=True)
     pdf.cell(30, 8, txt="price", border=1, fill=True)
 
-    # receipt Items
+
+def add_receipt_items(pdf, df_selected_products):
     for _, row in df_selected_products.iterrows():
         pdf.ln(8)
         pdf.cell(15, 8, txt=str(row["qty"]), border=1)
         pdf.cell(145, 8, txt=row["product"], border=1)
         pdf.cell(30, 8, txt="{:.2f}".format(row["price"]), border=1)
 
-    # total
+
+def add_total(pdf, df_selected_products):
     pdf.ln(8)
     total = (df_selected_products["qty"] * df_selected_products["price"]).sum()
     formatted_total = "{:.2f}".format(total)
@@ -262,23 +249,47 @@ def generate_receipt(df_selected_products, transaction_id):
     pdf.set_fill_color(174, 247, 173)
     pdf.cell(30, 8, txt=f"{formatted_total}", border=1, fill=True)
 
-    # id
+
+def add_transaction_id(pdf, transaction_id):
     pdf.ln(10)
     pdf.cell(15, 8, txt=f"Transaction ID: {transaction_id}")
 
-    # add Salesights logo
+
+def add_salesights_logo(pdf):
     pdf.image(
-        os.path.join("app", "static", "img", "salesights-logo.png"), x=10, y=pdf.h - 20, w=40
+        os.path.join("app", "static", "img", "salesights-logo.png"),
+        x=10,
+        y=pdf.h - 20,
+        w=40,
     )
 
-    # save the PDF in memory, system dependent
-    # temp fix until better method is found
+
+def save_pdf(pdf):
     if platform.system() == "Windows":
         pdf_byte_string = pdf.output()
     else:
         pdf_byte_string = pdf.output(dest="S").encode("latin-1")
+    return pdf_byte_string
 
-    # display PDF using iframe
+
+def generate_receipt(df_selected_products, transaction_id):
+    df_selected_products = prepare_dataframe(df_selected_products)
+    pdf = FPDF()
+    pdf.add_page()
+
+    generate_pdf_header(pdf)
+    add_date_time(pdf)
+
+    add_headers(pdf)
+    add_receipt_items(pdf, df_selected_products)
+
+    add_total(pdf, df_selected_products)
+
+    add_transaction_id(pdf, transaction_id)
+    add_salesights_logo(pdf)
+
+    pdf_byte_string = save_pdf(pdf)
+
     iframe_base64_pdf = convert_pdf_to_base64(pdf_byte_string)
 
     return iframe_base64_pdf

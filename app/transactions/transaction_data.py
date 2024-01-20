@@ -16,4 +16,3 @@ def get_db():
 def get_sale_transactions_collection():
     db = get_db()
     return db.sale_transactions
-

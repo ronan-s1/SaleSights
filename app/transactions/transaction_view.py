@@ -7,23 +7,23 @@ from transactions.transaction_controller import (
     get_transactions,
     structure_transaction_products,
     next_page,
-    prev_page
+    prev_page,
 )
 
 
 def display_transaction():
     page_size = 5
     transactions = list(get_transactions())
-    
+
     if not transactions:
         st.error("No transactions.")
         return
-    
+
     # filter transactions based on the entered ID
     search_id = st.text_input("Search by ID:")
     if search_id:
         transactions = filter_by_id(transactions, search_id)
-    
+
     total_pages = get_total_pages(page_size, transactions)
 
     # columns for prev and next buttons
@@ -35,10 +35,9 @@ def display_transaction():
     with col2:
         if st.session_state.current_page < total_pages:
             st.button("Next", on_click=next_page)
-    
+
     # start and end index for transactions list
     start_idx, end_idx = get_index(page_size)
-    
 
     # display transactions for the current page
     for transaction in transactions[start_idx:end_idx]:
@@ -51,10 +50,9 @@ def display_transaction():
     st.write(f"Page {st.session_state.current_page} of {total_pages}")
 
 
-
 def transaction_main():
     st.title("View Sale Transactions🧾")
-    
+
     if "current_page" not in st.session_state:
         st.session_state.current_page = 1
 
