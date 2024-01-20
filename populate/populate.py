@@ -41,7 +41,7 @@ def populate():
     logger.info("Inserting data into products collection")
     products_collection.insert_many(products_data)
     
-    generate_sale_transactions_test_data(5000)
+    generate_sale_transactions_test_data(3500)
 
     logger.info("Database populated successfully")
 

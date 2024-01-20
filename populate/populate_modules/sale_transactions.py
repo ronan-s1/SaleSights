@@ -41,7 +41,7 @@ def generate_sale_transactions_test_data(num_transactions):
     sale_transactions_test_data = []
 
     # every 30 transactions, go to next day
-    transactions_until_next_day = 30
+    transactions_until_next_day = 20
 
     logger.info("Generating sale transactions test data")
     
