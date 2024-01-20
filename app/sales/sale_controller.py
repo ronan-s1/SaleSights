@@ -111,7 +111,7 @@ def get_total_transaction(df_selected_products):
         str: Total price of the transaction.
     """
     total = (df_selected_products["price"] * df_selected_products["quantity"]).sum()
-    return f"Total: {total:.2f}"
+    return round(total, 2)
 
 
 def add_scanned_product_to_transaction(scanned_product):

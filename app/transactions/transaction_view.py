@@ -43,7 +43,7 @@ def display_transaction():
     for transaction in transactions[start_idx:end_idx]:
         with st.expander(transaction["timestamp"].strftime("%B %d, %Y %I:%M %p")):
             st.write(f"ID: {transaction['_id']}")
-            st.write(transaction["total"])
+            st.write(f"Total: {transaction['total']}")
             st.table(structure_transaction_products(transaction))
 
     # display current page info

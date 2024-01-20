@@ -74,7 +74,7 @@ def sale_main():
         df_selected_products_show = format_transaction_df(df_selected_products)
         st.table(df_selected_products_show)
         total = get_total_transaction(df_selected_products)
-        st.write(total)
+        st.write(f"Total: {total}")
 
         # create two columns for buttons
         col1, col2 = st.columns([9, 1])
