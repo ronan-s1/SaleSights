@@ -1,4 +1,5 @@
 import datetime
+import json
 import random
 import logging
 from pymongo import MongoClient
@@ -41,17 +42,24 @@ def generate_sale_transactions_test_data(num_transactions):
     sale_transactions_test_data = []
 
     # every 30 transactions, go to next day
-    transactions_until_next_day = 20
+    day_counter = 0
+    transaction_counter = 0
+    transactions_until_next_day = random.randint(10, 30)
 
     logger.info("Generating sale transactions test data")
-    
-    for i in range(num_transactions):
-        # Calculate the number of days to add based on the current transaction index
-        days_to_add = i // transactions_until_next_day
+
+    for _ in range(num_transactions):
+        # if the transaction counter has reached the random threshold to switch to the next day
+        if transaction_counter >= transactions_until_next_day:
+            transaction_counter = 0
+            day_counter += 1
+            transactions_until_next_day = random.randint(10, 30)
 
         # Calculate the timestamp for the transaction date with a random time between 9 am and 8 pm
         transaction_date = datetime.datetime.utcnow() + datetime.timedelta(
-            days=days_to_add, hours=random.randint(9, 20)
+            days=day_counter,
+            hours=random.randint(9, 20),
+            minutes=random.randint(0, 59),
         )
 
         # Random number of products from the products collection
@@ -62,17 +70,20 @@ def generate_sale_transactions_test_data(num_transactions):
             product["quantity"] = random.randint(1, 6)
 
         # calculate total price
-        total_price = round(sum(product["price"] * product["quantity"] for product in products), 2)
+        total_price = round(
+            sum(product["price"] * product["quantity"] for product in products), 2
+        )
 
         # transaction document
         transaction = {
             "timestamp": transaction_date,
             "total": total_price,
-            "products": products
+            "products": products,
         }
 
         # add transaction to list
         sale_transactions_test_data.append(transaction)
+        transaction_counter += 1
 
     # insert into db
     insert_transactions_to_collection(sale_transactions_test_data)
