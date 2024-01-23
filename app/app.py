@@ -2,16 +2,19 @@ import os
 import streamlit as st
 from streamlit_option_menu import option_menu
 from PIL import Image
+from analytics.analytic_view import anlaytic_main
 from home.home import home_main
 from sales.sale_view import sale_main
 from products.product_views import product_main
 from transactions.transaction_view import transaction_main
+
 
 LOGO_PATH = os.path.join("app", "static", "img", "salesights-logo.png")
 LOGO_ICON_PATH = os.path.join("app", "static", "img", "salesights-title-icon.png")
 CSS_PATH = os.path.join("app", "static", "css", "style.css")
 
 st.set_page_config(page_title="SaleSights", page_icon=LOGO_ICON_PATH)
+
 
 with open(CSS_PATH) as f:
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
@@ -39,10 +42,11 @@ def main():
     st.sidebar.image(salesights_logo)
 
     pages = {
-        "Home": {"function": home_main, "icon": "house"},
-        "Sale": {"function": sale_main, "icon": "cart-check"},
-        "Products": {"function": product_main, "icon": "basket"},
-        "Transactions": {"function": transaction_main, "icon": "wallet2"},
+        "Home": {"page": home_main, "icon": "house"},
+        "Sale": {"page": sale_main, "icon": "cart-check"},
+        "Products": {"page": product_main, "icon": "basket"},
+        "Transactions": {"page": transaction_main, "icon": "wallet2"},
+        "Analytics": {"page": anlaytic_main, "icon": "graph-up"}
     }
 
     pages_list = list(pages.keys())
@@ -50,12 +54,15 @@ def main():
 
     with st.sidebar:
         selected_page = option_menu(
-            menu_title=None, options=pages_list, icons=icons_list, default_index=0
+            menu_title=None, 
+            options=pages_list, 
+            icons=icons_list, 
+            default_index=0
         )
 
-    # Call the corresponding function based on the selected page
+    # Call the corresponding page based on the selected page
     if selected_page in pages:
-        pages[selected_page]["function"]()
+        pages[selected_page]["page"]()
 
 
 # Run the app
