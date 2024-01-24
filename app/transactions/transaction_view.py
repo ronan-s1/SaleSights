@@ -1,4 +1,4 @@
-import pandas as pd
+from datetime import datetime
 import streamlit as st
 from transactions.transaction_controller import (
     filter_by_id,
@@ -41,7 +41,8 @@ def display_transaction():
 
     # display transactions for the current page
     for transaction in transactions[start_idx:end_idx]:
-        with st.expander(transaction["timestamp"].strftime("%B %d, %Y %I:%M %p")):
+        formatted_date = f"{datetime.strptime(transaction['date'], '%Y-%m-%d').strftime('%B %d, %Y')} {transaction['time']}"
+        with st.expander(formatted_date):
             st.write(f"ID: {transaction['_id']}")
             st.write(f"Total: {transaction['total']}")
             st.table(structure_transaction_products(transaction))

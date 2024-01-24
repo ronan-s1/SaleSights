@@ -2,7 +2,7 @@ import os
 import streamlit as st
 from streamlit_option_menu import option_menu
 from PIL import Image
-from analytics.analytic_view import anlaytic_main
+from analytics.analytic_view import analytic_main
 from home.home import home_main
 from sales.sale_view import sale_main
 from products.product_views import product_main
@@ -46,7 +46,7 @@ def main():
         "Sale": {"page": sale_main, "icon": "cart-check"},
         "Products": {"page": product_main, "icon": "basket"},
         "Transactions": {"page": transaction_main, "icon": "wallet2"},
-        "Analytics": {"page": anlaytic_main, "icon": "graph-up"}
+        "Analytics": {"page": analytic_main, "icon": "graph-up"},
     }
 
     pages_list = list(pages.keys())
@@ -54,10 +54,7 @@ def main():
 
     with st.sidebar:
         selected_page = option_menu(
-            menu_title=None, 
-            options=pages_list, 
-            icons=icons_list, 
-            default_index=0
+            menu_title=None, options=pages_list, icons=icons_list, default_index=0
         )
 
     # Call the corresponding page based on the selected page

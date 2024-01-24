@@ -165,8 +165,12 @@ def add_transaction(df_selected_products):
         return "Cannot finish an empty transaction"
 
     # Create a transaction document
+    current_timestamp = datetime.utcnow()
+    date_str = current_timestamp.strftime("%Y-%m-%d")
+    time_str = current_timestamp.strftime("%H:%M:%S")
     transaction_data = {
-        "timestamp": dt.utcnow(),
+        "date": date_str,
+        "time": time_str,
         "total": get_total_transaction(df_selected_products),
         "products": df_selected_products.drop(columns=["barcode_data"]).to_dict(
             orient="records"
@@ -287,7 +291,9 @@ def add_total(pdf, df_selected_products_formatted):
         df_selected_products_formatted (pd.DataFrame): DataFrame containing selected products.
     """
     pdf.ln(8)
-    total = (df_selected_products_formatted["qty"] * df_selected_products_formatted["price"]).sum()
+    total = (
+        df_selected_products_formatted["qty"] * df_selected_products_formatted["price"]
+    ).sum()
     formatted_total = "{:.2f}".format(total)
     pdf.cell(160, 8, txt="Total", border=1)
     pdf.set_fill_color(174, 247, 173)

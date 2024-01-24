@@ -1,14 +1,11 @@
-import pymongo
 import streamlit as st
-from transactions.transaction_data import get_sale_transactions_collection
+from transactions.transaction_data import (
+    fetch_sale_transactions,
+)
 
 
 def get_transactions():
-    sale_transactions_collection = get_sale_transactions_collection()
-    transactions = sale_transactions_collection.find().sort(
-        "timestamp", pymongo.DESCENDING
-    )
-    return transactions
+    return fetch_sale_transactions()
 
 
 def structure_transaction_products(transaction):

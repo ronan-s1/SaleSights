@@ -1,5 +1,4 @@
 import datetime
-import json
 import random
 import logging
 from pymongo import MongoClient
@@ -75,8 +74,12 @@ def generate_sale_transactions_test_data(num_transactions):
         )
 
         # transaction document
+        date_str = transaction_date.strftime("%Y-%m-%d")
+        time_str = transaction_date.strftime("%H:%M:%S")
+        
         transaction = {
-            "timestamp": transaction_date,
+            "date": date_str,
+            "time": time_str,
             "total": total_price,
             "products": products,
         }
