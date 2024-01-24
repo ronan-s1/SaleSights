@@ -10,10 +10,9 @@ def analytic_main():
     end_date = "2024-04-24"
 
     data = get_cat_and_qty(start_date, end_date)
-    st.dataframe(data)
     
     # Create a bar chart using Plotly Express
-    fig = px.bar(data, x='category', y='quantity', title='Monthly Product Sales by Category')
+    fig = px.bar(data, x="category", y="quantity", title="Product Sales by Category")
 
     # Display the chart using Streamlit
     st.plotly_chart(fig)

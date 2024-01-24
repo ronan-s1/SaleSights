@@ -71,6 +71,7 @@ def generate_sale_transactions_test_data(num_transactions):
             products.append(selected_product)
 
         # random quantity for each product
+        products = set(products)
         for product in products:
             product["quantity"] = random.randint(1, 6)
 
