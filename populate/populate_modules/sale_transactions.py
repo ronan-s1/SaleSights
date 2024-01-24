@@ -62,7 +62,13 @@ def generate_sale_transactions_test_data(num_transactions):
         )
 
         # Random number of products from the products collection
-        products = list(products_collection.find().limit(random.randint(1, 8)))
+        all_products = list(products_collection.find())
+        products_in_transaction = random.randint(1, 8)
+        products = []
+        
+        for _ in range(products_in_transaction):
+            selected_product = random.choice(all_products)
+            products.append(selected_product)
 
         # random quantity for each product
         for product in products:

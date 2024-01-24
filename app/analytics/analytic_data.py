@@ -32,6 +32,7 @@ def fetch_sale_transactions():
 
 
 def fetch_cat_and_qty(start_date, end_date):
+    # filter
     date_range = {
         "date": {
             "$gte": (start_date),
