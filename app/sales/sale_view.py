@@ -13,7 +13,7 @@ from streamlit_qrcode_scanner import qrcode_scanner
 import pandas as pd
 
 
-def scan_product():
+def scan_product_components():
     # create cam_on session if it doesn't exist
     if "cam_on" not in st.session_state:
         st.session_state.cam_on = False
@@ -34,7 +34,7 @@ def scan_product():
             return scanned_product
 
 
-def add_product_manually():
+def add_product_manually_components():
     # create selected_products session if it doesn't exist
     if "selected_products" not in st.session_state:
         st.session_state.selected_products = []
@@ -64,10 +64,10 @@ def add_product_manually():
 def sale_main():
     st.title("Log Sale Transaction 🛒")
     with st.expander("Add Product"):
-        df_selected_products = add_product_manually()
+        df_selected_products = add_product_manually_components()
 
     with st.expander("Scan Product"):
-        scan_product()
+        scan_product_components()
 
     # if a product has been added to the transaction
     if not df_selected_products.empty:

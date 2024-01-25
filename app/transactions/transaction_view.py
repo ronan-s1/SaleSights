@@ -11,7 +11,7 @@ from transactions.transaction_controller import (
 )
 
 
-def display_transaction():
+def display_transaction_components():
     page_size = 5
     transactions = list(get_transactions())
 
@@ -57,4 +57,4 @@ def transaction_main():
     if "current_page" not in st.session_state:
         st.session_state.current_page = 1
 
-    display_transaction()
+    display_transaction_components()
