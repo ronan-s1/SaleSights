@@ -10,6 +10,7 @@ from sales.sale_data import (
     get_product_by_barcode,
     insert_transaction_into_db,
 )
+from utils import LOGO_PATH
 
 
 def get_products():
@@ -320,7 +321,7 @@ def add_salesights_logo(pdf):
         pdf (FPDF): PDF object
     """
     pdf.image(
-        os.path.join("app", "static", "img", "salesights-logo.png"),
+        os.path.join(LOGO_PATH),
         x=10,
         y=pdf.h - 20,
         w=40,

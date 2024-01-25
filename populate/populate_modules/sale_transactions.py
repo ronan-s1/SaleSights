@@ -63,7 +63,7 @@ def generate_sale_transactions_test_data(num_transactions):
 
         # Random number of products from the products collection
         all_products = list(products_collection.find())
-        number_of_products = random.randint(1, 6)
+        number_of_products = random.randint(1, 5)
 
         products = []
         for _ in range(number_of_products):
@@ -73,7 +73,7 @@ def generate_sale_transactions_test_data(num_transactions):
 
         # random quantity for each product
         for product in products:
-            product["quantity"] = random.randint(1, 3)
+            product["quantity"] = random.randint(1, 4)
 
         # calculate total price
         total_price = round(
