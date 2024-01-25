@@ -1,5 +1,3 @@
-import pandas as pd
-from datetime import datetime
 from pymongo import MongoClient
 from streamlit import secrets
 
@@ -39,14 +37,35 @@ def fetch_cat_and_qty(start_date, end_date):
             "$lte": (end_date),
         }
     }
-    
+
     # aggregation pipeline to project only the category and quantity
     pipeline = [
         {"$match": date_range},
         {"$unwind": "$products"},
-        {"$project": {"_id": 0, "category": "$products.category", "quantity": "$products.quantity"}}
+        {
+            "$project": {
+                "_id": 0,
+                "category": "$products.category",
+                "quantity": "$products.quantity",
+            }
+        },
     ]
 
     result = get_sale_transactions_collection().aggregate(pipeline)
-    
+    return result
+
+
+def fetch_transaction_totals(start_date, end_date):
+    # filter
+    date_range = {
+        "date": {
+            "$gte": (start_date),
+            "$lte": (end_date),
+        }
+    }
+
+    # aggregation pipeline to project only the "total" field
+    pipeline = [{"$match": date_range}, {"$project": {"_id": 0, "total": "$total"}}]
+
+    result = get_sale_transactions_collection().aggregate(pipeline)
     return result
