@@ -6,7 +6,7 @@
     width: 100%;
 }
 
-div[data-testid="metric-container"] {
+div[data-testid="stMetric"] {
     background-color: #e9ecfb;
     border: 1px solid rgba(28, 131, 225, 0.1);
     padding: 5% 5% 5% 10%;
@@ -15,7 +15,7 @@ div[data-testid="metric-container"] {
     overflow-wrap: break-word;
 }
 
-div[data-testid="metric-container"] > label[data-testid="stMetricLabel"] > div {
+div[data-testid="stMetric"] > label[data-testid="stMetricLabel"] > div {
     overflow-wrap: break-word;
     white-space: break-spaces;
 }
