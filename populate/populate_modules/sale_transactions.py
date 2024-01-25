@@ -63,17 +63,17 @@ def generate_sale_transactions_test_data(num_transactions):
 
         # Random number of products from the products collection
         all_products = list(products_collection.find())
-        products_in_transaction = random.randint(1, 8)
+        number_of_products = random.randint(1, 6)
+
         products = []
-        
-        for _ in range(products_in_transaction):
+        for _ in range(number_of_products):
             selected_product = random.choice(all_products)
-            products.append(selected_product)
+            if selected_product not in products:
+                products.append(selected_product)
 
         # random quantity for each product
-        products = set(products)
         for product in products:
-            product["quantity"] = random.randint(1, 6)
+            product["quantity"] = random.randint(1, 3)
 
         # calculate total price
         total_price = round(
@@ -83,7 +83,7 @@ def generate_sale_transactions_test_data(num_transactions):
         # transaction document
         date_str = transaction_date.strftime("%Y-%m-%d")
         time_str = transaction_date.strftime("%H:%M:%S")
-        
+
         transaction = {
             "date": date_str,
             "time": time_str,
