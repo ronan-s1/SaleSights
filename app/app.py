@@ -3,7 +3,7 @@ import streamlit as st
 from streamlit_option_menu import option_menu
 from PIL import Image
 from analytics.analytic_view import analytic_main
-from home.home import home_main
+from home.home_view import home_main
 from sales.sale_view import sale_main
 from products.product_views import product_main
 from transactions.transaction_view import transaction_main

@@ -1,5 +1,9 @@
 import streamlit as st
-from home.home_controller import service_container, get_greeting
+from home.home_controller import (
+    service_container,
+    get_greeting,
+    start_connection  
+)  
 
 
 def home_main():
@@ -29,3 +33,4 @@ def home_main():
         st.markdown(product_container, unsafe_allow_html=True)
 
     st.write("Need help? See our [docs](https://salesights.xyz).")
+    start_connection()

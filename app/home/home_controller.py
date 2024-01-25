@@ -1,4 +1,9 @@
 from datetime import datetime
+from home.home_data import connect_to_db
+
+
+def start_connection():
+    connect_to_db()
 
 
 def service_container(iconname, title, sline):
