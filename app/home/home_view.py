@@ -25,12 +25,29 @@ def home_main():
             "Efficiently log sale transactions and generate receipts",
         )
         st.markdown(sale_container, unsafe_allow_html=True)
+        
+        transaction_container = service_container(
+            "fa fa-exchange", 
+            "Transactions",
+            "View and find past transactions swiftly"
+        )
+        st.markdown(transaction_container, unsafe_allow_html=True)
 
     with col2:
         product_container = service_container(
-            "fa-solid fa-basket-shopping", "Products", "Manage your products with ease"
+            "fa-solid fa-basket-shopping", 
+            "Products",
+            "Manage your products with ease"
         )
         st.markdown(product_container, unsafe_allow_html=True)
+        
+        analytics_container = service_container(
+            "fa fa-line-chart", 
+            "Analytics",
+            "See insights and metrics on your business data"
+        )
+        st.markdown(analytics_container, unsafe_allow_html=True)
+        
 
     st.write("Need help? See our [docs](https://salesights.xyz).")
     start_connection()

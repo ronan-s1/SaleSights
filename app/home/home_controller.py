@@ -32,7 +32,7 @@ def service_container(iconname, title, sline):
             padding-top: 18px;
             padding-bottom: 18px;
             line-height: 25px;'>
-            <i class='{iconname} fa-2xs'></i> {title}
+            <i class='{iconname} fa-2xs' style='padding-right: 4px;'></i> {title}
             </br>
             <span style='font-size: 14px; margin-top: 0;'>{sline}</span>
         </p>
