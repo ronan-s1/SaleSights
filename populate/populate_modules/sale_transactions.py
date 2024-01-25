@@ -52,10 +52,10 @@ def generate_sale_transactions_test_data(num_transactions):
         if transaction_counter >= transactions_until_next_day:
             transaction_counter = 0
             day_counter += 1
-            transactions_until_next_day = random.randint(10, 30)
+            transactions_until_next_day = random.randint(5, 25)
 
         # Calculate the timestamp for the transaction date with a random time between 9 am and 8 pm
-        transaction_date = datetime.datetime.utcnow() + datetime.timedelta(
+        transaction_date = datetime.datetime(2024, 1, 1) + datetime.timedelta(
             days=day_counter,
             hours=random.randint(9, 20),
             minutes=random.randint(0, 59),
