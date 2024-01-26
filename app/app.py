@@ -7,11 +7,7 @@ from home.home_view import home_main
 from sales.sale_view import sale_main
 from products.product_views import product_main
 from transactions.transaction_view import transaction_main
-from utils import (
-    CSS_PATH, 
-    LOGO_ICON_PATH, 
-    LOGO_PATH
-)
+from utils import CSS_PATH, LOGO_ICON_PATH, LOGO_PATH
 
 st.set_page_config(page_title="SaleSights", page_icon=LOGO_ICON_PATH)
 

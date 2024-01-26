@@ -29,7 +29,7 @@ def fetch_sale_transactions():
     return transactions
 
 
-def fetch_cat_and_qty(start_date, end_date):
+def fetch_cat_qty_price(start_date, end_date):
     # filter
     date_range = {
         "date": {
@@ -47,6 +47,7 @@ def fetch_cat_and_qty(start_date, end_date):
                 "_id": 0,
                 "category": "$products.category",
                 "quantity": "$products.quantity",
+                "price": "$products.price"
             }
         },
     ]
@@ -64,8 +65,35 @@ def fetch_transaction_totals(start_date, end_date):
         }
     }
 
-    # aggregation pipeline to project only the "total" field
+    # project only the total field
     pipeline = [{"$match": date_range}, {"$project": {"_id": 0, "total": "$total"}}]
 
+    result = get_sale_transactions_collection().aggregate(pipeline)
+    return result
+
+
+def fetch_products_and_qty(start_date, end_date):
+    # filter
+    date_range = {
+        "date": {
+            "$gte": start_date,
+            "$lte": end_date,
+        }
+    }
+
+    # unwind products and group by product_name to sum the quantities
+    pipeline = [
+        {"$match": date_range},
+        {"$unwind": "$products"},
+        {
+            "$group": {
+                "_id": "$products.product_name",
+                "total_quantity": {"$sum": "$products.quantity"},
+            }
+        },
+        {"$project": {"_id": 0, "product_name": "$_id", "total_quantity": 1}},
+    ]
+
+    # Execute the aggregation pipeline
     result = get_sale_transactions_collection().aggregate(pipeline)
     return result

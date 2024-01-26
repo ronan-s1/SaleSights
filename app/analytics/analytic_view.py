@@ -1,25 +1,41 @@
 import streamlit as st
 import plotly.express as px
-from analytics.analytic_controller import get_cat_and_qty, get_transaction_totals
+from analytics.analytic_controller import (
+    get_cat_qty_price, 
+    get_transaction_totals,
+    get_products_and_qty
+)
 
 
-def kpi_components(start_date, end_date):
-    transaction_total = get_transaction_totals(start_date, end_date)
-    if isinstance(transaction_total, str):
-        st.error(transaction_total)
-        return False
+def products_and_qty_components(products_and_qty_df):
+    st.subheader("Products and Quantity Sold")
+    st.dataframe(products_and_qty_df, use_container_width=True)
 
+
+def kpi_components(transaction_total, transaction_total_avg, quantity_avg):
     kpi1, kpi2, kpi3 = st.columns(3)
 
     with kpi1:
         st.metric("Total Sales", transaction_total)
 
+    with kpi2:
+        st.metric("Average Transaction Value", transaction_total_avg)
+
+    with kpi3:
+        st.metric("Average Quantity Per Product", quantity_avg)
+
     return True
 
 
-def category_bar_chart_components(start_date, end_date):
-    data = get_cat_and_qty(start_date, end_date)
-    fig = px.bar(data, x="category", y="quantity", title="Product Sales by Category")
+def category_bar_chart_components(category_qty_price_df):
+    fig = px.bar(
+        category_qty_price_df,
+        x="category",
+        y=["quantity", "price"],
+        title="Product Sales by Category",
+        labels={"value": "Total", "variable": "Metric"},
+        barmode="group",  # Use 'group' for grouped bar chart
+    )
     st.plotly_chart(fig)
 
 
@@ -46,9 +62,18 @@ def analytic_main():
         st.error("Select a valid time range.")
         return
 
-    # if there's no records for entered date range
-    data = kpi_components(start_date, end_date)
-    if not data:
-        return
+    # get quantity avg first to pass to kpi
+    transaction_total, transaction_total_avg = get_transaction_totals(start_date, end_date)
+    
+    if isinstance(transaction_total, str):
+        st.error(transaction_total)
+        return False
+    
+    # get analytic data
+    category_qty_price_total, quantity_avg = get_cat_qty_price(start_date, end_date)
+    products_and_qty_df = get_products_and_qty(start_date, end_date)
 
-    category_bar_chart_components(start_date, end_date)
+    # display data
+    kpi_components(transaction_total, transaction_total_avg, quantity_avg)
+    category_bar_chart_components(category_qty_price_total)
+    products_and_qty_components(products_and_qty_df)
