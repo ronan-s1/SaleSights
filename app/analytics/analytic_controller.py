@@ -2,7 +2,8 @@ import pandas as pd
 from analytics.analytic_data import (
     fetch_cat_qty_price, 
     fetch_transaction_totals, 
-    fetch_products_and_qty
+    fetch_products_and_qty,
+    fetch_sales_over_time
 )
 
 
@@ -55,3 +56,10 @@ def get_products_and_qty(start_date, end_date):
     
     return products_and_qty_df
     
+
+def get_sales_over_time(start_date, end_date):
+    start_date_str, end_date_str = format_date(start_date, end_date)
+    sales_over_time = fetch_sales_over_time(start_date_str, end_date_str)
+    
+    sales_over_time_df = pd.DataFrame(sales_over_time)
+    return sales_over_time_df

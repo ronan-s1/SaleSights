@@ -1,7 +1,9 @@
 import streamlit as st
 import plotly.express as px
+from utils import FIG_BLUE_BACKGROUND_COLOUR
 from analytics.analytic_controller import (
-    get_cat_qty_price, 
+    get_cat_qty_price,
+    get_sales_over_time, 
     get_transaction_totals,
     get_products_and_qty
 )
@@ -27,6 +29,14 @@ def kpi_components(transaction_total, transaction_total_avg, quantity_avg):
     return True
 
 
+def sales_over_time_components(sales_over_time_df):
+    fig = px.line(sales_over_time_df, x="date", y="total_sales", title="Total Sales Per Day Over Time")
+    fig.update_layout(
+        plot_bgcolor=FIG_BLUE_BACKGROUND_COLOUR
+    )
+    st.plotly_chart(fig)
+
+
 def category_bar_chart_components(category_qty_price_df):
     fig = px.bar(
         category_qty_price_df,
@@ -34,7 +44,7 @@ def category_bar_chart_components(category_qty_price_df):
         y=["quantity", "price"],
         title="Product Sales by Category",
         labels={"value": "Total", "variable": "Metric"},
-        barmode="group",  # Use 'group' for grouped bar chart
+        barmode="group"
     )
     st.plotly_chart(fig)
 
@@ -72,8 +82,10 @@ def analytic_main():
     # get analytic data
     category_qty_price_total, quantity_avg = get_cat_qty_price(start_date, end_date)
     products_and_qty_df = get_products_and_qty(start_date, end_date)
+    sales_over_time_df = get_sales_over_time(start_date, end_date)
 
     # display data
     kpi_components(transaction_total, transaction_total_avg, quantity_avg)
     category_bar_chart_components(category_qty_price_total)
     products_and_qty_components(products_and_qty_df)
+    sales_over_time_components(sales_over_time_df)
