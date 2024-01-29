@@ -72,7 +72,7 @@ def fetch_transaction_totals(start_date, end_date):
     return result
 
 
-def fetch_products_and_qty(start_date, end_date):
+def fetch_products_sales_qty(start_date, end_date):
     # filter
     date_range = {
         "date": {
@@ -81,7 +81,7 @@ def fetch_products_and_qty(start_date, end_date):
         }
     }
 
-    # unwind products and group by product_name to sum the quantities
+    # unwind products and group by product_name to sum the quantities and total sales
     pipeline = [
         {"$match": date_range},
         {"$unwind": "$products"},
@@ -89,14 +89,17 @@ def fetch_products_and_qty(start_date, end_date):
             "$group": {
                 "_id": "$products.product_name",
                 "total_quantity": {"$sum": "$products.quantity"},
+                "total_sales": {"$sum": {"$multiply": ["$products.price", "$products.quantity"]}},
             }
         },
-        {"$project": {"_id": 0, "product_name": "$_id", "total_quantity": 1}},
+        {"$project": {"_id": 0, "product_name": "$_id", "total_quantity": 1, "total_sales": 1}},
     ]
 
     # Execute the aggregation pipeline
     result = get_sale_transactions_collection().aggregate(pipeline)
     return result
+
+
 
 
 def fetch_sales_over_time(start_date, end_date):
