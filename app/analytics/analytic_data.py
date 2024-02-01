@@ -47,7 +47,7 @@ def fetch_cat_qty_price(start_date, end_date):
                 "_id": 0,
                 "category": "$products.category",
                 "quantity": "$products.quantity",
-                "price": "$products.price"
+                "price": "$products.price",
             }
         },
     ]
@@ -89,17 +89,24 @@ def fetch_products_sales_qty(start_date, end_date):
             "$group": {
                 "_id": "$products.product_name",
                 "total_quantity": {"$sum": "$products.quantity"},
-                "total_sales": {"$sum": {"$multiply": ["$products.price", "$products.quantity"]}},
+                "total_sales": {
+                    "$sum": {"$multiply": ["$products.price", "$products.quantity"]}
+                },
             }
         },
-        {"$project": {"_id": 0, "product_name": "$_id", "total_quantity": 1, "total_sales": 1}},
+        {
+            "$project": {
+                "_id": 0,
+                "product_name": "$_id",
+                "total_quantity": 1,
+                "total_sales": 1,
+            }
+        },
     ]
 
     # Execute the aggregation pipeline
     result = get_sale_transactions_collection().aggregate(pipeline)
     return result
-
-
 
 
 def fetch_sales_over_time(start_date, end_date):
@@ -116,7 +123,47 @@ def fetch_sales_over_time(start_date, end_date):
         {"$match": date_range},
         {"$group": {"_id": "$date", "total_sales": {"$sum": "$total"}}},
         {"$project": {"_id": 0, "date": "$_id", "total_sales": 1}},
-        {"$sort": {"date": 1}}
+        {"$sort": {"date": 1}},
+    ]
+
+    result = get_sale_transactions_collection().aggregate(pipeline)
+    return result
+
+
+def fetch_transactions_per_day(start_date, end_date):
+    # filter
+    date_range = {
+        "date": {
+            "$gte": start_date,
+            "$lte": end_date,
+        }
+    }
+
+    # group by date and count the number of transactions within each group
+    pipeline = [
+        {"$match": date_range},
+        {"$group": {"_id": "$date", "transaction_count": {"$sum": 1}}},
+        {"$project": {"_id": 0, "date": "$_id", "transaction_count": 1}},
+        {"$sort": {"date": 1}},
+    ]
+
+    result = get_sale_transactions_collection().aggregate(pipeline)
+    return result
+
+
+def fetch_number_of_products_per_transaction(start_date, end_date):
+    # filter
+    date_range = {
+        "date": {
+            "$gte": (start_date),
+            "$lte": (end_date),
+        }
+    }
+
+    # include only the products field and calculate the size of the array
+    pipeline = [
+        {"$match": date_range},
+        {"$project": {"_id": 0, "num_products": {"$size": "$products"}}},
     ]
 
     result = get_sale_transactions_collection().aggregate(pipeline)
