@@ -31,9 +31,13 @@ def get_products_collection():
 
 
 def insert_transactions_to_collection(transactions):
-    logger.info("Insert sale transactions data into database")
+    logger.info("Inserting sale transactions data into database")
     sale_transactions_collection = get_sale_transactions_collection()
     sale_transactions_collection.insert_many(transactions)
+
+
+def get_transactions_until_next_day():
+    return random.randint(10, 30)
 
 
 def generate_sale_transactions_test_data(num_transactions):
@@ -43,7 +47,7 @@ def generate_sale_transactions_test_data(num_transactions):
     # every 30 transactions, go to next day
     day_counter = 0
     transaction_counter = 0
-    transactions_until_next_day = random.randint(10, 30)
+    transactions_until_next_day = get_transactions_until_next_day()
 
     logger.info("Generating sale transactions test data")
 
@@ -52,7 +56,7 @@ def generate_sale_transactions_test_data(num_transactions):
         if transaction_counter >= transactions_until_next_day:
             transaction_counter = 0
             day_counter += 1
-            transactions_until_next_day = random.randint(5, 25)
+            transactions_until_next_day = get_transactions_until_next_day()
 
         # Calculate the timestamp for the transaction date with a random time between 9 am and 8 pm
         transaction_date = datetime.datetime(2024, 1, 1) + datetime.timedelta(
