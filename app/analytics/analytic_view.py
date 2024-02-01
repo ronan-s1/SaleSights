@@ -43,11 +43,11 @@ def products_and_qty_components_components(products_and_qty_df):
 
 
 def kpi_components(
-    transaction_total, 
-    transaction_total_avg, 
-    quantity_avg, 
+    transaction_total,
+    transaction_total_avg,
+    quantity_avg,
     average_transactions,
-    avg_number_of_products_per_transaction
+    avg_number_of_products_per_transaction,
 ):
     kpi1, kpi2, kpi3 = st.columns(3)
     kpi4, kpi5, _ = st.columns(3)
@@ -63,7 +63,7 @@ def kpi_components(
 
     with kpi4:
         st.metric("Average Daily Transactions", average_transactions)
-        
+
     with kpi5:
         st.metric("Units Per Transaction (UPT)", avg_number_of_products_per_transaction)
 
@@ -155,15 +155,17 @@ def analytic_main():
     transactions_per_day_df, average_transactions = get_transactions_per_day(
         start_date, end_date
     )
-    avg_number_of_products_per_transaction = get_avg_number_of_products_per_transaction(start_date, end_date)
+    avg_number_of_products_per_transaction = get_avg_number_of_products_per_transaction(
+        start_date, end_date
+    )
 
     # display data
     kpi_components(
-        transaction_total, 
-        transaction_total_avg, 
-        quantity_avg, 
+        transaction_total,
+        transaction_total_avg,
+        quantity_avg,
         average_transactions,
-        avg_number_of_products_per_transaction
+        avg_number_of_products_per_transaction,
     )
     category_bar_chart_components(category_qty_price_total)
     products_and_qty_components_components(products_and_qty_df)

@@ -5,7 +5,7 @@ from analytics.analytic_data import (
     fetch_products_sales_qty,
     fetch_sales_over_time,
     fetch_transactions_per_day,
-    fetch_number_of_products_per_transaction
+    fetch_number_of_products_per_transaction,
 )
 
 
@@ -104,9 +104,13 @@ def get_transactions_per_day(start_date, end_date):
 
 def get_avg_number_of_products_per_transaction(start_date, end_date):
     start_date_str, end_date_str = format_date(start_date, end_date)
-    products_per_transaction = fetch_number_of_products_per_transaction(start_date_str, end_date_str)
-    
+    products_per_transaction = fetch_number_of_products_per_transaction(
+        start_date_str, end_date_str
+    )
+
     products_per_transaction_df = pd.DataFrame(products_per_transaction)
-    avg_number_of_products_per_transaction = round(products_per_transaction_df["num_products"].mean())
-    
+    avg_number_of_products_per_transaction = round(
+        products_per_transaction_df["num_products"].mean()
+    )
+
     return avg_number_of_products_per_transaction
