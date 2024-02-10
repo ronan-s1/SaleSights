@@ -7,7 +7,7 @@ from transactions.transaction_controller import (
     get_transactions,
     structure_transaction_products,
     next_page,
-    prev_page,
+    prev_page
 )
 
 
@@ -29,7 +29,7 @@ def display_transaction_components():
     # columns for prev and next buttons
     col1, col2 = st.columns([10, 1])
     with col1:
-        if st.session_state.current_page > 1:
+        if st.session_state.current_page > 1 and total_pages > 1:
             st.button("Previous", on_click=prev_page)
 
     with col2:

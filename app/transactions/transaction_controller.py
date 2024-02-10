@@ -47,7 +47,8 @@ def get_total_pages(page_size, transactions):
 
 
 def prev_page():
-    st.session_state.current_page -= 1
+    if st.session_state.current_page > 1:
+        st.session_state.current_page -= 1
 
 
 def next_page():
