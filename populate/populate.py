@@ -5,6 +5,7 @@ from pymongo import MongoClient
 from streamlit import secrets
 from populate_modules.sale_transactions import generate_sale_transactions_test_data
 
+
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 logger = logging.getLogger(__name__)
 
@@ -41,7 +42,7 @@ def populate():
 
     logger.info("Inserting data into product_categories collection")
     product_categories_collection.insert_many(product_categories_data)
-    
+
     logger.info("Inserting data into expense_categories collection")
     expense_categories_collection.insert_many(expense_categories_data)
 
