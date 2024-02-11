@@ -30,6 +30,7 @@ def filter_by_id(transactions, search_id):
         if search_id_lower in str(transaction["_id"]).lower()
     ]
 
+    st.session_state.current_page = 1
     return search_result
 
 
