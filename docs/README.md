@@ -3,12 +3,9 @@
 </p>
 
 <div align="center" style="margin-top: -20px">
-  <h4>Whether you're a developer or a user, we have you covered.</h4>
+  <h4>Allowing small businesses to leverage technology for their financial operations</h4>
 </div>
 
-### For Users
-Discover how to maximise the benefits of our services. Find user-friendly guides to enhance your workflow and achieve your business goals.
+## Why SaleSights?
 
-### For Developers
-Get detailed setup instructions for all platforms.
 
