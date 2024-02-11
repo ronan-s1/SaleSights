@@ -1,5 +1,4 @@
 import base64
-from datetime import datetime as dt
 import os
 import platform
 import streamlit as st
