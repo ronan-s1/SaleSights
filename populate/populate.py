@@ -23,6 +23,7 @@ def populate():
     # get the database and collections
     db = client.salesights
     product_categories_collection = db.product_categories
+    expense_categories_collection = db.expense_categories
     products_collection = db.products
     sale_transactions_collection = db.sale_transactions
 
@@ -31,12 +32,18 @@ def populate():
     product_categories_collection.drop()
     products_collection.drop()
     sale_transactions_collection.drop()
+    expense_categories_collection.drop()
 
+    # fetch and insert data
     product_categories_data = read_json("product_categories.json")
+    expense_categories_data = read_json("expense_categories.json")
     products_data = read_json("products.json")
 
     logger.info("Inserting data into product_categories collection")
     product_categories_collection.insert_many(product_categories_data)
+    
+    logger.info("Inserting data into expense_categories collection")
+    expense_categories_collection.insert_many(expense_categories_data)
 
     logger.info("Inserting data into products collection")
     products_collection.insert_many(products_data)
