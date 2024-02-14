@@ -1,19 +1,20 @@
-import time
-from datetime import datetime
-
-import pandas as pd
 import streamlit as st
-from expenses.expense_controller import add_new_category
-from expenses.expense_controller import add_new_expense
-from expenses.expense_controller import delete_category
-from expenses.expense_controller import edit_existing_category
-from expenses.expense_controller import filter_by_id
-from expenses.expense_controller import get_categories
-from expenses.expense_controller import get_expenses
-from expenses.expense_controller import get_index
-from expenses.expense_controller import get_total_pages
-from expenses.expense_controller import next_page
-from expenses.expense_controller import prev_page
+from datetime import datetime
+import pandas as pd
+from expenses.expense_controller import (
+    add_new_category,
+    add_new_expense,
+    delete_category,
+    edit_existing_category,
+    filter_by_id,
+    get_categories,
+    get_expenses,
+    get_index,
+    get_total_pages,
+    next_page,
+    prev_page,
+    get_text_ocr,
+)
 from utils import v_spacer
 
 
@@ -63,10 +64,30 @@ def display_expenses_components():
     st.write(f"Page {st.session_state.current_page_expense} of {total_pages}")
 
 
+@st.cache_resource
+def process_uploaded_file(uploaded_file):
+    return get_text_ocr(uploaded_file)
+
+
 def add_expense_components():
+    uploaded_file = st.file_uploader(
+        "Upload expense receipt (optional):",
+        type=["jpg", "jpeg", "png"],
+        accept_multiple_files=False,
+    )
+
+    if uploaded_file is not None:
+        image, text_str = process_uploaded_file(uploaded_file)
+
+        ocr_col1, ocr_col2 = st.columns(2)
+        with ocr_col1:
+            st.image(image)
+
+        with ocr_col2:
+            st.code(f"{text_str}", language="text")
+
     expense = st.text_input("Expense:")
     amount = st.text_input("Amount / Cost:")
-
     category_options = get_categories()
     category = st.selectbox("Select Category:", category_options)
     expense_date = st.date_input("Expense Date", format="YYYY/MM/DD", value=None)

@@ -1,15 +1,19 @@
 from datetime import date
 from datetime import datetime
-
-import pandas as pd
 import streamlit as st
-from expenses.expense_data import category_exists
-from expenses.expense_data import delete_category_from_db
-from expenses.expense_data import edit_category_in_db
-from expenses.expense_data import fetch_categories
-from expenses.expense_data import fetch_expenses
-from expenses.expense_data import insert_new_category_to_db
-from expenses.expense_data import insert_new_expense_to_db
+import easyocr
+from PIL import Image
+import cv2
+import numpy as np
+from expenses.expense_data import (
+    category_exists,
+    delete_category_from_db,
+    edit_category_in_db,
+    fetch_categories,
+    fetch_expenses,
+    insert_new_category_to_db,
+    insert_new_expense_to_db,
+)
 
 
 def get_categories():
@@ -195,3 +199,31 @@ def prev_page():
 
 def next_page():
     st.session_state.current_page_expense += 1
+
+
+def get_text_ocr(uploaded_file):
+    """
+    Extract text from an image using easyocr.
+
+    Args:
+        uploaded_file (image): The image file to extract text from.
+
+    Returns:
+        image (np.array): The image as a numpy array
+        text_str (str): The extracted text
+    """
+    reader = easyocr.Reader(["en"])
+
+    # Open the image file
+    image = Image.open(uploaded_file)
+
+    # Convert the image to a numpy array and convert it to RGB
+    image = cv2.cvtColor(np.array(image), cv2.COLOR_BGR2RGB)
+
+    # Use easyocr to read the text from the image
+    result = reader.readtext(image)
+
+    # extract text from the result
+    text_str = "\n".join([text for (_, text, _) in result])
+
+    return image, text_str

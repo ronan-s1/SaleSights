@@ -20,7 +20,13 @@ div[data-testid="stMetric"] > label[data-testid="stMetricLabel"] > div {
     white-space: break-spaces;
 }
 
-footer, div[data-testid="stDecoration"], div[data-testid="StyledLinkIconContainer"] a, .stDeployButton {
+footer, div[data-testid="stDecoration"],
+div[data-testid="StyledLinkIconContainer"] a,
+.stDeployButton,
+[data-testid="stToolbarActions"],
+[data-testid="baseButton-header"],
+[data-testid="stMarkdownContainer"] code,
+#MainMenu {
     display: none !important;
 }
 
