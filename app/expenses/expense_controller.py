@@ -1,5 +1,6 @@
 from datetime import date
 from datetime import datetime
+import bson
 import streamlit as st
 import easyocr
 from PIL import Image
@@ -113,7 +114,24 @@ def delete_category(category_name):
     delete_category_from_db(category_name)
 
 
-def add_new_expense(expense, category, description, amount, expense_date):
+def add_new_expense(
+    expense, category, description, amount, expense_date, uploaded_file=None
+):
+    """
+    Request data access to add a new expense.
+
+    Args:
+        expense (str): The name of the expense
+        category (str): The category of the expense
+        description (str): A description of the expense
+        amount (str): The amount of the expense
+        expense_date (str): The date of the expense
+        uploaded_file (file): The image of the expense receipt
+
+    Returns:
+        str: Error message
+        None: No errors
+    """
     # check if required data is missing
     if not all([expense, category, description, amount, expense_date]):
         return "Please fill in required fields"
@@ -138,6 +156,7 @@ def add_new_expense(expense, category, description, amount, expense_date):
     if expense_date > recorded_date:
         return "Expense date cannot be in the future."
 
+    # create a new expense document
     new_expense = {
         "expense": expense,
         "category": category,
@@ -146,6 +165,11 @@ def add_new_expense(expense, category, description, amount, expense_date):
         "recorded_date": recorded_date.strftime("%Y-%m-%d"),
         "expense_date": expense_date.strftime("%Y-%m-%d"),
     }
+
+    # add expense image if it exists
+    if uploaded_file is not None:
+        binary_image = bson.Binary(uploaded_file.read())
+        new_expense["expense_image"] = binary_image
 
     insert_new_expense_to_db(new_expense)
 

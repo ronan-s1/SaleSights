@@ -1,6 +1,8 @@
 import streamlit as st
 from datetime import datetime
 import pandas as pd
+from PIL import Image
+import io
 from expenses.expense_controller import (
     add_new_category,
     add_new_expense,
@@ -52,13 +54,20 @@ def display_expenses_components():
         with st.expander(formatted_date):
             expense_data = {
                 "Expense ID": [expense["_id"]],
-                "Expense": [expense["name"]],
+                "Expense": [expense["expense"]],
                 "Amount / Cost": [expense["amount"]],
                 "Category": [expense["category"]],
                 "Description": [expense["description"]],
             }
             df = pd.DataFrame(expense_data).T
             st.table(df)
+
+            # display expense image if it exists
+            if "expense_image" in expense:
+                st.write("Expense Image:")
+                image_data = expense["expense_image"]
+                image = Image.open(io.BytesIO(image_data))
+                st.image(image, caption="Expense Image", width=300)
 
     # display current page info
     st.write(f"Page {st.session_state.current_page_expense} of {total_pages}")
@@ -95,7 +104,9 @@ def add_expense_components():
 
     # Add product button
     if st.button("Add Expense"):
-        err = add_new_expense(expense, category, description, amount, expense_date)
+        err = add_new_expense(
+            expense, category, description, amount, expense_date, uploaded_file
+        )
         if err:
             st.warning(err)
         else:
@@ -162,6 +173,7 @@ def expense_main():
         st.session_state.current_tab = "Log Expenses"
 
     if col2.button("View Expenses"):
+        st.session_state.current_page_expense = 1
         st.session_state.current_tab = "View Expenses"
 
     # small gap between the tabs and the content
