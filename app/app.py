@@ -4,6 +4,7 @@ from streamlit_option_menu import option_menu
 from PIL import Image
 
 from analytics.analytic_view import analytic_main
+from biz.biz_view import biz_main
 from home.home_view import home_main
 from sales.sale_view import sale_main
 from products.product_views import product_main
@@ -41,30 +42,13 @@ def main():
     st.sidebar.image(salesights_logo)
 
     pages = {
-        "Home": {
-            "page": home_main,
-            "icon": "house"
-        },
-        "Sale": {
-            "page": sale_main,
-            "icon": "cart-check"
-        },
-        "Products": {
-            "page": product_main, 
-            "icon": "basket"
-        },
-        "Transactions": {
-            "page": transaction_main, 
-            "icon": "arrow-left-right"
-        },
-        "Analytics": {
-            "page": analytic_main,
-            "icon": "graph-up"
-        },
-        "Expenses": {
-            "page": expense_main, 
-            "icon": "wallet"
-        },
+        "Home": {"page": home_main, "icon": "house"},
+        "Sale": {"page": sale_main, "icon": "cart-check"},
+        "Products": {"page": product_main, "icon": "basket"},
+        "Transactions": {"page": transaction_main, "icon": "arrow-left-right"},
+        "Analytics": {"page": analytic_main, "icon": "graph-up"},
+        "Expenses": {"page": expense_main, "icon": "wallet"},
+        "Biz": {"page": biz_main, "icon": "robot"},
     }
 
     pages_list = list(pages.keys())
@@ -72,10 +56,7 @@ def main():
 
     with st.sidebar:
         selected_page = option_menu(
-            menu_title=None,
-            options=pages_list,
-            icons=icons_list,
-            default_index=0
+            menu_title=None, options=pages_list, icons=icons_list, default_index=0
         )
 
     # Call the corresponding page based on the selected page
