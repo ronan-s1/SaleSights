@@ -1,4 +1,8 @@
 [theme]
-base="light"
-primaryColor="#414a7d"
-secondaryBackgroundColor="#e9ecfb"
+base = "light"
+primaryColor = "#414a7d"
+secondaryBackgroundColor = "#e9ecfb"
+
+[server]
+enableXsrfProtection = false
+enableCORS = false
