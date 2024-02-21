@@ -25,7 +25,7 @@ def transactions_per_day_components(transactions_per_day_df):
         yaxis_title="Number of Transactions",
     )
 
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, use_container_width=True, config=dict(displaylogo=False))
 
 
 def products_and_qty_components_components(products_and_qty_df):
@@ -39,7 +39,7 @@ def products_and_qty_components_components(products_and_qty_df):
     )
 
     fig.update_layout(yaxis_title="Product", xaxis_title="Total")
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, use_container_width=True, config=dict(displaylogo=False))
 
 
 def kpi_components(
@@ -84,7 +84,7 @@ def daily_sales_components(sales_over_time_df):
         xaxis_title="Date",
     )
 
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, use_container_width=True, config=dict(displaylogo=False))
 
 
 def cumulative_sales_components(cumulative_sales_df):
@@ -101,7 +101,7 @@ def cumulative_sales_components(cumulative_sales_df):
         xaxis_title="Date",
     )
 
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, use_container_width=True, config=dict(displaylogo=False))
 
 
 def category_bar_chart_components(category_qty_price_df):
@@ -113,7 +113,7 @@ def category_bar_chart_components(category_qty_price_df):
         labels={"value": "Total", "variable": "Metric"},
         barmode="group",
     )
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, use_container_width=True, config=dict(displaylogo=False))
 
 
 def date_range_components():
