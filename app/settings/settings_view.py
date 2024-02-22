@@ -19,3 +19,5 @@ def settings_main():
         )
         if err:
             st.error(err)
+        else:
+            st.success("Settings updated")
