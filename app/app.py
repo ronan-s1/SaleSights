@@ -1,4 +1,3 @@
-import os
 import streamlit as st
 from streamlit_option_menu import option_menu
 from PIL import Image
@@ -10,6 +9,7 @@ from sales.sale_view import sale_main
 from products.product_views import product_main
 from transactions.transaction_view import transaction_main
 from expenses.expense_view import expense_main
+from settings.settings_view import settings_main
 
 from utils import CSS_PATH, LOGO_ICON_PATH, LOGO_PATH
 
@@ -49,6 +49,7 @@ def main():
         "Analytics": {"page": analytic_main, "icon": "graph-up"},
         "Expenses": {"page": expense_main, "icon": "wallet"},
         "Biz": {"page": biz_main, "icon": "robot"},
+        "Settings": {"page": settings_main, "icon": "gear"},
     }
 
     pages_list = list(pages.keys())
