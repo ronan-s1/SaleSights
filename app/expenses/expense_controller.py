@@ -199,7 +199,11 @@ def filter_by_id(transactions, search_id):
         if search_id_lower in str(transaction["_id"]).lower()
     ]
 
-    st.session_state.current_page_expense = 1
+    if len(search_result) == 0:
+        st.session_state.current_page_expense = 0
+    else:
+        st.session_state.current_page_expense = 1
+
     return search_result
 
 
