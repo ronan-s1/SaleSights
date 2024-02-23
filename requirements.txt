@@ -3,7 +3,6 @@ streamlit-option-menu==0.3.6
 plotly==5.16.1
 fpdf==1.7.2
 python-barcode==0.15.1
-langchain
 pymongo==4.3.2
 pandas==2.0.0
 numpy==1.23.3
@@ -14,3 +13,8 @@ python-dotenv==1.0.0
 streamlit-qrcode-scanner==0.1.2
 numpy==1.23.3
 easyocr==1.7.1
+langchain==0.1.7
+langchain-community==0.0.20
+langchain-core==0.1.23
+langchain-experimental==0.0.51
+langsmith==0.0.87
