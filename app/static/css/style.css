@@ -30,6 +30,16 @@ div[data-testid="StyledLinkIconContainer"] a,
     display: none !important;
 }
 
+[data-testid="chatAvatarIcon-assistant"] {
+    background-color: #414a7d;
+}
+
+[data-testid="chatAvatarIcon-user"] {
+    background-color: #8494e1;
+}
+
+
+
 /* header {
     display: none !important;
 } */
