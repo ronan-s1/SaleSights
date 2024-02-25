@@ -4,6 +4,12 @@
 .git
 .gitignore
 .gitattributes
+.pre-commit-config.yaml
+LICENSE
+README.md
+pyproject.toml
+setup.cfg
+tasks.py
 
 # CI
 .codeclimate.yml
