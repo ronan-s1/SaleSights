@@ -21,7 +21,7 @@ def update_settings(business_name, selected_model, api_key):
     settings = {
         "business_name": business_name,
         "selected_model": selected_model,
-        "api_key": api_key,
+        "openai_api_key": api_key,
     }
 
     insert_new_settings_to_db(settings)
@@ -36,11 +36,15 @@ def get_settings():
     """
 
     settings = fetch_settings()
+    models = ["gpt-4-0125-preview", "gpt-3.5-turbo-0125"]
+
+    # if no settings exist, return default values
+    if settings is None:
+        return "", 0, "", models
 
     business_name = settings.get("business_name", "")
-    api_key = settings.get("api_key", "")
+    api_key = settings.get("openai_api_key", "")
 
-    models = ["gpt-4-0125-preview", "gpt-3.5-turbo-0125"]
     selected_model = settings.get("selected_model", models[0])
     selected_model_index = (
         models.index(selected_model) if selected_model in models else 0
