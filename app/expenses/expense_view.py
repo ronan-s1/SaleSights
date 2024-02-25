@@ -158,7 +158,7 @@ def delete_category_components():
 
 
 def expense_main():
-    st.header("Business Expenses 💸")
+    st.title("Business Expenses 💸")
     categories = get_categories()
 
     if "current_page_expense" not in st.session_state:
