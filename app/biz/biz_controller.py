@@ -1,9 +1,9 @@
 import streamlit as st
+import pandas as pd
 from langchain.agents import AgentType
 from langchain_experimental.agents.agent_toolkits import create_pandas_dataframe_agent
 from langchain_community.callbacks import StreamlitCallbackHandler
 from langchain_community.chat_models import ChatOpenAI
-import pandas as pd
 from biz.biz_data import (
     fetch_openai_api_key,
     fetch_model,
@@ -12,6 +12,12 @@ from biz.biz_data import (
     fetch_products,
     fetch_product_categories,
     fetch_sale_transactions,
+)
+from biz.utils.prompt_templates import (
+    SINGLE_DF_PREFIX,
+    SINGLE_DF_SUFFIX,
+    MULTI_DF_PREFIX,
+    MULTI_DF_SUFFIX,
 )
 
 
@@ -168,8 +174,8 @@ def get_selected_collections(
         product_categories_collection (bool): Whether the product categories collection is selected.
         sales_transactions_collection (bool): Whether the sales transactions collection is selected.
 
-        Returns:
-            selected_collections (list): List of selected collections. The collections are convereted to dataframes.
+    Returns:
+        selected_collections (list): List of selected collections. The collections are convereted to dataframes.
     """
 
     selected_collections = []
@@ -239,6 +245,27 @@ def instantiate_openai_model():
     return llm
 
 
+def get_prefix_suffix(selected_collections_df):
+    """
+    Returns the prefix and suffix based on the number of selected collections.
+
+    Args:
+        selected_collections_df (list/pd.Dataframe): List of selected collections in dataframes or a single dataframe.
+
+    Returns:
+        prefix (str): Prefix message.
+        suffix (str): Suffix message.
+    """
+
+    if isinstance(selected_collections_df, pd.DataFrame):
+        return SINGLE_DF_PREFIX, SINGLE_DF_SUFFIX
+
+    elif isinstance(selected_collections_df, list) and len(selected_collections_df) > 1:
+        return MULTI_DF_PREFIX, MULTI_DF_SUFFIX
+
+    return SINGLE_DF_PREFIX, SINGLE_DF_SUFFIX
+
+
 def instantiate_pandas_dataframe_agent(llm, selected_collections_df):
     """
     Instantiates the pandas dataframe agent.
@@ -251,6 +278,8 @@ def instantiate_pandas_dataframe_agent(llm, selected_collections_df):
         pandas_df_agent (AgentType): An AgentExecutor with the specified agent_type agent and access to a PythonAstREPLTool with the DataFrame(s) and any user-provided extra_tools
     """
 
+    prefix, suffix = get_prefix_suffix(selected_collections_df)
+
     pandas_df_agent = create_pandas_dataframe_agent(
         llm,
         selected_collections_df,
@@ -258,6 +287,10 @@ def instantiate_pandas_dataframe_agent(llm, selected_collections_df):
         max_iterations=8,
         max_execution_time=100,
         handle_parsing_errors=True,
+        prefix=prefix,
+        suffix=suffix,
+        include_df_in_prompt=None,
+        input_variables=["df_head", "dfs_head", "num_dfs", "input", "agent_scratchpad"],
     )
 
     return pandas_df_agent
@@ -270,17 +303,17 @@ def process_query(selected_collections_df):
     Args:
         selected_collections_df (list/pd.Dataframe): List of selected collections in dataframes or a single dataframe.
     """
+
     llm = instantiate_openai_model()
     pandas_df_agent = instantiate_pandas_dataframe_agent(llm, selected_collections_df)
 
     # displays the agent's LLM and tool-usage thoughts
     st_cb = StreamlitCallbackHandler(st.container(), expand_new_thoughts=True)
-
     valid = True
     try:
         response = pandas_df_agent.run(st.session_state.messages, callbacks=[st_cb])
     except:
-        response = "Please ask a question related to the selected data."
+        response = "There seems to be an issue! Make sure to ask a question related to the selected data. If you're stuck look at the [docs](https://salesights.xyz/)."
         valid = False
 
     return response, valid

@@ -20,6 +20,29 @@ def button_style():
     )
 
 
+@st.cache_data
+def cache_selected_collections_df(
+    expenses_collection,
+    expenses_categories_collection,
+    products_collection,
+    product_categories_collection,
+    sales_transactions_collection,
+):
+
+    selected_collections_df, err = get_selected_collections(
+        expenses_collection,
+        expenses_categories_collection,
+        products_collection,
+        product_categories_collection,
+        sales_transactions_collection,
+    )
+
+    if err:
+        return None, err
+
+    return selected_collections_df, err
+
+
 def select_data_components():
     with st.expander("Select Data"):
         st.markdown("###### Select data to analyse:")
@@ -30,7 +53,7 @@ def select_data_components():
         sales_transactions_collection = st.checkbox("Sale Transactions")
 
         if st.button("Confirm"):
-            selected_collections_df, err = get_selected_collections(
+            selected_collections_df, err = cache_selected_collections_df(
                 expenses_collection,
                 expenses_categories_collection,
                 products_collection,
@@ -68,13 +91,20 @@ def chat_components():
         st.chat_message("user").write(prompt)
 
         with st.chat_message("assistant"):
-            response, valid = process_query(st.session_state.selected_collections)
+            if ("selected_collections" in st.session_state) and (
+                len(st.session_state.selected_collections) > 0
+            ):
+                response, valid = process_query(st.session_state.selected_collections)
 
-            st.session_state.messages.append({"role": "assistant", "content": response})
-            st.markdown(response)
+                st.session_state.messages.append(
+                    {"role": "assistant", "content": response}
+                )
+                st.markdown(response)
 
-            if not valid:
-                st.rerun()
+                if not valid:
+                    st.rerun()
+            else:
+                st.markdown("Please select a collection to proceed.")
 
 
 def biz_main():
