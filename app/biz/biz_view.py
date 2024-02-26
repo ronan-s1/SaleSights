@@ -43,7 +43,12 @@ def select_data_components():
             else:
                 st.session_state.selected_collections = selected_collections_df
                 st.markdown("###### Data in order of selection:")
-                for collection in selected_collections_df:
+
+                # if selected_collections_df is a list, iterate through the list and display each collection
+                if isinstance(selected_collections_df, list):
+                    for collection in selected_collections_df:
+                        st.dataframe(collection.head(), use_container_width=True)
+                else:
                     st.dataframe(collection.head(), use_container_width=True)
 
 
