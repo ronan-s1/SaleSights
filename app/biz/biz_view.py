@@ -49,7 +49,10 @@ def select_data_components():
                     for collection in selected_collections_df:
                         st.dataframe(collection.head(), use_container_width=True)
                 else:
-                    st.dataframe(collection.head(), use_container_width=True)
+                    if selected_collections_df is not None:
+                        st.dataframe(
+                            selected_collections_df.head(), use_container_width=True
+                        )
 
 
 def clear_button_components():
