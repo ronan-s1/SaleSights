@@ -332,7 +332,7 @@ def save_pdf(pdf):
     Save pdf in RAM. This is OS dependent.
 
     Args:
-        pdf (_type_): _description_
+        pdf (FPDF): PDF object
 
     Returns:
         bytes: A byte string containing the content of the generated PDF.

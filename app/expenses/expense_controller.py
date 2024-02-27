@@ -185,6 +185,16 @@ def get_expenses():
 
 
 def get_index(page_size):
+    """
+    Get the start and end index of the current page.
+
+    Args:
+        page_size (int): The number of items per page.
+
+    Returns:
+        start_idx (int): The start index of the current page.
+        end_idx (int): The end index of the current page.
+    """
     start_idx = (st.session_state.current_page_expense_expense - 1) * page_size
     end_idx = start_idx + page_size
 
@@ -192,6 +202,16 @@ def get_index(page_size):
 
 
 def filter_by_id(transactions, search_id):
+    """
+    Filter transactions by the search id.
+
+    Args:
+        transactions (list): The list of transactions.
+        search_id (str): The search id.
+
+    Returns:
+        search_result (list): The list of transactions that match the search id.
+    """
     search_id_lower = search_id.lower()
     search_result = [
         transaction
@@ -208,12 +228,28 @@ def filter_by_id(transactions, search_id):
 
 
 def get_total_pages(page_size, transactions):
+    """
+    Get the total number of pages for the current transactions.
+
+    Args:
+        page_size (int): The number of items per page.
+        transactions (list): The list of transactions.
+
+    Returns:
+        total_pages (int): The total number of pages.
+    """
     total_pages = len(transactions) // page_size + (len(transactions) % page_size > 0)
 
     return total_pages
 
 
 def get_index(page_size):
+    """
+    Get the start and end index of the current page.
+
+    Args:
+        page_size (int): The number of items per page.
+    """
     start_idx = (st.session_state.current_page_expense - 1) * page_size
     end_idx = start_idx + page_size
 
@@ -221,11 +257,17 @@ def get_index(page_size):
 
 
 def prev_page():
+    """
+    Decrement the current page by 1. If the current page is 1, it will not decrement.
+    """
     if st.session_state.current_page_expense > 1:
         st.session_state.current_page_expense -= 1
 
 
 def next_page():
+    """
+    Increment the current page by 1.
+    """
     st.session_state.current_page_expense += 1
 
 
