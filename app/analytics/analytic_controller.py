@@ -1,6 +1,7 @@
 import pandas as pd
 from analytics.analytic_data import (
     fetch_cat_qty_price,
+    fetch_expenses,
     fetch_transaction_totals,
     fetch_products_sales_qty,
     fetch_sales_over_time,
@@ -194,3 +195,32 @@ def get_avg_number_of_products_per_transaction(start_date, end_date):
     )
 
     return avg_number_of_products_per_transaction
+
+
+def get_expenses_data(start_date, end_date):
+    """
+    Get the expenses data.
+
+    Args:
+        start_date (datetime): start date
+        end_date (datetime): end date
+
+    Returns:
+        final_df (DataFrame): DataFrame with "Count", "Category", and "Total Expense Amount" columns
+    """
+    start_date_str, end_date_str = format_date(start_date, end_date)
+    expenses = fetch_expenses(start_date_str, end_date_str)
+    expenses_df = pd.DataFrame(expenses)
+
+    # calc the count for each category
+    category_distribution_df = expenses_df["category"].value_counts().reset_index()
+    category_distribution_df.columns = ["Category", "Count"]
+
+    # calc total for each category
+    category_totals_df = expenses_df.groupby("category")["amount"].sum().reset_index()
+    category_totals_df.columns = ["Category", "Total Expense Amount"]
+
+    # Merge the 2 dfs on category
+    final_df = pd.merge(category_distribution_df, category_totals_df, on="Category")
+
+    return final_df

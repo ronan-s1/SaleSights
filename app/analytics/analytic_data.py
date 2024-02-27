@@ -23,10 +23,30 @@ def get_sale_transactions_collection():
     return db.sale_transactions
 
 
+def get_expenses_collection():
+    db = get_db()
+    return db.expenses
+
+
 def fetch_sale_transactions():
     sale_transactions_collection = get_sale_transactions_collection()
     transactions = sale_transactions_collection.find()
     return transactions
+
+
+def fetch_expenses(start_date, end_date):
+    # filter
+    date_range = {
+        "expense_date": {
+            "$gte": (start_date),
+            "$lte": (end_date),
+        }
+    }
+
+    pipeline = [{"$match": date_range}, {"$project": {"_id": 0, "expense_image": 0}}]
+
+    result = get_expenses_collection().aggregate(pipeline)
+    return result
 
 
 def fetch_cat_qty_price(start_date, end_date):

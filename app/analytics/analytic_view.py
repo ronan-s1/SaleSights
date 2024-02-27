@@ -8,6 +8,7 @@ from analytics.analytic_controller import (
     get_transaction_totals,
     get_products_sales_qty,
     get_transactions_per_day,
+    get_expenses_data,
 )
 
 
@@ -128,6 +129,18 @@ def date_range_components():
         return start_date, end_date
 
 
+def expense_category_pie_chart_components(expense_category_df):
+    fig = px.pie(
+        expense_category_df,
+        values="Count",
+        names="Category",
+        title="Expenses by Category",
+        hover_data=["Total Expense Amount"],
+        color_discrete_sequence=px.colors.sequential.Reds_r,
+    )
+    st.plotly_chart(fig, use_container_width=True, config=dict(displaylogo=False))
+
+
 def analytic_main():
     st.title("Analytics and Insights 📊")
     start_date, end_date = date_range_components()
@@ -158,6 +171,7 @@ def analytic_main():
     avg_number_of_products_per_transaction = get_avg_number_of_products_per_transaction(
         start_date, end_date
     )
+    expense_category_df = get_expenses_data(start_date, end_date)
 
     # display data
     kpi_components(
@@ -174,3 +188,5 @@ def analytic_main():
     daily_sales_components(sales_over_time_df)
     st.divider()
     transactions_per_day_components(transactions_per_day_df)
+    st.divider()
+    expense_category_pie_chart_components(expense_category_df)
