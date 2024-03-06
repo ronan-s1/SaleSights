@@ -331,6 +331,10 @@ def process_query(selected_collections_df):
         if len(selected_collections_df) == 0:
             return "Please select valid data to proceed.", False
 
+        # if only one collection is valid after removing empty collections
+        if len(selected_collections_df) == 1:
+            selected_collections_df = selected_collections_df[0]
+
     llm = instantiate_openai_model()
     pandas_df_agent = instantiate_pandas_dataframe_agent(llm, selected_collections_df)
 
