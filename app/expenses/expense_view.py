@@ -57,6 +57,7 @@ def display_expenses_components():
                 "Expense": [expense["expense"]],
                 "Amount / Cost": [expense["amount"]],
                 "Category": [expense["category"]],
+                "Recorded Date": [expense["recorded_date"]],
                 "Description": [expense["description"]],
             }
             df = pd.DataFrame(expense_data).T
@@ -104,13 +105,15 @@ def add_expense_components():
 
     # Add product button
     if st.button("Add Expense"):
-        err = add_new_expense(
+        ack, expense_id = add_new_expense(
             expense, category, description, amount, expense_date, uploaded_file
         )
-        if err:
-            st.warning(err)
+        if isinstance(ack, str):
+            st.warning(ack)
+        elif ack:
+            st.success(f"Expense added successfully. ID: {expense_id}")
         else:
-            st.rerun()
+            st.error("Error occursed adding the expense to the database.")
 
 
 def add_category_components():
@@ -121,7 +124,7 @@ def add_category_components():
         if err:
             st.warning(err)
         else:
-            st.rerun()
+            st.success(f"Category '{new_category_name}' added successfully.")
 
 
 def edit_category_components():
@@ -139,7 +142,9 @@ def edit_category_components():
         if err:
             st.warning(err)
         else:
-            st.rerun()
+            st.success(
+                f"Category '{selected_category_name}' edited to '{new_category_name}'."
+            )
 
 
 def delete_category_components():
@@ -154,7 +159,7 @@ def delete_category_components():
         if err:
             st.warning(err)
         else:
-            st.rerun()
+            st.success(f"Category '{selected_category_name}' deleted successfully.")
 
 
 def expense_main():

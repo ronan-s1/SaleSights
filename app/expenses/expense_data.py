@@ -30,7 +30,8 @@ def fetch_categories():
 
 def insert_new_expense_to_db(new_expense):
     expenses = get_expenses_collection()
-    expenses.insert_one(new_expense)
+    result = expenses.insert_one(new_expense)
+    return result.acknowledged, result.inserted_id
 
 
 def fetch_expenses():

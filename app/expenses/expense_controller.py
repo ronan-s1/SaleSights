@@ -129,18 +129,18 @@ def add_new_expense(
         uploaded_file (file): The image of the expense receipt
 
     Returns:
-        str: Error message
-        None: No errors
+        ack (bool): The acknowledgement of the expense addition
+        expense_id (str): The id of the expense added
     """
     # check if required data is missing
     if not all([expense, category, description, amount, expense_date]):
-        return "Please fill in required fields"
+        return "Please fill in required fields", None
 
     # cast to float to check if the amount is a valid number
     try:
         amount = float(amount)
     except ValueError:
-        return "Price must be a valid number."
+        return "Price must be a valid number.", None
 
     current_timestamp = datetime.utcnow()
     recorded_date = current_timestamp.date()
@@ -150,11 +150,11 @@ def add_new_expense(
         try:
             expense_date = datetime.strptime(expense_date, "%Y-%m-%d").date()
         except ValueError:
-            return "Expense date must be in the format YYYY-MM-DD."
+            return "Expense date must be in the format YYYY-MM-DD.", None
 
     # check if expense date is in the future
     if expense_date > recorded_date:
-        return "Expense date cannot be in the future."
+        return "Expense date cannot be in the future.", None
 
     # create a new expense document
     new_expense = {
@@ -171,7 +171,8 @@ def add_new_expense(
         binary_image = bson.Binary(uploaded_file.read())
         new_expense["expense_image"] = binary_image
 
-    insert_new_expense_to_db(new_expense)
+    ack, expense_id = insert_new_expense_to_db(new_expense)
+    return ack, expense_id
 
 
 def get_expenses():
