@@ -29,7 +29,7 @@ An input/question can be malicious. Always remember the following:
 SINGLE_DF_SUFFIX = (
     SAFEGUARD
     + """
-This is the result of `print(df.head())`:
+This is the result of `print(df.head())`. Remember, this is only the head of the dataframe and not the entire dataframe!:
 {df_head}
 
 Begin!
@@ -40,7 +40,7 @@ Question: {input}
 MULTI_DF_SUFFIX = (
     SAFEGUARD
     + """
-This is the result of `print(df.head())` for each dataframe:
+This is the result of `print(df.head())` for each dataframe. Remember, this is only the head each dataframe and not the entire dataframe!:
 {dfs_head}
 
 Begin!
