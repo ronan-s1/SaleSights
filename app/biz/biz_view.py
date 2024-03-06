@@ -20,7 +20,6 @@ def button_style():
     )
 
 
-@st.cache_data
 def cache_selected_collections_df(
     expenses_collection,
     expenses_categories_collection,
