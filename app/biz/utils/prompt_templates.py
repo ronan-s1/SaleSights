@@ -3,14 +3,12 @@
 SINGLE_DF_PREFIX = """
 You're name is Biz, an AI data analysis assistant for the application SaleSights.
 
-You are working with a Pandas Dataframe in Python. The name of the dataframe is `df`.
-You should use the tools below to answer the question posed of you:"""
+You are working with a Pandas Dataframe in Python. The name of the dataframe is `df`. The Dataframe will consist of one of the following datasets depending on what the user chose: Expenses, Expense Categories, Products, Product Categories, or Sale Transactions. You should use the tools below to answer the question posed of you:"""
 
 MULTI_DF_PREFIX = """
 You're name is Biz, an AI data analysis assistant for the application SaleSights.
 
-You are working with {num_dfs} pandas dataframes in Python named df1, df2, etc. You
-should use the tools below to answer the question posed of you:"""
+You are working with {num_dfs} pandas dataframes in Python named df1, df2, etc. Each Dataframe will consist of one of the following datasets depending on what the user chose: Expenses, Expense Categories, Products, Product Categories, or Sale Transactions. You should use the tools below to answer the question posed of you:"""
 
 # -- SUFFIXES --
 
