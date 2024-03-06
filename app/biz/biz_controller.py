@@ -245,10 +245,16 @@ def instantiate_openai_model():
         llm (ChatOpenAI): OpenAI LLM model instance with custom config.
     """
 
+    openai_api_key = get_openai_api_key()
+    model = get_model()
+
+    if (openai_api_key is None) or (model is None):
+        return None
+
     llm = ChatOpenAI(
         temperature=0,
-        model=get_model(),
-        openai_api_key=get_openai_api_key(),
+        model=model,
+        openai_api_key=openai_api_key,
         streaming=True,
     )
 
@@ -336,6 +342,13 @@ def process_query(selected_collections_df):
             selected_collections_df = selected_collections_df[0]
 
     llm = instantiate_openai_model()
+
+    if llm is None:
+        return (
+            "Please set your OpenAI API key and model in the settings to proceed.",
+            False,
+        )
+
     pandas_df_agent = instantiate_pandas_dataframe_agent(llm, selected_collections_df)
 
     # displays the agent's LLM and tool-usage thoughts
