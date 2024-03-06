@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-from langchain.agents import AgentType
 from langchain_experimental.agents.agent_toolkits import create_pandas_dataframe_agent
 from langchain_community.callbacks import StreamlitCallbackHandler
 from langchain_community.chat_models import ChatOpenAI
@@ -97,6 +96,9 @@ def flatten_transactions(transactions):
         flattened_transactions (list): List of dictionaries containing the flattened transactions.
     """
 
+    if not transactions:
+        return None
+
     flattened_transactions = []
     for transaction in transactions:
         transaction_id = transaction["_id"]
@@ -131,6 +133,10 @@ def get_sale_transactions_df():
     """
     transactions = fetch_sale_transactions()
     flattened_transactions = flatten_transactions(transactions)
+
+    if flattened_transactions is None:
+        return pd.DataFrame()
+
     df = pd.DataFrame(flattened_transactions)
     return df
 
@@ -147,13 +153,16 @@ def selected_collections_processing(selected_collections):
         valid (bool): Whether the selected collections are valid.
     """
 
+    # if no collection is selected
     if len(selected_collections) <= 0:
-        err = "Please select a collection to proceed."
+        err = "Please select valid data to proceed."
         return None, err
 
+    # if only one collection is selected
     if len(selected_collections) == 1:
         return selected_collections[0], None
 
+    # if multiple collections are selected
     return selected_collections, None
 
 
@@ -178,6 +187,7 @@ def get_selected_collections(
         selected_collections (list): List of selected collections. The collections are convereted to dataframes.
     """
 
+    # list to store the selected collections
     selected_collections = []
 
     if expenses_collection:
@@ -304,6 +314,23 @@ def process_query(selected_collections_df):
         selected_collections_df (list/pd.Dataframe): List of selected collections in dataframes or a single dataframe.
     """
 
+    # if an empty data is selected
+    if (
+        isinstance(selected_collections_df, pd.DataFrame)
+        and selected_collections_df.empty
+    ):
+        return "Please select valid data to proceed.", False
+
+    # Remove any empty collections from the list
+    elif isinstance(selected_collections_df, list):
+        selected_collections_df = [
+            collection for collection in selected_collections_df if not collection.empty
+        ]
+
+        # if multiple collections are selected and all are empty
+        if len(selected_collections_df) == 0:
+            return "Please select valid data to proceed.", False
+
     llm = instantiate_openai_model()
     pandas_df_agent = instantiate_pandas_dataframe_agent(llm, selected_collections_df)
 
@@ -313,7 +340,7 @@ def process_query(selected_collections_df):
     try:
         response = pandas_df_agent.run(st.session_state.messages, callbacks=[st_cb])
     except:
-        response = "There seems to be an issue! Make sure to ask a question related to the selected data. If you're stuck look at the [docs](https://salesights.xyz/)."
+        response = "Make sure to ask a question related to the selected data. If you're stuck look at the [docs](https://salesights.xyz/)."
         valid = False
 
     return response, valid

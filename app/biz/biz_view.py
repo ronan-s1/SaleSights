@@ -70,12 +70,16 @@ def select_data_components():
                 # if selected_collections_df is a list, iterate through the list and display each collection
                 if isinstance(selected_collections_df, list):
                     for collection in selected_collections_df:
-                        st.dataframe(collection.head(), use_container_width=True)
+                        if collection.empty:
+                            st.warning(f"No data found for selected data.")
+                        else:
+                            st.dataframe(collection.head(), use_container_width=True)
+                elif selected_collections_df.empty:
+                    st.warning(f"No data found for selected data.")
                 else:
-                    if selected_collections_df is not None:
-                        st.dataframe(
-                            selected_collections_df.head(), use_container_width=True
-                        )
+                    st.dataframe(
+                        selected_collections_df.head(), use_container_width=True
+                    )
 
 
 def clear_button_components():
