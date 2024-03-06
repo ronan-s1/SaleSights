@@ -51,7 +51,16 @@ def select_data_components():
         product_categories_collection = st.checkbox("Product Categories")
         sales_transactions_collection = st.checkbox("Sale Transactions")
 
-        if st.button("Confirm"):
+        col1, col2 = st.columns([12, 3.8])
+        with col1:
+            confirm_selction = st.button("Confirm")
+
+        with col2:
+            if st.button("Clear Selection"):
+                st.session_state.selected_collections = []
+                st.rerun()
+
+        if confirm_selction:
             selected_collections_df, err = cache_selected_collections_df(
                 expenses_collection,
                 expenses_categories_collection,
