@@ -44,6 +44,10 @@ def get_cat_qty_price(start_date, end_date):
     transactions = fetch_cat_qty_price(start_date_str, end_date_str)
 
     product_category_df = pd.DataFrame(transactions)
+
+    if product_category_df.empty:
+        return product_category_df, None
+
     product_category_df = product_category_df.rename(columns={"price": "total sales"})
 
     # group by category and sum the quantities and prices
@@ -77,7 +81,7 @@ def get_transaction_totals(start_date, end_date):
 
     # check if there's data
     if totals_df.empty:
-        return f"No records between {start_date} and {end_date}", None
+        return None, None
 
     # get average and total for transaction totals
     total_sum = round(totals_df["total"].sum(), 2)
@@ -102,6 +106,10 @@ def get_products_sales_qty(start_date, end_date):
 
     # rename columns in df
     products_and_qty_df = pd.DataFrame(products_and_qty)
+
+    if products_and_qty_df.empty:
+        return products_and_qty_df
+
     products_and_qty_df = products_and_qty_df.rename(
         columns={
             "total_quantity": "total quantity",
@@ -151,6 +159,10 @@ def get_sales_over_time(start_date, end_date):
 
     # create df and remove underscores
     sales_over_time_df = pd.DataFrame(sales_over_time)
+
+    if sales_over_time_df.empty:
+        return sales_over_time_df, sales_over_time_df
+
     cumulative_sales_df = calculate_cumulative_sales(sales_over_time_df)
 
     return sales_over_time_df, cumulative_sales_df
@@ -168,6 +180,10 @@ def get_transactions_per_day(start_date, end_date):
     transactions_per_day = fetch_transactions_per_day(start_date_str, end_date_str)
 
     transactions_per_day_df = pd.DataFrame(transactions_per_day)
+
+    if transactions_per_day_df.empty:
+        return transactions_per_day_df, None
+
     average_transactions = round(transactions_per_day_df["transaction_count"].mean())
 
     return transactions_per_day_df, average_transactions
@@ -182,7 +198,7 @@ def get_avg_number_of_products_per_transaction(start_date, end_date):
         end_date (datetime): end date
 
     Returns:
-        avg_number_of_products_per_transaction (int): average number of products per transaction
+        avg_number_of_products_per_transaction (float): average number of products per transaction
     """
     start_date_str, end_date_str = format_date(start_date, end_date)
     products_per_transaction = fetch_number_of_products_per_transaction(
@@ -190,11 +206,15 @@ def get_avg_number_of_products_per_transaction(start_date, end_date):
     )
 
     products_per_transaction_df = pd.DataFrame(products_per_transaction)
+
+    if products_per_transaction_df.empty:
+        return None
+
     avg_number_of_products_per_transaction = round(
-        products_per_transaction_df["num_products"].mean()
+        products_per_transaction_df["num_products"].mean(), 2
     )
 
-    return avg_number_of_products_per_transaction
+    return float(avg_number_of_products_per_transaction)
 
 
 def get_expenses_data(start_date, end_date):
@@ -211,6 +231,9 @@ def get_expenses_data(start_date, end_date):
     start_date_str, end_date_str = format_date(start_date, end_date)
     expenses = fetch_expenses(start_date_str, end_date_str)
     expenses_df = pd.DataFrame(expenses)
+
+    if expenses_df.empty:
+        return expenses_df
 
     # calc the count for each category
     category_distribution_df = expenses_df["category"].value_counts().reset_index()

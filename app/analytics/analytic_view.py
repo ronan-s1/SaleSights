@@ -53,20 +53,28 @@ def kpi_components(
     kpi1, kpi2, kpi3 = st.columns(3)
     kpi4, kpi5, _ = st.columns(3)
 
-    with kpi1:
-        st.metric("Total Sales", transaction_total)
+    if transaction_total is not None:
+        with kpi1:
+            st.metric("Total Sales", transaction_total)
 
-    with kpi2:
-        st.metric("Average Transaction Value", transaction_total_avg)
+    if transaction_total_avg is not None:
+        with kpi2:
+            st.metric("Avg Transaction Value", transaction_total_avg)
 
-    with kpi3:
-        st.metric("Average Quantity Per Product", quantity_avg)
+    if quantity_avg is not None:
+        with kpi3:
+            st.metric("Avg Quantity Per Product", quantity_avg)
 
-    with kpi4:
-        st.metric("Average Daily Transactions", average_transactions)
+    if average_transactions is not None:
+        with kpi4:
+            st.metric("Avg Daily Transactions", average_transactions)
 
-    with kpi5:
-        st.metric("Units Per Transaction (UPT)", avg_number_of_products_per_transaction)
+    if avg_number_of_products_per_transaction is not None:
+        with kpi5:
+            st.metric(
+                "Avg Units Per Transaction (UPT)",
+                avg_number_of_products_per_transaction,
+            )
 
     return True
 
@@ -157,10 +165,6 @@ def analytic_main():
         start_date, end_date
     )
 
-    if isinstance(transaction_total, str):
-        st.error(transaction_total)
-        st.stop()
-
     # get analytic data
     category_qty_price_total, quantity_avg = get_cat_qty_price(start_date, end_date)
     products_and_qty_df = get_products_sales_qty(start_date, end_date)
@@ -173,6 +177,9 @@ def analytic_main():
     )
     expense_category_df = get_expenses_data(start_date, end_date)
 
+    # st.write(avg_number_of_products_per_transaction)
+    # st.write(type(avg_number_of_products_per_transaction))
+
     # display data
     kpi_components(
         transaction_total,
@@ -181,12 +188,42 @@ def analytic_main():
         average_transactions,
         avg_number_of_products_per_transaction,
     )
-    category_bar_chart_components(category_qty_price_total)
-    products_and_qty_components_components(products_and_qty_df)
+
+    # TO DO:
+    # ADD ERROR HANDLING IF NO DATA TO OTHER COMPONENTS
+
+    if not category_qty_price_total.empty:
+        category_bar_chart_components(category_qty_price_total)
+    else:
+        st.warning("No sales found for the selected date range.")
+
+    if not products_and_qty_df.empty:
+        products_and_qty_components_components(products_and_qty_df)
+    else:
+        st.warning("No sales found for the selected date range.")
+
     st.divider()
-    cumulative_sales_components(cumulative_sales_df)
-    daily_sales_components(sales_over_time_df)
+
+    if not cumulative_sales_df.empty:
+        cumulative_sales_components(cumulative_sales_df)
+    else:
+        st.warning("No sales found for the selected date range.")
+
+    if not sales_over_time_df.empty:
+        daily_sales_components(sales_over_time_df)
+    else:
+        st.warning("No sales found for the selected date range.")
+
     st.divider()
-    transactions_per_day_components(transactions_per_day_df)
+
+    if not transactions_per_day_df.empty:
+        transactions_per_day_components(transactions_per_day_df)
+    else:
+        st.warning("No transactions found for the selected date range.")
+
     st.divider()
-    expense_category_pie_chart_components(expense_category_df)
+
+    if not expense_category_df.empty:
+        expense_category_pie_chart_components(expense_category_df)
+    else:
+        st.warning("No expenses found for the selected date range.")
