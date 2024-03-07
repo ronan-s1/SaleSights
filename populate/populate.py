@@ -4,6 +4,7 @@ import json
 from pymongo import MongoClient
 from streamlit import secrets
 from populate_modules.sale_transactions import generate_sale_transactions_test_data
+from populate_modules.expenses import generate_expenses_test_data
 
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
@@ -27,6 +28,7 @@ def populate():
     expense_categories_collection = db.expense_categories
     products_collection = db.products
     sale_transactions_collection = db.sale_transactions
+    expenses_collectriion = db.expenses
 
     # drop existing collections
     logger.info("Dropping existing collections")
@@ -34,6 +36,7 @@ def populate():
     products_collection.drop()
     sale_transactions_collection.drop()
     expense_categories_collection.drop()
+    expenses_collectriion.drop()
 
     # fetch and insert data
     product_categories_data = read_json("product_categories.json")
@@ -50,6 +53,7 @@ def populate():
     products_collection.insert_many(products_data)
 
     generate_sale_transactions_test_data(3500)
+    generate_expenses_test_data(310)
 
     logger.info("Database populated successfully")
 

@@ -1,4 +1,4 @@
-from pymongo import MongoClient
+from pymongo import DESCENDING, MongoClient
 from streamlit import secrets
 
 
@@ -35,8 +35,9 @@ def insert_new_expense_to_db(new_expense):
 
 
 def fetch_expenses():
-    expenses = get_expenses_collection()
-    return expenses.find()
+    expenses_collection = get_expenses_collection()
+    expenses = expenses_collection.find().sort("recorded_date", DESCENDING)
+    return expenses
 
 
 def category_exists(category):
