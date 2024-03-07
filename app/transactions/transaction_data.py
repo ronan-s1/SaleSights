@@ -20,5 +20,7 @@ def get_sale_transactions_collection():
 
 def fetch_sale_transactions():
     sale_transactions_collection = get_sale_transactions_collection()
-    transactions = sale_transactions_collection.find().sort("timestamp", DESCENDING)
+    transactions = sale_transactions_collection.find().sort(
+        [("date", DESCENDING), ("time", DESCENDING)]
+    )
     return transactions
