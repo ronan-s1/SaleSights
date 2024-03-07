@@ -318,6 +318,10 @@ def process_query(selected_collections_df):
 
     Args:
         selected_collections_df (list/pd.Dataframe): List of selected collections in dataframes or a single dataframe.
+
+    Returns:
+        response (str): Agent's response or warning message.
+        valid (bool): If an error occurs, valid is False. Otherwise, valid is True.
     """
 
     # if an empty data is selected
