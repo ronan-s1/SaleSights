@@ -27,6 +27,13 @@ def home_main():
         )
         st.markdown(transaction_container, unsafe_allow_html=True)
 
+        expenses_container = service_container(
+            "fa fa-money-bill-transfer",
+            "Expenses",
+            "Track your expenses and upload receipts easily",
+        )
+        st.markdown(expenses_container, unsafe_allow_html=True)
+
     with col2:
         product_container = service_container(
             "fa-solid fa-basket-shopping", "Products", "Manage your products with ease"
@@ -39,6 +46,13 @@ def home_main():
             "See insights and metrics on your business data",
         )
         st.markdown(analytics_container, unsafe_allow_html=True)
+
+        biz_container = service_container(
+            "fa fa-robot",
+            "Biz",
+            "Ask questions on your data using state-of-the-art AI",
+        )
+        st.markdown(biz_container, unsafe_allow_html=True)
 
     st.write("Need help? See our [docs](https://salesights.xyz).")
     start_connection()
