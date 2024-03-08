@@ -58,6 +58,7 @@ def display_expenses_components():
                 "Amount / Cost": [expense["amount"]],
                 "Category": [expense["category"]],
                 "Recorded Date": [expense["recorded_date"]],
+                "Expense Date": [expense["expense_date"]],
                 "Description": [expense["description"]],
             }
             df = pd.DataFrame(expense_data).T
