@@ -53,7 +53,6 @@ def get_expenses_categories_df():
     Returns:
         df (pd.Dataframe): Dataframe containing the expenses categories.
     """
-
     expenses_categories_data = fetch_expense_categories()
     df = pd.DataFrame(expenses_categories_data)
     return df
@@ -66,7 +65,6 @@ def get_products_df():
     Returns:
         df (pd.Dataframe): Dataframe containing the products.
     """
-
     products_data = fetch_products()
     df = pd.DataFrame(products_data)
     return df
@@ -79,7 +77,6 @@ def get_product_categories_df():
     Returns:
         df (pd.Dataframe): Dataframe containing the product categories.
     """
-
     product_categories_data = fetch_product_categories()
     df = pd.DataFrame(product_categories_data)
     return df
@@ -95,7 +92,6 @@ def flatten_transactions(transactions):
     Returns:
         flattened_transactions (list): List of dictionaries containing the flattened transactions.
     """
-
     if not transactions:
         return None
 
@@ -152,7 +148,6 @@ def selected_collections_processing(selected_collections):
         response (str): Warning message or selected collection(s).
         valid (bool): Whether the selected collections are valid.
     """
-
     # if no collection is selected
     if len(selected_collections) <= 0:
         err = "Please select valid data to proceed."
@@ -186,7 +181,6 @@ def get_selected_collections(
     Returns:
         selected_collections (list): List of selected collections. The collections are convereted to dataframes.
     """
-
     # list to store the selected collections
     selected_collections = []
 
@@ -222,7 +216,6 @@ def get_model():
     Returns:
         model (str): Open AI model.
     """
-
     return fetch_model()
 
 
@@ -233,7 +226,6 @@ def get_openai_api_key():
     Returns:
         openai_api_key (str): Open AI API key.
     """
-
     return fetch_openai_api_key()
 
 
@@ -244,7 +236,6 @@ def instantiate_openai_model():
     Returns:
         llm (ChatOpenAI): OpenAI LLM model instance with custom config.
     """
-
     openai_api_key = get_openai_api_key()
     model = get_model()
 
@@ -272,7 +263,6 @@ def get_prefix_suffix(selected_collections_df):
         prefix (str): Prefix message.
         suffix (str): Suffix message.
     """
-
     if isinstance(selected_collections_df, pd.DataFrame):
         return SINGLE_DF_PREFIX, SINGLE_DF_SUFFIX
 
@@ -293,7 +283,6 @@ def instantiate_pandas_dataframe_agent(llm, selected_collections_df):
     Returns:
         pandas_df_agent (AgentType): An AgentExecutor with the specified agent_type agent and access to a PythonAstREPLTool with the DataFrame(s) and any user-provided extra_tools
     """
-
     prefix, suffix = get_prefix_suffix(selected_collections_df)
 
     pandas_df_agent = create_pandas_dataframe_agent(
@@ -323,7 +312,6 @@ def process_query(selected_collections_df):
         response (str): Agent's response or warning message.
         valid (bool): If an error occurs, valid is False. Otherwise, valid is True.
     """
-
     # if an empty data is selected
     if (
         isinstance(selected_collections_df, pd.DataFrame)

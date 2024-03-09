@@ -14,7 +14,6 @@ def update_settings(business_name, selected_model, api_key):
         str: Error message
         None: No errors
     """
-
     if any(not data for data in [business_name, selected_model, api_key]):
         return "Please fill in required fields"
 
@@ -34,7 +33,6 @@ def get_settings():
     Returns:
         dict: The settings
     """
-
     settings = fetch_settings()
     models = ["gpt-4-0125-preview", "gpt-3.5-turbo-0125"]
 
