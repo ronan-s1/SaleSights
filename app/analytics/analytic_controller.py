@@ -1,12 +1,16 @@
 import pandas as pd
+import calendar
 from analytics.analytic_data import (
     fetch_cat_qty_price,
+    fetch_daily_total_expenses,
     fetch_expenses,
+    fetch_expenses_by_day_of_week,
     fetch_transaction_totals,
     fetch_products_sales_qty,
     fetch_sales_over_time,
     fetch_transactions_per_day,
     fetch_number_of_products_per_transaction,
+    fetch_sale_transactions_by_day_of_week,
 )
 
 
@@ -139,6 +143,7 @@ def calculate_cumulative_sales(df):
         df (DataFrame): dataframe with cumulative sales column.
     """
     df["cumulative_sales"] = df["total_sales"].cumsum()
+
     return df
 
 
@@ -217,6 +222,44 @@ def get_avg_number_of_products_per_transaction(start_date, end_date):
     return float(avg_number_of_products_per_transaction)
 
 
+def get_sale_transactions_by_day_of_week(start_date, end_date):
+    """
+    Get the sale transactions by day of week.
+
+    Args:
+        start_date (datetime): start date
+        end_date (datetime): end date
+
+    Returns:
+        transactions_by_day_of_week_df (DataFrame): sale transactions by day of week
+    """
+    start_date_str, end_date_str = format_date(start_date, end_date)
+    transactions_by_day_of_week = fetch_sale_transactions_by_day_of_week(
+        start_date_str, end_date_str
+    )
+
+    transactions_by_day_of_week_df = pd.DataFrame(transactions_by_day_of_week)
+
+    if transactions_by_day_of_week_df.empty:
+        return transactions_by_day_of_week_df
+
+    # Map numerical day of week to day name
+    day_of_week_map = {
+        1: "Monday",
+        2: "Tuesday",
+        3: "Wednesday",
+        4: "Thursday",
+        5: "Friday",
+        6: "Saturday",
+        7: "Sunday",
+    }
+    transactions_by_day_of_week_df["day_of_week"] = transactions_by_day_of_week_df[
+        "day_of_week"
+    ].map(day_of_week_map)
+
+    return transactions_by_day_of_week_df
+
+
 def get_expenses_data(start_date, end_date):
     """
     Get the expenses data.
@@ -240,10 +283,69 @@ def get_expenses_data(start_date, end_date):
     category_distribution_df.columns = ["Category", "Count"]
 
     # calc total for each category
-    category_totals_df = expenses_df.groupby("category")["amount"].sum().reset_index()
+    category_totals_df = (
+        expenses_df.groupby("category")["amount"].sum().round(2).reset_index()
+    )
     category_totals_df.columns = ["Category", "Total Expense Amount"]
 
     # Merge the 2 dfs on category
     final_df = pd.merge(category_distribution_df, category_totals_df, on="Category")
 
     return final_df
+
+
+def get_daily_total_expenses(start_date, end_date):
+    """
+    Get the daily total expenses. Calls a function from data access that aggregates the total expenses by summing up the amount field for each day using the expense_date field.
+
+    Args:
+        start_date (datetime): start date
+        end_date (datetime): end date
+
+    Returns:
+        daily_total_expenses_df (DataFrame): daily total expenses
+    """
+    start_date_str, end_date_str = format_date(start_date, end_date)
+    daily_total_expenses = fetch_daily_total_expenses(start_date_str, end_date_str)
+
+    daily_total_expenses_df = pd.DataFrame(daily_total_expenses)
+    return daily_total_expenses_df
+
+
+def get_expenses_by_day_of_week(start_date, end_date):
+    """
+    Get the total expenses by day of week.
+
+    Args:
+        start_date (datetime): start date
+        end_date (datetime): end date
+
+    Returns:
+        expenses_by_day_of_week_df (DataFrame): total expenses by day of week
+    """
+    start_date_str, end_date_str = format_date(start_date, end_date)
+    expenses_by_day_of_week = fetch_expenses_by_day_of_week(
+        start_date_str, end_date_str
+    )
+
+    # Replace numerical day of week with day names
+    expenses_by_day_of_week_df = pd.DataFrame(expenses_by_day_of_week)
+
+    if expenses_by_day_of_week_df.empty:
+        return expenses_by_day_of_week_df
+
+    # Map numerical day of week to day name
+    day_of_week_map = {
+        1: "Monday",
+        2: "Tuesday",
+        3: "Wednesday",
+        4: "Thursday",
+        5: "Friday",
+        6: "Saturday",
+        7: "Sunday",
+    }
+    expenses_by_day_of_week_df["day_of_week"] = expenses_by_day_of_week_df[
+        "day_of_week"
+    ].map(day_of_week_map)
+
+    return expenses_by_day_of_week_df

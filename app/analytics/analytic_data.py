@@ -49,6 +49,50 @@ def fetch_expenses(start_date, end_date):
     return result
 
 
+def fetch_daily_total_expenses(start_date, end_date):
+    date_range = {
+        "expense_date": {
+            "$gte": (start_date),
+            "$lte": (end_date),
+        }
+    }
+
+    pipeline = [
+        {"$match": date_range},
+        {"$group": {"_id": "$expense_date", "total_amount": {"$sum": "$amount"}}},
+        {"$project": {"_id": 0, "expense_date": "$_id", "total_amount": 1}},
+        {"$sort": {"expense_date": 1}},
+    ]
+
+    result = get_expenses_collection().aggregate(pipeline)
+    return result
+
+
+def fetch_expenses_by_day_of_week(start_date, end_date):
+    date_range = {
+        "expense_date": {
+            "$gte": start_date,
+            "$lte": end_date,
+        }
+    }
+
+    pipeline = [
+        {"$match": date_range},
+        {
+            "$project": {
+                "day_of_week": {"$dayOfWeek": {"$toDate": "$expense_date"}},
+                "amount": 1,
+            }
+        },
+        {"$group": {"_id": "$day_of_week", "total_amount": {"$sum": "$amount"}}},
+        {"$project": {"_id": 0, "day_of_week": "$_id", "total_amount": 1}},
+        {"$sort": {"day_of_week": 1}},
+    ]
+
+    result = get_expenses_collection().aggregate(pipeline)
+    return result
+
+
 def fetch_cat_qty_price(start_date, end_date):
     # filter
     date_range = {
@@ -184,6 +228,31 @@ def fetch_number_of_products_per_transaction(start_date, end_date):
     pipeline = [
         {"$match": date_range},
         {"$project": {"_id": 0, "num_products": {"$size": "$products"}}},
+    ]
+
+    result = get_sale_transactions_collection().aggregate(pipeline)
+    return result
+
+
+def fetch_sale_transactions_by_day_of_week(start_date, end_date):
+    date_range = {
+        "date": {
+            "$gte": start_date,
+            "$lte": end_date,
+        }
+    }
+
+    pipeline = [
+        {"$match": date_range},
+        {
+            "$project": {
+                "day_of_week": {"$dayOfWeek": {"$toDate": "$date"}},
+                "total_amount": "$total",
+            }
+        },
+        {"$group": {"_id": "$day_of_week", "total_amount": {"$sum": "$total_amount"}}},
+        {"$project": {"_id": 0, "day_of_week": "$_id", "total_amount": 1}},
+        {"$sort": {"day_of_week": 1}},
     ]
 
     result = get_sale_transactions_collection().aggregate(pipeline)

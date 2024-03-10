@@ -1,9 +1,12 @@
 import streamlit as st
 import plotly.express as px
-from utils import FIG_BLUE_BACKGROUND_COLOUR
+from utils import FIG_BLUE_BACKGROUND_COLOUR, FIG_RED_BACKGROUND_COLOUR
 from analytics.analytic_controller import (
     get_avg_number_of_products_per_transaction,
     get_cat_qty_price,
+    get_daily_total_expenses,
+    get_expenses_by_day_of_week,
+    get_sale_transactions_by_day_of_week,
     get_sales_over_time,
     get_transaction_totals,
     get_products_sales_qty,
@@ -18,6 +21,7 @@ def transactions_per_day_components(transactions_per_day_df):
         x="date",
         y="transaction_count",
         title="Number of Daily Transactions",
+        labels={"date": "Date", "transaction_count": "Transactions"},
     )
 
     fig.update_layout(
@@ -36,7 +40,7 @@ def products_and_qty_components_components(products_and_qty_df):
         x=["total quantity", "total sales"],
         orientation="h",
         title="Sales and Quanitity by Product",
-        labels={"value": "Total", "variable": "Metric"},
+        labels={"value": "Total", "variable": "Metric", "product": "Product"},
     )
 
     fig.update_layout(yaxis_title="Product", xaxis_title="Total")
@@ -85,6 +89,7 @@ def daily_sales_components(sales_over_time_df):
         x="date",
         y="total_sales",
         title="Total Daily Sales Over Time",
+        labels={"date": "Date", "total_sales": "Total"},
     )
 
     fig.update_layout(
@@ -102,6 +107,7 @@ def cumulative_sales_components(cumulative_sales_df):
         x="date",
         y="cumulative_sales",
         title="Cumulative Daily Sales Over Time",
+        labels={"date": "Date", "cumulative_sales": "Cummulative Sales"},
     )
 
     fig.update_layout(
@@ -119,7 +125,7 @@ def category_bar_chart_components(category_qty_price_df):
         x="category",
         y=["quantity", "total sales"],
         title="Sales and Quanitity by Category",
-        labels={"value": "Total", "variable": "Metric"},
+        labels={"value": "Total", "variable": "Metric", "category": "Category"},
         barmode="group",
     )
     st.plotly_chart(fig, use_container_width=True, config=dict(displaylogo=False))
@@ -146,6 +152,60 @@ def expense_category_pie_chart_components(expense_category_df):
         hover_data=["Total Expense Amount"],
         color_discrete_sequence=px.colors.sequential.Reds_r,
     )
+    st.plotly_chart(fig, use_container_width=True, config=dict(displaylogo=False))
+
+
+def total_expenses_line_chart_components(daily_total_expenses_df):
+    fig = px.line(
+        daily_total_expenses_df,
+        x="expense_date",
+        y="total_amount",
+        title="Total Daily Expenses Over Time",
+        color_discrete_sequence=px.colors.sequential.Reds_r,
+        labels={"expense_date": "Date", "total_amount": "Total"},
+    )
+
+    fig.update_layout(
+        plot_bgcolor=FIG_RED_BACKGROUND_COLOUR,
+        yaxis_title="Total Expenses",
+        xaxis_title="Expense Date",
+    )
+
+    st.plotly_chart(fig, use_container_width=True, config=dict(displaylogo=False))
+
+
+def expenses_by_day_of_week_chart_components(expenses_by_day_of_week_df):
+    fig = px.bar(
+        expenses_by_day_of_week_df,
+        x="day_of_week",
+        y="total_amount",
+        title="Total Expenses by Day of Week",
+        labels={"day_of_week": "Day", "total_amount": "Total Expenses"},
+        color_discrete_sequence=px.colors.sequential.Reds_r,
+    )
+
+    fig.update_layout(
+        yaxis_title="Total Expenses",
+        xaxis_title="Day of Week",
+    )
+
+    st.plotly_chart(fig, use_container_width=True, config=dict(displaylogo=False))
+
+
+def sales_by_day_of_week_chart_components(transactions_by_day_of_week_df):
+    fig = px.bar(
+        transactions_by_day_of_week_df,
+        x="day_of_week",
+        y="total_amount",
+        title="Total Sales by Day of Week",
+        labels={"day_of_week": "Day", "total_amount": "Total Sales"},
+    )
+
+    fig.update_layout(
+        yaxis_title="Total Sales",
+        xaxis_title="Day of Week",
+    )
+
     st.plotly_chart(fig, use_container_width=True, config=dict(displaylogo=False))
 
 
@@ -176,10 +236,14 @@ def analytic_main():
         start_date, end_date
     )
     expense_category_df = get_expenses_data(start_date, end_date)
+    daily_total_expenses_df = get_daily_total_expenses(start_date, end_date)
+    expenses_by_day_of_week_df = get_expenses_by_day_of_week(start_date, end_date)
+    transactions_by_day_of_week_df = get_sale_transactions_by_day_of_week(
+        start_date, end_date
+    )
 
-    # st.write(avg_number_of_products_per_transaction)
-    # st.write(type(avg_number_of_products_per_transaction))
-
+    # st.write(transactions_by_day_of_week_df)
+    # return
     # display data
     kpi_components(
         transaction_total,
@@ -188,9 +252,6 @@ def analytic_main():
         average_transactions,
         avg_number_of_products_per_transaction,
     )
-
-    # TO DO:
-    # ADD ERROR HANDLING IF NO DATA TO OTHER COMPONENTS
 
     if not category_qty_price_total.empty:
         category_bar_chart_components(category_qty_price_total)
@@ -202,8 +263,6 @@ def analytic_main():
     else:
         st.warning("No sales found for the selected date range.")
 
-    st.divider()
-
     if not cumulative_sales_df.empty:
         cumulative_sales_components(cumulative_sales_df)
     else:
@@ -214,7 +273,10 @@ def analytic_main():
     else:
         st.warning("No sales found for the selected date range.")
 
-    st.divider()
+    if not transactions_by_day_of_week_df.empty:
+        sales_by_day_of_week_chart_components(transactions_by_day_of_week_df)
+    else:
+        st.warning("No sales found for the selected date range.")
 
     if not transactions_per_day_df.empty:
         transactions_per_day_components(transactions_per_day_df)
@@ -225,5 +287,15 @@ def analytic_main():
 
     if not expense_category_df.empty:
         expense_category_pie_chart_components(expense_category_df)
+    else:
+        st.warning("No expenses found for the selected date range.")
+
+    if not daily_total_expenses_df.empty:
+        total_expenses_line_chart_components(daily_total_expenses_df)
+    else:
+        st.warning("No expenses found for the selected date range.")
+
+    if not expenses_by_day_of_week_df.empty:
+        expenses_by_day_of_week_chart_components(expenses_by_day_of_week_df)
     else:
         st.warning("No expenses found for the selected date range.")
