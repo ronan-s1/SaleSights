@@ -27,9 +27,7 @@ def get_greeting():
     Returns:
         response (str): Greeting message.
     """
-    response = (
-        "Hey there! I'm Biz, your AI data analysis assistant. How can I help you today?"
-    )
+    response = "Hey there! I'm Biz, your AI data analysis assistant. [Need help?](https://salesights.xyz)."
     return response
 
 
