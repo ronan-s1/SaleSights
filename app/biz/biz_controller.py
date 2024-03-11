@@ -27,7 +27,7 @@ def get_greeting():
     Returns:
         response (str): Greeting message.
     """
-    response = "Hey there! I'm Biz, your AI data analysis assistant. [Need help?](https://salesights.xyz)."
+    response = "Hey there! I'm Biz, your AI data analysis assistant. [Need help?](https://salesights.xyz)"
     return response
 
 
@@ -41,6 +41,7 @@ def get_expenses_df():
 
     expenses_data = fetch_expenses()
     df = pd.DataFrame(expenses_data)
+    df.rename(columns={"_id": "expense_id"}, inplace=True)
     return df
 
 

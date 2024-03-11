@@ -80,7 +80,7 @@ def fetch_product_categories():
 
 def fetch_expenses():
     expenses_collection = get_expenses_collection()
-    result = expenses_collection.find({}, {"expense_image": 0, "_id": 0})
+    result = expenses_collection.find({}, {"expense_image": 0})
     return result
 
 
