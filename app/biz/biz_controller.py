@@ -38,7 +38,6 @@ def get_expenses_df():
     Returns:
         df (pd.Dataframe): Dataframe containing the expenses.
     """
-
     expenses_data = fetch_expenses()
     df = pd.DataFrame(expenses_data)
     df.rename(columns={"_id": "expense_id"}, inplace=True)
@@ -127,7 +126,12 @@ def get_sale_transactions_df():
         df (pd.Dataframe): Dataframe containing the flattened sales transactions.
     """
     transactions = fetch_sale_transactions()
-    flattened_transactions = flatten_transactions(transactions)
+
+    # if barcode error comes up
+    try:
+        flattened_transactions = flatten_transactions(transactions)
+    except:
+        return pd.DataFrame()
 
     if flattened_transactions is None:
         return pd.DataFrame()
@@ -331,6 +335,10 @@ def process_query(selected_collections_df):
         # if only one collection is valid after removing empty collections
         if len(selected_collections_df) == 1:
             selected_collections_df = selected_collections_df[0]
+
+    # If invalid data some how gets passed
+    else:
+        return "Please select valid data to proceed.", False
 
     llm = instantiate_openai_model()
 
