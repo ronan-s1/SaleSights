@@ -23,6 +23,11 @@ def get_sale_transactions_collection():
     return db.sale_transactions
 
 
+def get_settings_collection():
+    db = get_db()
+    return db.settings
+
+
 def fetch_products():
     products_collection = get_products_collection()
     projection = {
@@ -48,4 +53,12 @@ def insert_transaction_into_db(transaction):
         return result.inserted_id
     except Exception as e:
         print(e)
-        return
+        return None
+
+
+def fetch_business_name():
+    settings_collection = get_settings_collection()
+    business_name_doc = settings_collection.find_one({}, {"business_name": 1})
+    if business_name_doc:
+        return business_name_doc["business_name"]
+    return None

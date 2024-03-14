@@ -5,6 +5,7 @@ import streamlit as st
 from fpdf import FPDF
 from datetime import datetime
 from sales.sale_data import (
+    fetch_business_name,
     fetch_products,
     get_product_by_barcode,
     insert_transaction_into_db,
@@ -21,6 +22,21 @@ def get_products():
     """
     products = fetch_products()
     return list(products)
+
+
+def get_business_name():
+    """
+    Request business name from data access. If no business name is found, return a default name.
+
+    Returns:
+        str: Business name
+    """
+    business_name = fetch_business_name()
+
+    if business_name is None:
+        return "SaleSights User"
+
+    return business_name
 
 
 def process_barcode(barcode_data):
@@ -241,17 +257,20 @@ def generate_pdf_header(pdf):
     pdf.set_font("Helvetica", "", 11)
 
 
-def add_date_time(pdf):
+def add_date_time_and_vendor(pdf):
     """
     Add date and time of receipt generation.
 
     Args:
         pdf (FPDF): PDF object
     """
+    business_name = get_business_name()
     now = datetime.now()
     formatted_date = now.strftime("%Y/%m/%d %H:%M:%S")
-    pdf.cell(0, 8, txt=f"Receipt Generation Date: {formatted_date}")
-    pdf.ln(8)
+    pdf.cell(0, 8, txt=f"Vendor: {business_name}")
+    pdf.ln(6)
+    pdf.cell(0, 8, txt=f"Date: {formatted_date}")
+    pdf.ln(10)
 
 
 def add_headers(pdf):
@@ -361,7 +380,7 @@ def generate_receipt(df_selected_products, transaction_id):
     pdf.add_page()
 
     generate_pdf_header(pdf)
-    add_date_time(pdf)
+    add_date_time_and_vendor(pdf)
 
     add_headers(pdf)
     add_receipt_items(pdf, df_selected_products_formatted)
