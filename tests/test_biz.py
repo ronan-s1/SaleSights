@@ -17,17 +17,20 @@ from biz.utils.prompt_templates import (
 def test_process_query():
     # Test when an empty dataframe is passed
     result, valid = process_query(pd.DataFrame())
-    assert result == "Please select valid data to proceed."
+    assert result == "Please select valid data to proceed. (single df is empty)"
     assert valid is False
 
     # Test when a list of empty dataframes is passed
     result, valid = process_query([pd.DataFrame(), pd.DataFrame()])
-    assert result == "Please select valid data to proceed."
+    assert (
+        result
+        == "Please select valid data to proceed. (multiple df selected but all empty)"
+    )
     assert valid is False
 
     # Test when invalid data is passed
     result, valid = process_query("invalid data")
-    assert result == "Please select valid data to proceed."
+    assert result == "Please select valid data to proceed. (data not a df or list)"
     assert valid is False
 
 

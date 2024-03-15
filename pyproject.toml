@@ -1,9 +1,6 @@
 [tool.black]
-target-version = ['py37']
-extend-exclude = '''
-(
-  ^/foo.py
-  | .*_pb2.py
-)
-'''
+target-version = ["py37"]
 skip-string-normalization = true
+
+[tool.pytest.ini_options]
+addopts = "-p no:warnings"
