@@ -109,7 +109,7 @@ def flatten_transactions(transactions):
                 "total": total,
                 "product_name": product["product_name"],
                 "category": product["category"],
-                "barcode_data": product["barcode_data"],
+                "barcode_data": product.get("barcode_data", None),
                 "price": product["price"],
                 "quantity": product["quantity"],
             }
@@ -315,12 +315,16 @@ def process_query(selected_collections_df):
         response (str): Agent's response or warning message.
         valid (bool): If an error occurs, valid is False. Otherwise, valid is True.
     """
+    # if data isn't a dataframe or a list
+    if not isinstance(selected_collections_df, (pd.DataFrame, list)):
+        return "Please select valid data to proceed. (data not a df or list)", False
+
     # if an empty data is selected
-    if (
+    elif (
         isinstance(selected_collections_df, pd.DataFrame)
         and selected_collections_df.empty
     ):
-        return "Please select valid data to proceed.", False
+        return "Please select valid data to proceed. (single df is empty)", False
 
     # Remove any empty collections from the list
     elif isinstance(selected_collections_df, list):
@@ -330,15 +334,14 @@ def process_query(selected_collections_df):
 
         # if multiple collections are selected and all are empty
         if len(selected_collections_df) == 0:
-            return "Please select valid data to proceed.", False
+            return (
+                "Please select valid data to proceed. (multiple df selected but all empty)",
+                False,
+            )
 
         # if only one collection is valid after removing empty collections
         if len(selected_collections_df) == 1:
             selected_collections_df = selected_collections_df[0]
-
-    # If invalid data some how gets passed
-    else:
-        return "Please select valid data to proceed.", False
 
     llm = instantiate_openai_model()
 
