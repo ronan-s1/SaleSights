@@ -1,5 +1,4 @@
 import pandas as pd
-import calendar
 from analytics.analytic_data import (
     fetch_cat_qty_price,
     fetch_daily_total_expenses,

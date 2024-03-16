@@ -1,0 +1,34 @@
+[
+    {
+        "expense": "Test Expense 1",
+        "category": "Packaging",
+        "description": "Test Description",
+        "amount": 50,
+        "recorded_date": "2024-01-01",
+        "expense_date": "2024-01-01"
+    },
+    {
+        "expense": "Test Expense 2",
+        "category": "Packaging",
+        "description": "Test Description",
+        "amount": 50,
+        "recorded_date": "2024-01-01",
+        "expense_date": "2024-01-01"
+    },
+    {
+        "expense": "Test Expense 3",
+        "category": "Packaging",
+        "description": "Test Description",
+        "amount": 50,
+        "recorded_date": "2024-01-01",
+        "expense_date": "2024-01-01"
+    },
+    {
+        "expense": "Test Expense 4",
+        "category": "Packaging",
+        "description": "Test Description",
+        "amount": 50,
+        "recorded_date": "2024-01-01",
+        "expense_date": "2024-01-01"
+    }
+]

@@ -1,0 +1,284 @@
+[
+    {
+        "date":"2024-02-06",
+        "time":"19:52:00",
+        "total":50,
+        "products":[
+            {
+                "_id":{
+                    "$oid":"65f410846d37acde89c198db"
+                },
+                "product_name":"Charcoal Infused Toothpaste",
+                "category":"Personal Care",
+                "barcode_data":"X006CITP06",
+                "price":4.99,
+                "quantity":4
+            },
+            {
+                "_id":{
+                    "$oid":"65f410846d37acde89c198c9"
+                },
+                "product_name":"Vitamin D3 Supplement",
+                "category":"Supplements",
+                "barcode_data":"X002VTD301",
+                "price":5.99,
+                "quantity":2
+            },
+            {
+                "_id":{
+                    "$oid":"65f410846d37acde89c198ca"
+                },
+                "product_name":"Gluten-Free Quinoa Pasta",
+                "category":"Food",
+                "barcode_data":"X003GFQP02",
+                "price":6.99,
+                "quantity":1
+            },
+            {
+                "_id":{
+                    "$oid":"65f410846d37acde89c198cc"
+                },
+                "product_name":"Natural Almond Butter",
+                "category":"Food",
+                "barcode_data":"X008NAB07",
+                "price":3.69,
+                "quantity":3
+            }
+        ]
+    },
+    {
+        "date":"2024-02-06",
+        "time":"19:53:00",
+        "total":50,
+        "products":[
+            {
+                "_id":{
+                    "$oid":"65f410846d37acde89c198db"
+                },
+                "product_name":"Charcoal Infused Toothpaste",
+                "category":"Personal Care",
+                "barcode_data":"X006CITP06",
+                "price":4.99,
+                "quantity":4
+            },
+            {
+                "_id":{
+                    "$oid":"65f410846d37acde89c198c9"
+                },
+                "product_name":"Vitamin D3 Supplement",
+                "category":"Supplements",
+                "barcode_data":"X002VTD301",
+                "price":5.99,
+                "quantity":2
+            },
+            {
+                "_id":{
+                    "$oid":"65f410846d37acde89c198ca"
+                },
+                "product_name":"Gluten-Free Quinoa Pasta",
+                "category":"Food",
+                "barcode_data":"X003GFQP02",
+                "price":6.99,
+                "quantity":1
+            },
+            {
+                "_id":{
+                    "$oid":"65f410846d37acde89c198cc"
+                },
+                "product_name":"Natural Almond Butter",
+                "category":"Food",
+                "barcode_data":"X008NAB07",
+                "price":3.69,
+                "quantity":3
+            }
+        ]
+    },
+    {
+        "date":"2024-02-06",
+        "time":"19:54:00",
+        "total":50,
+        "products":[
+            {
+                "_id":{
+                    "$oid":"65f410846d37acde89c198db"
+                },
+                "product_name":"Charcoal Infused Toothpaste",
+                "category":"Personal Care",
+                "barcode_data":"X006CITP06",
+                "price":4.99,
+                "quantity":4
+            },
+            {
+                "_id":{
+                    "$oid":"65f410846d37acde89c198c9"
+                },
+                "product_name":"Vitamin D3 Supplement",
+                "category":"Supplements",
+                "barcode_data":"X002VTD301",
+                "price":5.99,
+                "quantity":2
+            },
+            {
+                "_id":{
+                    "$oid":"65f410846d37acde89c198ca"
+                },
+                "product_name":"Gluten-Free Quinoa Pasta",
+                "category":"Food",
+                "barcode_data":"X003GFQP02",
+                "price":6.99,
+                "quantity":1
+            },
+            {
+                "_id":{
+                    "$oid":"65f410846d37acde89c198cc"
+                },
+                "product_name":"Natural Almond Butter",
+                "category":"Food",
+                "barcode_data":"X008NAB07",
+                "price":3.69,
+                "quantity":3
+            }
+        ]
+    },
+    {
+        "date":"2024-02-06",
+        "time":"19:11:00",
+        "total":50,
+        "products":[
+            {
+                "_id":{
+                    "$oid":"65f410846d37acde89c198db"
+                },
+                "product_name":"Charcoal Infused Toothpaste",
+                "category":"Personal Care",
+                "barcode_data":"X006CITP06",
+                "price":4.99,
+                "quantity":4
+            },
+            {
+                "_id":{
+                    "$oid":"65f410846d37acde89c198c9"
+                },
+                "product_name":"Vitamin D3 Supplement",
+                "category":"Supplements",
+                "barcode_data":"X002VTD301",
+                "price":5.99,
+                "quantity":2
+            },
+            {
+                "_id":{
+                    "$oid":"65f410846d37acde89c198ca"
+                },
+                "product_name":"Gluten-Free Quinoa Pasta",
+                "category":"Food",
+                "barcode_data":"X003GFQP02",
+                "price":6.99,
+                "quantity":1
+            },
+            {
+                "_id":{
+                    "$oid":"65f410846d37acde89c198cc"
+                },
+                "product_name":"Natural Almond Butter",
+                "category":"Food",
+                "barcode_data":"X008NAB07",
+                "price":3.69,
+                "quantity":3
+            }
+        ]
+    },
+    {
+        "date":"2024-02-06",
+        "time":"11:51:00",
+        "total":50,
+        "products":[
+            {
+                "_id":{
+                    "$oid":"65f410846d37acde89c198db"
+                },
+                "product_name":"Charcoal Infused Toothpaste",
+                "category":"Personal Care",
+                "barcode_data":"X006CITP06",
+                "price":4.99,
+                "quantity":4
+            },
+            {
+                "_id":{
+                    "$oid":"65f410846d37acde89c198c9"
+                },
+                "product_name":"Vitamin D3 Supplement",
+                "category":"Supplements",
+                "barcode_data":"X002VTD301",
+                "price":5.99,
+                "quantity":2
+            },
+            {
+                "_id":{
+                    "$oid":"65f410846d37acde89c198ca"
+                },
+                "product_name":"Gluten-Free Quinoa Pasta",
+                "category":"Food",
+                "barcode_data":"X003GFQP02",
+                "price":6.99,
+                "quantity":1
+            },
+            {
+                "_id":{
+                    "$oid":"65f410846d37acde89c198cc"
+                },
+                "product_name":"Natural Almond Butter",
+                "category":"Food",
+                "barcode_data":"X008NAB07",
+                "price":3.69,
+                "quantity":3
+            }
+        ]
+    },
+    {
+        "date":"2024-02-06",
+        "time":"12:51:00",
+        "total":50,
+        "products":[
+            {
+                "_id":{
+                    "$oid":"65f410846d37acde89c198db"
+                },
+                "product_name":"Charcoal Infused Toothpaste",
+                "category":"Personal Care",
+                "barcode_data":"X006CITP06",
+                "price":4.99,
+                "quantity":4
+            },
+            {
+                "_id":{
+                    "$oid":"65f410846d37acde89c198c9"
+                },
+                "product_name":"Vitamin D3 Supplement",
+                "category":"Supplements",
+                "barcode_data":"X002VTD301",
+                "price":5.99,
+                "quantity":2
+            },
+            {
+                "_id":{
+                    "$oid":"65f410846d37acde89c198ca"
+                },
+                "product_name":"Gluten-Free Quinoa Pasta",
+                "category":"Food",
+                "barcode_data":"X003GFQP02",
+                "price":6.99,
+                "quantity":1
+            },
+            {
+                "_id":{
+                    "$oid":"65f410846d37acde89c198cc"
+                },
+                "product_name":"Natural Almond Butter",
+                "category":"Food",
+                "barcode_data":"X008NAB07",
+                "price":3.69,
+                "quantity":3
+            }
+        ]
+    }
+]

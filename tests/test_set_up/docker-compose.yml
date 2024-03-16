@@ -1,0 +1,8 @@
+version: "3.8"
+
+services:
+  mongo:
+    image: mongo
+    container_name: salesights_test_mongodb_container
+    ports:
+      - "27018:27017"
