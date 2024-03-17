@@ -232,4 +232,4 @@ def test_get_sales_over_time():
 
 
 if __name__ == "__main__":
-    pytest.main()
+    pytest.main(["-v", __file__])

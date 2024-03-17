@@ -2,7 +2,6 @@ import switch_path
 import pytest
 from expenses.expense_controller import (
     add_new_expense,
-    get_expenses,
     filter_by_id,
 )
 
@@ -98,4 +97,4 @@ def test_filter_by_id():
 
 
 if __name__ == "__main__":
-    pytest.main()
+    pytest.main(["-v", __file__])

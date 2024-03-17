@@ -74,4 +74,4 @@ def test_get_prefix_suffix():
 
 
 if __name__ == "__main__":
-    pytest.main()
+    pytest.main(["-v", __file__])
