@@ -1,5 +1,7 @@
 # https://gist.githubusercontent.com/KernelA/04b4d7691f28e264f72e76cfd724d448/raw/f17a09be647c71dd77c53f919705196995d09cab/.dockerignore
 
+tests/
+
 # Git
 .git
 .gitignore
