@@ -5,6 +5,7 @@ from biz.biz_controller import (
     process_query,
     selected_collections_processing,
     get_prefix_suffix,
+    flatten_transactions,
 )
 from biz.utils.prompt_templates import (
     SINGLE_DF_PREFIX,
@@ -71,6 +72,140 @@ def test_get_prefix_suffix():
     prefix, suffix = get_prefix_suffix(selected_collections_df)
     assert prefix == SINGLE_DF_PREFIX
     assert suffix == SINGLE_DF_SUFFIX
+
+
+def test_flatten_transactions():
+    # Test with empty transactions list
+    transactions = []
+    flattened_transactions = flatten_transactions(transactions)
+    assert flattened_transactions == None
+
+    # Test with a single transaction
+    transactions = [
+        {
+            "_id": "123",
+            "date": "2022-01-01",
+            "time": "10:00:00",
+            "total": 100.0,
+            "products": [
+                {
+                    "product_name": "Product 1",
+                    "category": "Category 1",
+                    "barcode_data": "123456789",
+                    "price": 10.0,
+                    "quantity": 2,
+                },
+                {
+                    "product_name": "Product 2",
+                    "category": "Category 2",
+                    "price": 20.0,
+                    "quantity": 1,
+                },
+            ],
+        }
+    ]
+    expected_flattened_transactions = [
+        {
+            "transaction_id": "123",
+            "date": "2022-01-01",
+            "time": "10:00:00",
+            "total": 100.0,
+            "product_name": "Product 1",
+            "category": "Category 1",
+            "barcode_data": "123456789",
+            "price": 10.0,
+            "quantity": 2,
+        },
+        {
+            "transaction_id": "123",
+            "date": "2022-01-01",
+            "time": "10:00:00",
+            "total": 100.0,
+            "product_name": "Product 2",
+            "category": "Category 2",
+            "barcode_data": None,
+            "price": 20.0,
+            "quantity": 1,
+        },
+    ]
+    flattened_transactions = flatten_transactions(transactions)
+    assert flattened_transactions == expected_flattened_transactions
+
+    # Test with multiple transactions
+    transactions = [
+        {
+            "_id": "123",
+            "date": "2022-01-01",
+            "time": "10:00:00",
+            "total": 100.0,
+            "products": [
+                {
+                    "product_name": "Product 1",
+                    "category": "Category 1",
+                    "barcode_data": "123456789",
+                    "price": 10.0,
+                    "quantity": 2,
+                }
+            ],
+        },
+        {
+            "_id": "456",
+            "date": "2022-01-02",
+            "time": "11:00:00",
+            "total": 50.0,
+            "products": [
+                {
+                    "product_name": "Product 2",
+                    "category": "Category 2",
+                    "price": 20.0,
+                    "quantity": 1,
+                },
+                {
+                    "product_name": "Product 3",
+                    "category": "Category 3",
+                    "price": 15.0,
+                    "quantity": 3,
+                },
+            ],
+        },
+    ]
+    expected_flattened_transactions = [
+        {
+            "transaction_id": "123",
+            "date": "2022-01-01",
+            "time": "10:00:00",
+            "total": 100.0,
+            "product_name": "Product 1",
+            "category": "Category 1",
+            "barcode_data": "123456789",
+            "price": 10.0,
+            "quantity": 2,
+        },
+        {
+            "transaction_id": "456",
+            "date": "2022-01-02",
+            "time": "11:00:00",
+            "total": 50.0,
+            "product_name": "Product 2",
+            "category": "Category 2",
+            "barcode_data": None,
+            "price": 20.0,
+            "quantity": 1,
+        },
+        {
+            "transaction_id": "456",
+            "date": "2022-01-02",
+            "time": "11:00:00",
+            "total": 50.0,
+            "product_name": "Product 3",
+            "category": "Category 3",
+            "barcode_data": None,
+            "price": 15.0,
+            "quantity": 3,
+        },
+    ]
+    flattened_transactions = flatten_transactions(transactions)
+    assert flattened_transactions == expected_flattened_transactions
 
 
 if __name__ == "__main__":
