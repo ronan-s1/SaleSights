@@ -61,7 +61,7 @@ def get_cat_qty_price(start_date, end_date):
     )
 
     # get avg quantity per transaction
-    quantity_avg = round(product_category_df["quantity"].mean())
+    quantity_avg = round(product_category_df["quantity"].mean(), 2)
 
     return category_qty_price_total, quantity_avg
 
@@ -179,6 +179,9 @@ def get_transactions_per_day(start_date, end_date):
     Args:
         start_date (datetime): start date
         end_date (datetime): end date
+
+    Returns:
+        transactions_per_day_df (DataFrame): transactions per day
     """
     start_date_str, end_date_str = format_date(start_date, end_date)
     transactions_per_day = fetch_transactions_per_day(start_date_str, end_date_str)
@@ -188,7 +191,7 @@ def get_transactions_per_day(start_date, end_date):
     if transactions_per_day_df.empty:
         return transactions_per_day_df, None
 
-    average_transactions = round(transactions_per_day_df["transaction_count"].mean())
+    average_transactions = round(transactions_per_day_df["transaction_count"].mean(), 2)
 
     return transactions_per_day_df, average_transactions
 
@@ -244,13 +247,13 @@ def get_sale_transactions_by_day_of_week(start_date, end_date):
 
     # Map numerical day of week to day name
     day_of_week_map = {
-        1: "Monday",
-        2: "Tuesday",
-        3: "Wednesday",
-        4: "Thursday",
-        5: "Friday",
-        6: "Saturday",
-        7: "Sunday",
+        2: "Monday",
+        3: "Tuesday",
+        4: "Wednesday",
+        5: "Thursday",
+        6: "Friday",
+        7: "Saturday",
+        1: "Sunday",
     }
     transactions_by_day_of_week_df["day_of_week"] = transactions_by_day_of_week_df[
         "day_of_week"
@@ -335,13 +338,13 @@ def get_expenses_by_day_of_week(start_date, end_date):
 
     # Map numerical day of week to day name
     day_of_week_map = {
-        1: "Monday",
-        2: "Tuesday",
-        3: "Wednesday",
-        4: "Thursday",
-        5: "Friday",
-        6: "Saturday",
-        7: "Sunday",
+        2: "Monday",
+        3: "Tuesday",
+        4: "Wednesday",
+        5: "Thursday",
+        6: "Friday",
+        7: "Saturday",
+        1: "Sunday",
     }
     expenses_by_day_of_week_df["day_of_week"] = expenses_by_day_of_week_df[
         "day_of_week"
