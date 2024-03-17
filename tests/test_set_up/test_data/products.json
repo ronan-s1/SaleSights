@@ -1,0 +1,16 @@
+[
+    {
+        "_id": "1",
+        "product_name": "Vitamin D3 Supplement",
+        "category": "Supplements",
+        "barcode_data": "X002VTD301",
+        "price": 5.99
+    },
+    {
+        "_id": "2",
+        "product_name": "Gluten-Free Quinoa Pasta",
+        "category": "Food",
+        "barcode_data": "X003GFQP02",
+        "price": 6.99
+    }
+]

@@ -16,14 +16,18 @@ def populate():
     db = client.salesights
     sale_transactions_collection = db.sale_transactions
     expenses_collection = db.expenses
+    product_collection = db.products
 
     # drop the collection
     sale_transactions_collection.drop()
     expenses_collection.drop()
+    product_collection.drop()
 
     # fetch and insert data
     sale_transactions_data = read_json("sale_transactions.json")
     expense_data = read_json("expenses.json")
+    product_data = read_json("products.json")
 
     sale_transactions_collection.insert_many(sale_transactions_data)
     expenses_collection.insert_many(expense_data)
+    product_collection.insert_many(product_data)
