@@ -242,8 +242,6 @@ def analytic_main():
         start_date, end_date
     )
 
-    # st.write(transactions_by_day_of_week_df)
-    # return
     # display data
     kpi_components(
         transaction_total,
