@@ -52,30 +52,6 @@ def add_new_category(new_category):
     insert_new_category_to_db(new_category)
 
 
-def add_new_category(new_category):
-    """
-    Request data access to add new category
-
-    Args:
-        new_category (str): category to add
-
-    Returns:
-        str: Error message
-        None: No errors
-    """
-    if not new_category:
-        return "Please fill in required fields"
-
-    new_category = new_category.capitalize()
-
-    if category_exists(new_category):
-        return f"category '{new_category}' already exists"
-
-    new_category = {"category": new_category}
-
-    insert_new_category_to_db(new_category)
-
-
 def edit_existing_category(selected_category_name, new_category_name):
     """
     Request data access to edit an existing category.
@@ -194,9 +170,9 @@ def get_index(page_size):
 
     Returns:
         start_idx (int): The start index of the current page.
-        end_idx (int): The end index of the current page.
+        end_idx (int): The end index of the current page
     """
-    start_idx = (st.session_state.current_page_expense_expense - 1) * page_size
+    start_idx = (st.session_state.current_page_expense - 1) * page_size
     end_idx = start_idx + page_size
 
     return start_idx, end_idx
@@ -242,19 +218,6 @@ def get_total_pages(page_size, transactions):
     total_pages = len(transactions) // page_size + (len(transactions) % page_size > 0)
 
     return total_pages
-
-
-def get_index(page_size):
-    """
-    Get the start and end index of the current page.
-
-    Args:
-        page_size (int): The number of items per page.
-    """
-    start_idx = (st.session_state.current_page_expense - 1) * page_size
-    end_idx = start_idx + page_size
-
-    return start_idx, end_idx
 
 
 def prev_page():
