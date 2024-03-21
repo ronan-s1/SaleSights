@@ -208,6 +208,20 @@ def add_transaction(df_selected_products):
 # -- Receipt Generation --
 
 
+def pdf_iframe(base64_pdf):
+    """
+    Display the PDF receipt in an iframe.
+
+    Args:
+        base64_pdf (str): Base64-encoded string for displaying the PDF receipt using an iframe
+
+    Returns:
+        str: HTML code for displaying the PDF receipt in an iframe
+    """
+    pdf_display = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="700" height="900" type="application/pdf"></iframe>'
+    return pdf_display
+
+
 def convert_pdf_to_base64(pdf_content):
     """
     Convert PDF content to a Base64-encoded string.
@@ -219,7 +233,7 @@ def convert_pdf_to_base64(pdf_content):
         str: Base64-encoded string for displaying the PDF receipt using an iframe
     """
     base64_pdf = base64.b64encode(pdf_content).decode("utf-8")
-    pdf_display = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="700" height="900" type="application/pdf"></iframe>'
+    pdf_display = pdf_iframe(base64_pdf)
     return pdf_display
 
 
