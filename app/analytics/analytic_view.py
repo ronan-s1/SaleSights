@@ -39,7 +39,7 @@ def products_and_qty_components_components(products_and_qty_df):
         y="product",
         x=["total quantity", "total sales"],
         orientation="h",
-        title="Sales and Quanitity by Product",
+        title="Sales and Quantity by Product",
         labels={"value": "Total", "variable": "Metric", "product": "Product"},
     )
 
@@ -124,7 +124,7 @@ def category_bar_chart_components(category_qty_price_df):
         category_qty_price_df,
         x="category",
         y=["quantity", "total sales"],
-        title="Sales and Quanitity by Category",
+        title="Sales and Quantity by Category",
         labels={"value": "Total", "variable": "Metric", "category": "Category"},
         barmode="group",
     )
