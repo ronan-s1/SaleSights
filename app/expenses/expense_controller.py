@@ -247,12 +247,7 @@ def get_text_ocr(uploaded_file):
         text_str (str): The extracted text
     """
     reader = easyocr.Reader(["en"])
-
-    # Open the image file
     image = Image.open(uploaded_file)
-
-    # Convert the image to a numpy array and convert it to RGB
-    image = cv2.cvtColor(np.array(image), cv2.COLOR_BGR2RGB)
 
     # Use easyocr to read the text from the image
     result = reader.readtext(image)
