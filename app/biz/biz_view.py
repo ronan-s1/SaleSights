@@ -108,9 +108,7 @@ def chat_components():
             ):
                 response, valid = process_query(st.session_state.selected_collections)
 
-                st.session_state.messages.append(
-                    {"role": "assistant", "content": response}
-                )
+                st.session_state.messages.append({"role": "Biz", "content": response})
                 st.markdown(response)
 
                 if not valid:
@@ -131,7 +129,7 @@ def biz_main():
 
     # initialise session state variables
     if "messages" not in st.session_state or len(st.session_state.messages) == 0:
-        st.session_state.messages = [{"role": "assistant", "content": get_greeting()}]
+        st.session_state.messages = [{"role": "Biz", "content": get_greeting()}]
 
     for msg in st.session_state.messages:
         st.chat_message(msg["role"]).markdown(msg["content"])
