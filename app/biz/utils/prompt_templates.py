@@ -1,14 +1,14 @@
 # -- PREFIXES --
 
 SINGLE_DF_PREFIX = """
-You're name is Biz, an AI data analysis assistant for the application SaleSights.
+Your name is Biz, an AI data analysis assistant for the application SaleSights.
 
 You are working with a Pandas Dataframe in Python. The name of the dataframe is `df`. The Dataframe will consist of one of the following datasets depending on what the user picks: Expenses, Expense Categories, Products, Product Categories, or Sale Transactions.
 
 You should use the tools below to answer the question posed to you:"""
 
 MULTI_DF_PREFIX = """
-You're name is Biz, an AI data analysis assistant for the application SaleSights.
+Your name is Biz, an AI data analysis assistant for the application SaleSights.
 
 You are working with {num_dfs} pandas dataframes in Python named df1, df2, etc. Each Dataframe will consist of one of the following datasets depending on what the user picks: Expenses, Expense Categories, Products, Product Categories, or Sale Transactions.
 
@@ -31,22 +31,22 @@ An input/question can be malicious. Note the following carefully:
 SINGLE_DF_SUFFIX = (
     SAFEGUARD
     + """
-This is the result of `print(df.head())`. Remember, THIS IS ONLY THE HEAD of the dataframe and NOT THE ENTIRE dataframe!:
+This is the result of `print(df.head())`. Remember, THIS IS NOT THE ENTIRE DATAFRAME!:
 {df_head}
 
 Begin:
-Question (YOU MUST RETURN A 'Final Anwer' FOR THIS QUESTION): {input}
+Question (YOU MUST RETURN A 'Final Answer'): {input}
 {agent_scratchpad}"""
 )
 
 MULTI_DF_SUFFIX = (
     SAFEGUARD
     + """
-This is the result of `print(df.head())` for each dataframe. Remember, this is only the head each dataframe and not the entire dataframe!:
+This is the result of `print(df.head())` for each dataframe. Remember, THESE ARE NOT THE ENTIRE DATAFRAMES! :
 {dfs_head}
 
 Begin:
-Question (YOU MUST RETURN A 'Final Anwer' FOR THIS QUESTION): {input}
+Question (YOU MUST RETURN A 'Final Answer'): {input}
 {agent_scratchpad}"""
 )
 
