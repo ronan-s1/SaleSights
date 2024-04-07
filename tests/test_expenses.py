@@ -46,7 +46,7 @@ def test_add_new_expense():
     ack, expense_id = add_new_expense(
         expense, category, description, amount, expense_date, uploaded_file
     )
-    assert ack == "Price must be a valid number."
+    assert ack == "Cost/Amount must be a valid number."
     assert expense_id == None
 
     # Expense date in the future
