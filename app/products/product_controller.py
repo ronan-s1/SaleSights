@@ -85,6 +85,9 @@ def add_new_product(product_name, category, barcode_data, price):
     except ValueError:
         return "Price must be a valid number."
 
+    if price <= 0:
+        return "Price must be greater than 0."
+
     new_product = {
         "product_name": product_name,
         "category": category,
@@ -133,6 +136,9 @@ def update_product(product_details, product_name, category, barcode, price):
         price = float(price)
     except ValueError:
         return "Price must be a valid number."
+
+    if price <= 0:
+        return "Price must be greater than 0."
 
     product_id = product_details["_id"].iloc[0]
     product_to_update = {

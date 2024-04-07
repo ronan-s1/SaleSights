@@ -116,7 +116,10 @@ def add_new_expense(
     try:
         amount = float(amount)
     except ValueError:
-        return "Price must be a valid number.", None
+        return "Cost/Amount must be a valid number.", None
+
+    if amount <= 0:
+        return "Cost/Amount must be greater than 0.", None
 
     current_timestamp = datetime.utcnow()
     recorded_date = current_timestamp.date()
