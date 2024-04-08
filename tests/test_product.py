@@ -46,6 +46,15 @@ def test_add_new_product():
     result = add_new_product(product_name, category, barcode_data, price)
     assert result == "Price must be a valid number."
 
+    # price less than 0
+    product_name = "Test 4"
+    category = "Food"
+    barcode_data = "1234567890"
+    price = "-10"
+
+    result = add_new_product(product_name, category, barcode_data, price)
+    assert result == "Price must be greater than 0."
+
 
 if __name__ == "__main__":
     pytest.main(["-v", __file__])

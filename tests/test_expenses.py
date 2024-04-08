@@ -63,6 +63,19 @@ def test_add_new_expense():
     assert ack == "Expense date cannot be in the future."
     assert expense_id == None
 
+    # Expense less than 0
+    expense = "Test 5"
+    category = "Packaging"
+    description = "blah blah"
+    amount = "-100"
+    expense_date = "2022-01-01"
+    uploaded_file = None
+
+    ack, expense_id = add_new_expense(
+        expense, category, description, amount, expense_date, uploaded_file
+    )
+    assert ack == "Cost/Amount must be greater than 0."
+
 
 def test_filter_by_id():
     # Empty transactions list
