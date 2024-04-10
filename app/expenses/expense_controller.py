@@ -252,8 +252,11 @@ def get_text_ocr(uploaded_file):
     reader = easyocr.Reader(["en"])
     image = Image.open(uploaded_file)
 
+    # convert image to np array
+    image_np = np.array(image)
+
     # Use easyocr to read the text from the image
-    result = reader.readtext(image)
+    result = reader.readtext(image_np)
 
     # extract text from the result
     text_str = "\n".join([text for (_, text, _) in result])
