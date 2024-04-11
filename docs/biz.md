@@ -6,7 +6,7 @@ Ask questions on your business data with Biz. Biz is SaleSights' data analysis a
 
 Follow these simple instructions. It takes only 5 minutes.
 
-1. Go to openAI's [webiste](https://openai.com/blog/openai-api) and sign up for an API key.
+1. Go to OpenAI's [webiste](https://openai.com/blog/openai-api) and sign up for an API key.
 2. Add some credits into your account.
 3. Copy the key and enter it in the settings tab on SaleSights.
 
@@ -45,3 +45,7 @@ How many expenses and and how many transactions occured on 2024-01-01
 ```Biz Query
 How many transactions had a product in the "Food" category on 2024-01-01?
 ```
+
+## Things to Note!
+
+!> IMPORTANT: AI isn't perfect. Use Biz as a helper/guide. Be as precise as you can with your questions.

@@ -3,7 +3,7 @@
 </p>
 
 <div align="center" style="margin-top: -20px">
-  <h4>Allowing small businesses to leverage technology for their financial operations</h4>
+  <h4>Because Small Businesses Deserve Big Solutions</h4>
 </div>
 
 ## Why SaleSights?
