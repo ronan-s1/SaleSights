@@ -34,7 +34,7 @@ def get_settings():
         dict: The settings
     """
     settings = fetch_settings()
-    models = ["gpt-4-0125-preview", "gpt-3.5-turbo-0125"]
+    models = ["gpt-4-turbo", "gpt-3.5-turbo-0125"]
 
     # if no settings exist, return default values
     if settings is None:
